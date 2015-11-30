@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JBake</title>
+    <link>https://cwweng.github.io</link>
+    <atom:link href="https://cwweng.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <description>JBake Bootstrap Template</description>
+    <language>en-gb</language>
+    <pubDate>星期一, 30 十一月 2015 16:12:52 +0800</pubDate>
+    <lastBuildDate>星期一, 30 十一月 2015 16:12:52 +0800</lastBuildDate>
+
+    <item>
+      <title>重新出發</title>
+      <link>https://cwweng.github.io/blog/2015/11/30-new-start.html</link>
+      <pubDate>星期一, 30 十一月 2015 00:00:00 +0800</pubDate>
+      <guid isPermaLink="false">blog/2015/11/30-new-start.html</guid>
+      	<description>
+	&lt;p&gt;公司把 &lt;a href=&quot;https://www.tumblr.com&quot;&gt;Tumblr&lt;/a&gt; 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。&lt;/p&gt;&lt;p&gt;這次改用 &lt;a href=&quot;http://jbake.org&quot;&gt;JBake&lt;/a&gt; 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。&lt;/p&gt;
+	</description>
+    </item>
+
+  </channel> 
+</rss>
