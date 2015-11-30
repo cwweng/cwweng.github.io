@@ -52,8 +52,10 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="tags/jbake.html">jbake</a></li>
+                  <li><a href="tags/git.html">git</a></li>
                   <li><a href="tags/linux.html">linux</a></li>
                   <li><a href="tags/碎碎唸.html">碎碎唸</a></li>
+                  <li><a href="tags/開卷有益.html">開卷有益</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -77,12 +79,35 @@
 	<div class="page-header">
 		<h1>Just Do It</h1>
 	</div>
+			<article>
   			<a href="blog/2015/11/30-new-start.html"><h1>重新出發</h1></a>
   			<p>2015-11-30</p>
-  			<p><p>公司把 <a href="https://www.tumblr.com">Tumblr</a> 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。</p><p>這次改用 <a href="http://jbake.org">JBake</a> 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。</p></p>
+  			<p>
+				<p>公司把 <a href="https://www.tumblr.com">Tumblr</a> 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。</p><p>這次改用 <a href="http://jbake.org">JBake</a> 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。</p>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2014/03/28-git-through-proxy.html"><h1>如何透過 proxy 存取 git://</h1></a>
+  			<p>2014-03-28</p>
+  			<p>
+				<p>網路上找到的解決辦法都是設 proxy，比如</p>
+<!--?prettify?-->
+<pre><code class="bash">git config --global http.proxy http://user:pwd@proxy.server.com:8080
+git config --global https.proxy http://user:pwd@proxy.server.com:8080
+</code></pre><p>不過如果 proxy 不支援 CONNECT 就失敗了。</p><p>另一個方法是用 <code>https.insteadOf.git</code>，比如<br/><!--?prettify?--><br/><code>bash
+git config --global url.&quot;https://&quot;.insteadOf git://
+</code></p><p>參考 <a href="https://coderwall.com/p/89zmpg%22Git%20protocol%20behind%20a%20proxy%22">Git protocol behind a proxy</a></p>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
   			<a href="blog/2013/09/14-linux-mount-windows-share.html"><h1>Linux 掛載 Windows 網芳 </h1></a>
   			<p>2013-09-14</p>
-  			<p><h4>安裝</h4>
+  			<p>
+				<h4>安裝</h4>
 <!--?prettify?-->
 <pre><code class="bash">apt-get install smbclient
 apt-get install cifs-utils
@@ -91,7 +116,22 @@ apt-get install cifs-utils
 <pre><code class="bash">smbclient -L //IP/Share -U domain/username -D subdirectory
 </code></pre><h3>掛載</h3>
 <pre><code class="bash">mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;password&gt; //IP/Share/subdirectory /mount_point
-</code></pre></p>
+</code></pre>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2011/08/03-回到明朝當王爺.html"><h1>「回到明朝當王爺」觀後感</h1></a>
+  			<p>2011-08-03</p>
+  			<p>
+				<p>打個分數：四顆星</p><p>拜<a href="http://www.haodoo.net/">網路</a>和 Kindle 的幫助，在幾乎睜開眼有時間的情況下就是拿來看<a href="http://www.haodoo.net/?M=Share&P=0937">回到明朝當王爺</a>。就算是這樣也花了半個月以上的時間，真的是很長的一本小說。</p><p>簡單來說，就是男主角陰錯陽差的回到了明朝附身在一個邊疆的秀才身上，又很強運的在兩三年內一路狂升，從邊疆的驛丞、太子侍讀、神機營參將、內廠廠督、威武侯、威武公直至威武王。又運用了一些現代人的知識和身旁高手的協助，鬥倒掉了劉謹、開海禁、滅倭寇海盜、驅夷人收復滿刺加、平四川蠻族叛亂、平白巾賊響馬盜內亂，連蒙古韃靼也被他解決了，最後還封疆蒙古準備北上吃掉西伯利亞。過程中還一路取了嬌妻美妾，這還不夠強運嗎！</p>
+
+					<a href="blog/2011/08/03-回到明朝當王爺.html">...Read More</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
 	
 	<hr />
 	

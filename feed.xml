@@ -6,22 +6,37 @@
     <atom:link href="https://cwweng.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>星期一, 30 十一月 2015 17:00:28 +0800</pubDate>
-    <lastBuildDate>星期一, 30 十一月 2015 17:00:28 +0800</lastBuildDate>
+    <pubDate>Tue, 1 Dec 2015 02:22:15 +0800</pubDate>
+    <lastBuildDate>Tue, 1 Dec 2015 02:22:15 +0800</lastBuildDate>
 
     <item>
       <title>重新出發</title>
       <link>https://cwweng.github.io/blog/2015/11/30-new-start.html</link>
-      <pubDate>星期一, 30 十一月 2015 16:32:00 +0800</pubDate>
+      <pubDate>Mon, 30 Nov 2015 16:32:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/11/30-new-start.html</guid>
       	<description>
 	&lt;p&gt;公司把 &lt;a href=&quot;https://www.tumblr.com&quot;&gt;Tumblr&lt;/a&gt; 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。&lt;/p&gt;&lt;p&gt;這次改用 &lt;a href=&quot;http://jbake.org&quot;&gt;JBake&lt;/a&gt; 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。&lt;/p&gt;
 	</description>
     </item>
     <item>
+      <title>如何透過 proxy 存取 git://</title>
+      <link>https://cwweng.github.io/blog/2014/03/28-git-through-proxy.html</link>
+      <pubDate>Fri, 28 Mar 2014 14:56:00 +0800</pubDate>
+      <guid isPermaLink="false">blog/2014/03/28-git-through-proxy.html</guid>
+      	<description>
+	&lt;p&gt;網路上找到的解決辦法都是設 proxy，比如&lt;/p&gt;
+&lt;!--?prettify?--&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;git config --global http.proxy http://user:pwd@proxy.server.com:8080
+git config --global https.proxy http://user:pwd@proxy.server.com:8080
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;不過如果 proxy 不支援 CONNECT 就失敗了。&lt;/p&gt;&lt;p&gt;另一個方法是用 &lt;code&gt;https.insteadOf.git&lt;/code&gt;，比如&lt;br/&gt;&lt;!--?prettify?--&gt;&lt;br/&gt;&lt;code&gt;bash
+git config --global url.&amp;quot;https://&amp;quot;.insteadOf git://
+&lt;/code&gt;&lt;/p&gt;&lt;p&gt;參考 &lt;a href=&quot;https://coderwall.com/p/89zmpg%22Git%20protocol%20behind%20a%20proxy%22&quot;&gt;Git protocol behind a proxy&lt;/a&gt;&lt;/p&gt;
+	</description>
+    </item>
+    <item>
       <title>Linux 掛載 Windows 網芳 </title>
       <link>https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share.html</link>
-      <pubDate>星期六, 14 九月 2013 14:41:00 +0800</pubDate>
+      <pubDate>Sat, 14 Sep 2013 14:41:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2013/09/14-linux-mount-windows-share.html</guid>
       	<description>
 	&lt;h4&gt;安裝&lt;/h4&gt;
@@ -34,6 +49,16 @@ apt-get install cifs-utils
 &lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;掛載&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;mount -t cifs -o user=&amp;lt;username&amp;gt;,domain=&amp;lt;domain&amp;gt;,password=&amp;lt;password&amp;gt; //IP/Share/subdirectory /mount_point
 &lt;/code&gt;&lt;/pre&gt;
+	</description>
+    </item>
+    <item>
+      <title>「回到明朝當王爺」觀後感</title>
+      <link>https://cwweng.github.io/blog/2011/08/03-回到明朝當王爺.html</link>
+      <pubDate>Wed, 3 Aug 2011 11:16:00 +0800</pubDate>
+      <guid isPermaLink="false">blog/2011/08/03-回到明朝當王爺.html</guid>
+      	<description>
+	&lt;p&gt;打個分數：四顆星&lt;/p&gt;&lt;p&gt;拜&lt;a href=&quot;http://www.haodoo.net/&quot;&gt;網路&lt;/a&gt;和 Kindle 的幫助，在幾乎睜開眼有時間的情況下就是拿來看&lt;a href=&quot;http://www.haodoo.net/?M=Share&amp;P=0937&quot;&gt;回到明朝當王爺&lt;/a&gt;。就算是這樣也花了半個月以上的時間，真的是很長的一本小說。&lt;/p&gt;&lt;p&gt;簡單來說，就是男主角陰錯陽差的回到了明朝附身在一個邊疆的秀才身上，又很強運的在兩三年內一路狂升，從邊疆的驛丞、太子侍讀、神機營參將、內廠廠督、威武侯、威武公直至威武王。又運用了一些現代人的知識和身旁高手的協助，鬥倒掉了劉謹、開海禁、滅倭寇海盜、驅夷人收復滿刺加、平四川蠻族叛亂、平白巾賊響馬盜內亂，連蒙古韃靼也被他解決了，最後還封疆蒙古準備北上吃掉西伯利亞。過程中還一路取了嬌妻美妾，這還不夠強運嗎！&lt;/p&gt;
+&lt;!--more--&gt;&lt;p&gt;這書還有個特點，就是很有畫面，人物的衣著表情、都市的繁華、戰爭的壯闊、塞外的風光，就連…咳…咳…夫妻才能做事也都很有畫面。雖然用詞有點艱深，有時候也會過於冗長，不過還是很有臨場感啦！&lt;/p&gt;&lt;p&gt;作者顯然對歷史也很有研究，人物、地理、科技等等感覺似乎都很有根據，就連不知道是不是自創的詩詞也相當多。有的很有意境，有的很白爛。&lt;/p&gt;&lt;p&gt;至於我少給一顆星其中一個原因就是：太虎爛！一個原本只是做保險的回到了過去，竟然可以有鬥倒劉謹的權謀，有開海通商的經濟觀和國際觀，有戰無不勝的戰術戰略，叢林戰、都市戰、草原野戰樣樣都行，連把馬子都無往不利，你說…這還不虎爛嗎！&lt;/p&gt;&lt;p&gt;這書還有個問題，就是喜歡把中國講得很強大，日本、歐洲等國只是屁，要不是中國有爛皇帝惡搞，這些國家只有吃屎的份。不知道這是不是大陸人跟台灣人一樣都有的問題，勉懷過去的強大來安慰自己。另一個我不喜歡的就是，裡面闡述的一些理念想法或多或少有迎合共產黨政策的味道。比如「先讓少部份人富起來」、改革要慢慢來、強而有力的領導人帶領國家往正確的道路走等等。&lt;/p&gt;&lt;p&gt;雖然說是穿越小說，不過作者大概只是想寫一部假如中國當初怎樣怎樣，現在就會怎樣怎樣的小說。雖然有歷史，但是完全沒照著歷史走，而是自己改寫了歷史。不過既然是小說，這也沒什麼，只是我還是喜歡尋秦記(只看過港劇)的作法，努力的想以自己所知來改變歷史上的錯誤，卻發覺原來所作所為只是讓歷史照著已知的路走下去罷了。&lt;/p&gt;&lt;p&gt;無論如何，這仍是一本相當值得推薦的好書。&lt;/p&gt;
 	</description>
     </item>
 
