@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Just Do It</title>
+    <title>Linux 掛載 Windows 網芳 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="cwweng">
@@ -10,14 +10,14 @@
     <meta name="generator" content="JBake">
 
     <!-- Le styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/asciidoctor.css" rel="stylesheet">
-    <link href="css/base.css" rel="stylesheet">
-    <link href="css/prettify.css" rel="stylesheet">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/asciidoctor.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link href="../../../css/prettify.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
+      <script src="../../../js/html5shiv.min.js"></script>
     <![endif]-->
 
     <!-- Fav and touch icons -->
@@ -25,12 +25,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="favicon.ico">-->
+    <link rel="shortcut icon" href="../../../favicon.ico">-->
   </head>
   <body onload="prettyPrint()">
     <div id="wrap">
    
-
+	
 	<!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -41,19 +41,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="">Just Do It</a>
+          <a class="navbar-brand" href="../../../">Just Do It</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <!--
-            <li><a href="index.html">Home</a></li>
+            <li><a href="../../../index.html">Home</a></li>
             -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                  <li><a href="tags/jbake.html">jbake</a></li>
-                  <li><a href="tags/linux.html">linux</a></li>
-                  <li><a href="tags/碎碎唸.html">碎碎唸</a></li>
+                  <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/linux.html">linux</a></li>
+                  <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -65,9 +65,9 @@
                 -->
               </ul>
             </li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="feed.xml">Subscribe</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="../../../archive.html">Archive</a></li>
+            <li><a href="../../../feed.xml">Subscribe</a></li>
+            <li><a href="../../../about.html">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -75,15 +75,23 @@
     <div class="container">
 	
 	<div class="page-header">
-		<h1>Tag: 碎碎唸</h1>
+		<h1>Linux 掛載 Windows 網芳 </h1>
 	</div>
-	
-	<!--<ul>-->
-			<h4>十一月 2015</h4>
-			<ul>
-		
-		<li>30 - <a href="blog/2015/11/30-new-start.html">重新出發</a></li>
-	</ul>
+
+	<p><em>2013-09-14 14:41</em></p>
+
+	<p><h4>安裝</h4>
+<!--?prettify?-->
+<pre><code class="bash">apt-get install smbclient
+apt-get install cifs-utils
+</code></pre><h3>瀏覽</h3>
+<!--?prettify?-->
+<pre><code class="bash">smbclient -L //IP/Share -U domain/username -D subdirectory
+</code></pre><h3>掛載</h3>
+<pre><code class="bash">mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;password&gt; //IP/Share/subdirectory /mount_point
+</code></pre></p>
+
+	<hr />
 	
 		</div>
 		<div id="push"></div>
@@ -98,9 +106,9 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/prettify.js"></script>
+    <script src="../../../js/jquery-1.11.1.min.js"></script>
+    <script src="../../../js/bootstrap.min.js"></script>
+    <script src="../../../js/prettify.js"></script>
     
   </body>
 </html>

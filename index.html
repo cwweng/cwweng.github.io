@@ -24,8 +24,8 @@
     <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="favicon.ico">-->
   </head>
   <body onload="prettyPrint()">
     <div id="wrap">
@@ -51,9 +51,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="tags/jbake.html">jbake</a></li>
-                                <li><a href="tags/碎碎唸.html">碎碎唸</a></li>
-                >
+                  <li><a href="tags/jbake.html">jbake</a></li>
+                  <li><a href="tags/linux.html">linux</a></li>
+                  <li><a href="tags/碎碎唸.html">碎碎唸</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -78,12 +78,26 @@
 		<h1>Just Do It</h1>
 	</div>
   			<a href="blog/2015/11/30-new-start.html"><h1>重新出發</h1></a>
-  			<p>30 十一月 2015</p>
+  			<p>2015-11-30</p>
   			<p><p>公司把 <a href="https://www.tumblr.com">Tumblr</a> 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。</p><p>這次改用 <a href="http://jbake.org">JBake</a> 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。</p></p>
+  			<a href="blog/2013/09/14-linux-mount-windows-share.html"><h1>Linux 掛載 Windows 網芳 </h1></a>
+  			<p>2013-09-14</p>
+  			<p><h4>安裝</h4>
+<!--?prettify?-->
+<pre><code class="bash">apt-get install smbclient
+apt-get install cifs-utils
+</code></pre><h3>瀏覽</h3>
+<!--?prettify?-->
+<pre><code class="bash">smbclient -L //IP/Share -U domain/username -D subdirectory
+</code></pre><h3>掛載</h3>
+<pre><code class="bash">mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;password&gt; //IP/Share/subdirectory /mount_point
+</code></pre></p>
 	
 	<hr />
 	
+    <!--
 	<p>Older posts are available in the <a href="/archive.html">archive</a>.</p>
+    -->
 
 		</div>
 		<div id="push"></div>

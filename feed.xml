@@ -6,16 +6,34 @@
     <atom:link href="https://cwweng.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>星期一, 30 十一月 2015 16:12:52 +0800</pubDate>
-    <lastBuildDate>星期一, 30 十一月 2015 16:12:52 +0800</lastBuildDate>
+    <pubDate>星期一, 30 十一月 2015 17:00:28 +0800</pubDate>
+    <lastBuildDate>星期一, 30 十一月 2015 17:00:28 +0800</lastBuildDate>
 
     <item>
       <title>重新出發</title>
       <link>https://cwweng.github.io/blog/2015/11/30-new-start.html</link>
-      <pubDate>星期一, 30 十一月 2015 00:00:00 +0800</pubDate>
+      <pubDate>星期一, 30 十一月 2015 16:32:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/11/30-new-start.html</guid>
       	<description>
 	&lt;p&gt;公司把 &lt;a href=&quot;https://www.tumblr.com&quot;&gt;Tumblr&lt;/a&gt; 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。&lt;/p&gt;&lt;p&gt;這次改用 &lt;a href=&quot;http://jbake.org&quot;&gt;JBake&lt;/a&gt; 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。&lt;/p&gt;
+	</description>
+    </item>
+    <item>
+      <title>Linux 掛載 Windows 網芳 </title>
+      <link>https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share.html</link>
+      <pubDate>星期六, 14 九月 2013 14:41:00 +0800</pubDate>
+      <guid isPermaLink="false">blog/2013/09/14-linux-mount-windows-share.html</guid>
+      	<description>
+	&lt;h4&gt;安裝&lt;/h4&gt;
+&lt;!--?prettify?--&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;apt-get install smbclient
+apt-get install cifs-utils
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;瀏覽&lt;/h3&gt;
+&lt;!--?prettify?--&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;smbclient -L //IP/Share -U domain/username -D subdirectory
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;掛載&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;mount -t cifs -o user=&amp;lt;username&amp;gt;,domain=&amp;lt;domain&amp;gt;,password=&amp;lt;password&amp;gt; //IP/Share/subdirectory /mount_point
+&lt;/code&gt;&lt;/pre&gt;
 	</description>
     </item>
 
