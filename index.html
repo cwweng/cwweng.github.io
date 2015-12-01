@@ -52,9 +52,12 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="tags/jbake.html">jbake</a></li>
+                  <li><a href="tags/遊山玩水.html">遊山玩水</a></li>
                   <li><a href="tags/git.html">git</a></li>
+                  <li><a href="tags/java.html">java</a></li>
                   <li><a href="tags/linux.html">linux</a></li>
                   <li><a href="tags/碎碎唸.html">碎碎唸</a></li>
+                  <li><a href="tags/kindle.html">kindle</a></li>
                   <li><a href="tags/開卷有益.html">開卷有益</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
@@ -96,9 +99,10 @@
 <!--?prettify?-->
 <pre><code class="bash">git config --global http.proxy http://user:pwd@proxy.server.com:8080
 git config --global https.proxy http://user:pwd@proxy.server.com:8080
-</code></pre><p>不過如果 proxy 不支援 CONNECT 就失敗了。</p><p>另一個方法是用 <code>https.insteadOf.git</code>，比如<br/><!--?prettify?--><br/><code>bash
-git config --global url.&quot;https://&quot;.insteadOf git://
-</code></p><p>參考 <a href="https://coderwall.com/p/89zmpg%22Git%20protocol%20behind%20a%20proxy%22">Git protocol behind a proxy</a></p>
+</code></pre><p>不過如果 proxy 不支援 CONNECT 就失敗了。</p><p>另一個方法是用 <code>https.insteadOf.git</code>，比如</p>
+<!--?prettify?-->
+<pre><code class="bash">git config --global url.&quot;https://&quot;.insteadOf git://
+</code></pre><p>參考 <a href="https://coderwall.com/p/89zmpg%22Git%20protocol%20behind%20a%20proxy%22">Git protocol behind a proxy</a></p>
 			</p>
 			</article>
 			</p>
@@ -128,6 +132,125 @@ apt-get install cifs-utils
 				<p>打個分數：四顆星</p><p>拜<a href="http://www.haodoo.net/">網路</a>和 Kindle 的幫助，在幾乎睜開眼有時間的情況下就是拿來看<a href="http://www.haodoo.net/?M=Share&P=0937">回到明朝當王爺</a>。就算是這樣也花了半個月以上的時間，真的是很長的一本小說。</p><p>簡單來說，就是男主角陰錯陽差的回到了明朝附身在一個邊疆的秀才身上，又很強運的在兩三年內一路狂升，從邊疆的驛丞、太子侍讀、神機營參將、內廠廠督、威武侯、威武公直至威武王。又運用了一些現代人的知識和身旁高手的協助，鬥倒掉了劉謹、開海禁、滅倭寇海盜、驅夷人收復滿刺加、平四川蠻族叛亂、平白巾賊響馬盜內亂，連蒙古韃靼也被他解決了，最後還封疆蒙古準備北上吃掉西伯利亞。過程中還一路取了嬌妻美妾，這還不夠強運嗎！</p>
 
 					<a href="blog/2011/08/03-回到明朝當王爺.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2011/07/07-日月潭兩天一夜.html"><h1>2011-07 日月潭兩天一夜</h1></a>
+  			<p>2011-07-07</p>
+  			<p>
+				<p>六月初經由<a href="http://uhooamber.com">李小淮</a>得知了南投縣魚池鄉『日月潭頭社休閒農業區』自行車逍遙遊的活動，再加上<a href="http://uhooamber.com">好心人</a>贊助的日月潭湖景房，所以 7/2 就往南投出發啦！</p><p>第一站是埔里酒廠，天氣很熱。首先就買了好像大家一定會的買紹興香腸，一支才 $25，不貴也不錯吃啦！<br/><a href="https://picasaweb.google.com/lh/photo/NhJwims_wv8-z1V1mvjn5zaAC5HF2o1tXqZbEROtLHM?feat=embedwebsite"><img src="https://lh3.googleusercontent.com/-oTq1Mn6hg14/ThXBa45SAUI/AAAAAAAAAQY/3oNnbOtOva0/s400/IMG_1295.JPG" height="300" width="400"></a></p>
+
+					<a href="blog/2011/07/07-日月潭兩天一夜.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html"><h1>WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</h1></a>
+  			<p>2011-06-28</p>
+  			<p>
+				<p><em>Update</em> : I migrate from tumblr to Github Page and slightly modify and re-post this article.</p><p>This is the English version of my <a href="http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">another post</a>.</p><h2>Problem</h2><p>While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span>.</p><p>Turns out it was the following section cause the error</p>
+<!--?prettify?-->
+<pre><code class="xml">&lt;s:complexType name=&quot;MonitorFilter&quot;&gt;
+  &lt;s:sequence&gt;
+    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;_sumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;!-- irrelevant --&gt;
+    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;SumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;!-- irrelevant --&gt;
+ &lt;/s:sequence&gt;
+&lt;/s:complexType&gt;
+</code></pre><p>The root cause is that <strong>_sumInstances and SumInstances produce the same property</strong></p>
+
+					<a href="blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2011/06/24-kindle-3.html"><h1>Amazon Kindle 3 入手</h1></a>
+  			<p>2011-06-24</p>
+  			<p>
+				<p>抓了很多電子書，但是用電腦看的缺點就是眼睛會越看越乾，久了就累了想睡覺。另外就是開會或是出差閒閒沒事時沒辦法看，要用手機看電子書不如拿來玩遊戲。所以買一台電子書閱讀器就是最好的選擇啦！雖然原因那麼多，但最主要的是最近發獎金有一筆小錢啦！</p><p>iPad 紅歸紅，一樣有看久會累的問題，而且買了 iPad 應該大部份時間都不會是看電子書吧，而且...它很貴。總之，買了台 Kindle 3 Wifi-only，正值台幣值錢，加上稅金運費也只要台幣 4800 就搞定了。</p>
+
+					<a href="blog/2011/06/24-kindle-3.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2011/06/17-Hong-Kong-Day4.html"><h1>香港四天三夜自由行 ─ 第四天</h1></a>
+  			<p>2011-06-17</p>
+  			<p>
+				<p>第四天了，拖了兩年多終於要寫完啦！</p><p>這天一大早就辦退房了，但是退房後可以寄放行李，這樣就能輕輕鬆鬆出去玩了，有這種服務真棒！</p><p>早餐原本好像是要吃「澳洲牛奶公司」，不過變成了「美心快餐」，也是很好吃，尤其是蘿蔔糕，讚！<br/><a href="https://picasaweb.google.com/lh/photo/WkZYSfH3UMn7qCkgDj7rZ33Peb3-iAfJG4h-wH49law?feat=embedwebsite"><img src="https://lh3.googleusercontent.com/-K9LtD-2xdUs/Te-U_QE2_kI/AAAAAAAAANA/6DcBUE2GmoY/s400/20090205-085712.jpg" height="300" width="400"></a></p>
+
+					<a href="blog/2011/06/17-Hong-Kong-Day4.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2011/06/14-Hong-Kong-Day3.html"><h1>香港四天三夜自由行 ─ 第三天</h1></a>
+  			<p>2011-06-14</p>
+  			<p>
+				<p>隔兩年了，要動<strike>筆</strike>手真難</p><p>今天計畫很簡單，可是不太輕鬆，加上前一晚太累，所以一大早就拖延了。早餐吃的是「潮樓」，照慣例有著香港不怎麼樣的服務態度，但又很美味的食物，真的是又愛又恨啊！</p>
+
+					<a href="blog/2011/06/14-Hong-Kong-Day3.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html"><h1>WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</h1></a>
+  			<p>2011-06-03</p>
+  			<p>
+				<h2>問題</h2><p>測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題</p><p>直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span> 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題</p>
+<!--?prettify?-->
+<pre><code class="xml">&lt;s:complexType name=&quot;MonitorFilter&quot;&gt;
+  &lt;s:sequence&gt;
+    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;_sumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;!-- 省略 --&gt;
+    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;SumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;!-- 省略 --&gt;
+ &lt;/s:sequence&gt;
+&lt;/s:complexType&gt;
+</code></pre><p>因為 <strong>_sumInstances 和 SumInstances 會產生相同的 property</strong></p>
+
+					<a href="blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2009/11/07-Hong-Kong-Day2.html"><h1>香港四天三夜自由行 ─ 第二天</h1></a>
+  			<p>2009-11-07</p>
+  			<p>
+				<p>這次更扯啦！距離前一篇已經超過五個月囉！寫遊記實在不是我的強項。</p><p>第二天大概八點起床吧，雖然說是自由行，不過如果睡太晚就虧大囉。今天的行程主要是去海洋公園、太平山夜景、還有蘭桂芳，不過重點還是香港美食啦！</p>
+
+					<a href="blog/2009/11/07-Hong-Kong-Day2.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2009/05/28-Hong-Kong-Day1.html"><h1>香港四天三夜自由行 ─ 第一天</h1></a>
+  			<p>2009-05-28</p>
+  			<p>
+				<p>距離前一篇已經過了三個月了，人懶起來真的是很恐佈的！</p><p>行程的開頭當然是去機場啦，幸好刷國泰的卡可以免費停外圍的五福停車場，不然交通真的是很麻煩的一件事，雖然如此，路癡我還是迷了路幸好沒有延誤。登機的地方是第二航廈，不過就算是第二航廈還是很不怎麼樣，輸國外很多啊！</p><p>行程的第一站就誤點了，因為飛機重新降落，果然計劃趕不上變化啊！一出關就很明顯就看到中旅社的櫃台了，把「單程纜車+凌霄閣」套票和海洋公園的票買好，再買八達通，港幣去掉快大半了。接著就去 Hotel Link 登記等著上巴士然後就到了要睡四天的金御假日了。東西放一放就往第一站「半島酒店下午茶」出發啦！</p>
+
+					<a href="blog/2009/05/28-Hong-Kong-Day1.html">...更多</a>
+			</p>
+			</article>
+			</p>
+			<hr/>
+			<article>
+  			<a href="blog/2009/02/08-Hong-Kong-plan.html"><h1>香港四天三夜自由行 ─ 行前規劃</h1></a>
+  			<p>2009-02-08</p>
+  			<p>
+				<p>因為老婆放寒假，本來是想趁過年去紐西蘭玩的，查了一下以後發現......貴死人，加上現在經濟不景氣我們還是低調點的好，所以就變成香港啦。其實我是個懶人，想到要自己規劃行程又更懶了，所以拖到過年前一週才開始研究，一經老婆提醒才想到過年銀行都沒開，緊急草率算了一下趕快去換的結果就是現金徹底的不夠，差點在香港沒錢吃飯。</p><p>第一步當然就是確定出去玩的日期、酒店和飛機了。很不巧的有同事跟我撞期要去日本，，只好選擇 2/2 ~ 2/5 這四天，週末的假一天都沒有派上用場 :-( 不過這樣也沒啥不好，至少每個點都不用人擠人浪費時間。機加酒最後是選擇了<a href="http://www.kktravel.com.tw">自遊網</a>的金御假日酒店和長榮航空早去晚回（含機場酒店接送及簽證），因為金御假日就在地鐵站出口旁，而且也比喜來登便宜多了。</p><p>規劃行程是最麻煩的了，要參考一堆別人的行程，研究自己想去的點、想吃的店、想逛的商場，還得參考地圖。最後行程的部份大部份是參考<a href="http://www.backpackers.com.tw">背包客</a>網站和 PTT 的 Hong_Kong 板，地圖用 <a href="http://maps.google.com.tw">Google Map</a>，餐廳的位置就靠<a href="http://www.openprice.com">開飯網</a>，還有一堆網站用來查公車、門票、叮叮車、船班等等。用 Google Map 的好處是可以把每個要去的點都先標示出來再排行程可以比較有概念，至於大家都推薦的<a href="http://www.centamap.com">中原地圖</a>感覺頗複雜，所以就沒有用了。最推薦的網站就是<a href="http://hk.myblog.yahoo.com/catjacob2004">Cat Jacob's 香港吃喝玩樂情報站</a>，即使沒有用到他上面提供的行程，但是靠上面的資料就可把很多點之間的交通方式給串出來了。</p>
+
+					<a href="blog/2009/02/08-Hong-Kong-plan.html">...更多</a>
 			</p>
 			</article>
 			</p>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="cwweng">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <!-- Le styles -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/asciidoctor.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link href="../../../css/prettify.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="../../../favicon.ico">-->
+  </head>
+  <body onload="prettyPrint()">
+    <div id="wrap">
+   
+	
+	<!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../../">Just Do It</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <!--
+            <li><a href="../../../index.html">Home</a></li>
+            -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/遊山玩水.html">遊山玩水</a></li>
+                  <li><a href="../../../tags/git.html">git</a></li>
+                  <li><a href="../../../tags/java.html">java</a></li>
+                  <li><a href="../../../tags/linux.html">linux</a></li>
+                  <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
+                  <li><a href="../../../tags/kindle.html">kindle</a></li>
+                  <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                <!--
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+                -->
+              </ul>
+            </li>
+            <li><a href="../../../archive.html">Archive</a></li>
+            <li><a href="../../../feed.xml">Subscribe</a></li>
+            <li><a href="../../../about.html">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="container">
+	
+	<div class="page-header">
+		<h1>WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</h1>
+	</div>
+
+	<p><em>2011-06-28 11:46</em></p>
+
+	<p><p><em>Update</em> : I migrate from tumblr to Github Page and slightly modify and re-post this article.</p><p>This is the English version of my <a href="http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">another post</a>.</p><h2>Problem</h2><p>While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span>.</p><p>Turns out it was the following section cause the error</p>
+<!--?prettify?-->
+<pre><code class="xml">&lt;s:complexType name=&quot;MonitorFilter&quot;&gt;
+  &lt;s:sequence&gt;
+    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;_sumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;!-- irrelevant --&gt;
+    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;SumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;!-- irrelevant --&gt;
+ &lt;/s:sequence&gt;
+&lt;/s:complexType&gt;
+</code></pre><p>The root cause is that <strong>_sumInstances and SumInstances produce the same property</strong></p>
+<!--more--><h2>Solutions</h2><p>There are seems several solutions I found, but none of them gives me a complete solution. Here they are :</p><h4>Solution 1</h4><p>Adding <em>-autoNameResolution</em> argument to WSDL2Java. My test shows no effect, and the error remains.</p>
+<hr/><h4>Solution 2</h4><p>Do not strip _ by using JAXB binding :</p>
+<!--?prettify?-->
+<pre><code class="xml">&lt;jaxb:bindings
+  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
+  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
+  version=&quot;1.0&quot;&gt;
+ 
+  &lt;jaxb:globalBindings underscoreBinding=&quot;asCharInWord&quot;/&gt;
+&lt;/jaxb:bindings&gt;
+</code></pre><p>After adding <em>-b binding.xml</em> argument, the error message changed to <span style="color: red">WSDLToJava Error: java.lang.IllegalArgumentException: trying to create the same field twice: sumInstances</span></p>
+<hr/><h4>Solution 3</h4><p>Rename _sumInstances to underscoreBinding by JAXWS binding :</p>
+<!--?prettify?-->
+<pre><code class="xml">&lt;jaxws:bindings version=&quot;1.0&quot;
+  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
+  xmlns:jaxws=&quot;http://java.sun.com/xml/ns/jaxws&quot;
+  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
+  xmlns:wsdl=&quot;http://schemas.xmlsoap.org/wsdl/&quot;
+  wsdlLocation=&quot;PerformanceDataCollectionWS.wsdl&quot;
+  xmlns=&quot;http://java.sun.com/xml/ns/jaxws&quot;
+  xmlns:tns1=&quot;VOLARISWS&quot;&gt;
+ 
+  &lt;jaxws:schemabindings&gt;
+    &lt;jaxws:bindings node=&quot;wsdl:definitions&quot;&gt;
+      &lt;jaxws:bindings node=&quot;//s:element[@nam=&#39;_sumInstances&#39;]&quot;&gt;
+        &lt;jaxb:property name=&quot;underscoreSumInstances&quot; /&gt;
+      &lt;/jaxws:bindings&gt;
+    &lt;/jaxws:bindings&gt;
+  &lt;/jaxws:schemabindings&gt;
+&lt;/jaxws:bindings&gt;
+</code></pre><p>The argument is the same as the previous one: <em>-b binding.xml</em>. The error became <span style="color: red">WSDLToJava Error: Could not find any node with the XPath expression: //wsdl:definitions///s:element[@nam=’_sumInstances’]</span>. </p><p>WTF !!!</p>
+<hr/><h4>Solution 4</h4><p>Rename _sumInstances to underscoreBinding by JAXB binding :</p>
+<!--?prettify?-->
+<pre><code class="xml">&lt;jaxb:bindings
+  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
+  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
+  version=&quot;1.0&quot;&gt;
+ 
+  &lt;jaxb:bindings schemaLocation=&quot;file:PerformanceDataCollectionWS.wsdl&quot; node=&quot;/s:schema&quot;&gt;
+    &lt;jaxb:bindings node=&quot;//s:element[@name=&#39;_sumInstances&#39;]&quot;&gt;
+      &lt;jaxb:property name=&quot;underscoreSumInstances&quot;&gt;&lt;/jaxb:property&gt;
+    &lt;/jaxb:bindings&gt;
+  &lt;/jaxb:bindings&gt; 
+&lt;/jaxb:bindings&gt;
+</code></pre><p>The result was <span style="color: red">WSDLToJava Error: Thrown by JAXB: “file:/PerformanceDataCollectionWS.wsdl” is not a part of this compilation. Is this a mistake for “file:/PerformanceDataCollectionWS.wsdl#types1”? at line 6 column 91 of schema file:/binding.xml</span>. </p><p>It's driving me crazy.</p>
+<hr/><h4>Hint</h4><p><a href="http://mail-archives.apache.org/mod_mbox/cxf-issues/200906.mbox/%3C584927696.1244148907615.JavaMail.jira@brutus%3E">This post</a> said Won’t Fix ! and we should use JAXWS instead of JAXB (However, JAXWS did not work in my previous test). The post did give me a solution for the error. After adding #types1 to the filename value of the schemaLocation attribute in binding.xml, that is <span style="color: red"> <strong>schemaLocation=”file:PerformanceDataCollectionWS.wsdl#types1”</strong> </span>, and it worked !</p><h2>Conclusion</h2><p><strong>The modified 4th solution plus the hint works</strong></p><h2>Reference</h2>
+<ul>
+  <li><a href="http://www.jroller.com/ouertani/entry/wsdl_integration_problem_two_declarations">WSDL integration problem : Two declarations cause a collision</a></li>
+  <li><a href="http://stackoverflow.com/questions/2163719/tell-jaxb-to-not-remove-underscores">tell jaxb to not remove underscores</a></li>
+</ul></p>
+
+	<hr />
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 廣告 -->
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-7899315580063320"
+        data-ad-slot="7761292690"
+        data-ad-format="auto"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script></script></ins></script>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../../js/jquery-1.11.1.min.js"></script>
+    <script src="../../../js/bootstrap.min.js"></script>
+    <script src="../../../js/prettify.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-175902-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    
+  </body>
+</html>
