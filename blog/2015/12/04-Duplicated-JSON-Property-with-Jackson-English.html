@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>「回到明朝當王爺」觀後感</title>
+    <title>Duplicated JSON Properties After Serialize with Jackson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="cwweng">
@@ -92,13 +92,30 @@
     <div class="container">
 	
 	<div class="page-header">
-		<h1>「回到明朝當王爺」觀後感</h1>
+		<h1>Duplicated JSON Properties After Serialize with Jackson</h1>
 	</div>
 
-	<p><em>2011-08-03 11:16</em></p>
+	<p><em>2015-12-04 15:26</em></p>
 
-	<p><p>打個分數：四顆星</p><p>拜<a href="http://www.haodoo.net/">網路</a>和 Kindle 的幫助，在幾乎睜開眼有時間的情況下就是拿來看<a href="http://www.haodoo.net/?M=Share&P=0937">回到明朝當王爺</a>。就算是這樣也花了半個月以上的時間，真的是很長的一本小說。</p><p>簡單來說，就是男主角陰錯陽差的回到了明朝附身在一個邊疆的秀才身上，又很強運的在兩三年內一路狂升，從邊疆的驛丞、太子侍讀、神機營參將、內廠廠督、威武侯、威武公直至威武王。又運用了一些現代人的知識和身旁高手的協助，鬥倒掉了劉謹、開海禁、滅倭寇海盜、驅夷人收復滿刺加、平四川蠻族叛亂、平白巾賊響馬盜內亂，連蒙古韃靼也被他解決了，最後還封疆蒙古準備北上吃掉西伯利亞。過程中還一路取了嬌妻美妾，這還不夠強運嗎！</p>
-<!--more--><p>這書還有個特點，就是很有畫面，人物的衣著表情、都市的繁華、戰爭的壯闊、塞外的風光，就連…咳…咳…夫妻才能做事也都很有畫面。雖然用詞有點艱深，有時候也會過於冗長，不過還是很有臨場感啦！</p><p>作者顯然對歷史也很有研究，人物、地理、科技等等感覺似乎都很有根據，就連不知道是不是自創的詩詞也相當多。有的很有意境，有的很白爛。</p><p>至於我少給一顆星其中一個原因就是：太虎爛！一個原本只是做保險的回到了過去，竟然可以有鬥倒劉謹的權謀，有開海通商的經濟觀和國際觀，有戰無不勝的戰術戰略，叢林戰、都市戰、草原野戰樣樣都行，連把馬子都無往不利，你說…這還不虎爛嗎！</p><p>這書還有個問題，就是喜歡把中國講得很強大，日本、歐洲等國只是屁，要不是中國有爛皇帝惡搞，這些國家只有吃屎的份。不知道這是不是大陸人跟台灣人一樣都有的問題，勉懷過去的強大來安慰自己。另一個我不喜歡的就是，裡面闡述的一些理念想法或多或少有迎合共產黨政策的味道。比如「先讓少部份人富起來」、改革要慢慢來、強而有力的領導人帶領國家往正確的道路走等等。</p><p>雖然說是穿越小說，不過作者大概只是想寫一部假如中國當初怎樣怎樣，現在就會怎樣怎樣的小說。雖然有歷史，但是完全沒照著歷史走，而是自己改寫了歷史。不過既然是小說，這也沒什麼，只是我還是喜歡尋秦記(只看過港劇)的作法，努力的想以自己所知來改變歷史上的錯誤，卻發覺原來所作所為只是讓歷史照著已知的路走下去罷了。</p><p>無論如何，這仍是一本相當值得推薦的好書。</p></p>
+	<p><p>Following problem found in the previous post, certain property got duplicated in the JSON after serialized polymorphic objects with Jackson.</p><p>According to <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">this article</a>, Jackson will output <code>action</code> property based on the value of <code>@JsonSubTypes.Type</code>, and then serialize the object. Since <code>action</code> property is used for polymorphic object deserialization and as an actual member of the class, <code>action</code> get duplicated.</p><p>The solution is simple and can be found in the same artitle. Just change <code>JsonTypeInfo.As.PROPERTY</code> in <code>@JsonTypeInfo</code> to <code>JsonTypeInfo.As.EXISTING_PROPERTY</code>.</p>
+<!--?prettify?-->
+<pre><code class="java">@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, visible = true, property = &quot;action&quot;)
+@JsonSubTypes({
+    @Type(value = SendMessageAction.class, name = &quot;sendMessage&quot;),
+    @Type(value = LoginAction.class, name = &quot;login&quot;)
+})
+abstract class Action {
+    protected String action;
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+}
+</code></pre></p>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -109,7 +126,7 @@
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2011/08/03-回到明朝當王爺.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.ioblog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
