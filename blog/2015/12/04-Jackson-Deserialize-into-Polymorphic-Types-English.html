@@ -97,7 +97,19 @@
 
 	<p><em>2015-12-04 14:57</em></p>
 
-	<p><h3>Problem</h3><p>Assume you have two types of JSON documents, and the following actions depend on the value of specific attribute.<br/>`<code>json</code><br/>{<br/> "action": "login",<br/> "userId": "xxx"<br/>}</p><p>{<br/> "action": "sendMessage",<br/> "message": "user Message"<br/>}<br/>```</p><p>If both types of JSON documents can be received, the simplest way is to deserialized them into Map, but that would be very not object-oriented. What you need is a way to automatically deserialize them into right type of objects.</p><h3>Solution</h3><p><a href="http://programmerbruce.blogspot.tw/2011/05/deserialize-json-with-jackson-into.html">Deserialize JSON with Jackson into Polymorphic Types - A Complete Example</a> demonstrate many useful examples. What we need is Example 5, but Mixin is not necessary in our case, not sure if it's because we use Jackson 2.6.</p>
+	<p><h3>Problem</h3><p>Assume you have two types of JSON documents, and the following actions depend on the value of specific attribute.</p>
+<!--?prettify?-->
+<pre><code class="json">{
+    &quot;action&quot;: &quot;login&quot;,
+    &quot;userId&quot;: &quot;xxx&quot;
+}
+
+{
+    &quot;action&quot;: &quot;sendMessage&quot;,
+    &quot;message&quot;: &quot;user Message&quot;
+}
+</code></pre><p>If both types of JSON documents can be received, the simplest way is to deserialized them into Map, but that would be very not object-oriented. What you need is a way to automatically deserialize them into right type of objects.</p>
+<!--more--><h3>Solution</h3><p><a href="http://programmerbruce.blogspot.tw/2011/05/deserialize-json-with-jackson-into.html">Deserialize JSON with Jackson into Polymorphic Types - A Complete Example</a> demonstrate many useful examples. What we need is Example 5, but Mixin is not necessary in our case, not sure if it's because we use Jackson 2.6.</p>
 <!--?prettify?-->
 <pre><code class="java">import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
