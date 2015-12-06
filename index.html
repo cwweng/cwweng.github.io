@@ -69,6 +69,7 @@
                   <li><a href="tags/git.html">git</a></li>
                   <li><a href="tags/linux.html">linux</a></li>
                   <li><a href="tags/碎碎唸.html">碎碎唸</a></li>
+                  <li><a href="tags/blog.html">blog</a></li>
                   <li><a href="tags/kindle.html">kindle</a></li>
                   <li><a href="tags/開卷有益.html">開卷有益</a></li>
                 <!--
@@ -94,6 +95,12 @@
 	<div class="page-header">
 		<h1>Just Do It</h1>
 	</div>
+  			<a href="blog/2015/12/07-fancyBox-with-Google-Photos.html"><h1>fancyBox 和 Google Photos 不太合作 (fancyBox doesn&apos;t work with Google Photos)</h1></a>
+  			<p>2015-12-07</p>
+  			<p>
+				<p>為新 Blog 放上了 <a href="http://fancyapps.com/fancybox/">fancyBox</a> 後發現不支援 Google Photos 圖檔的網址，<a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51">查了一下</a>發現原來 fancyBox 會去判斷副檔名，剛好 Google Photos 提供的網址都沒有副檔名。根據該文章的說明，把 Google Photos 提供的網址最後加上 <strong>#.jpg</strong> 讓它看起來有副檔名就行了。</p><p>After adding support for <a href="http://fancyapps.com/fancybox/">fancyBox</a>, I found that it doesn't work with Google Photos. According to <a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51">this article</a>, fancyBox requires extension at the end of the URL, and URL provided by Google Photos has none. Just Adding <strong>#.jpg</strong> at the end of the URL as the article suggested and everything works !</p>
+			</p>
+			<hr/>
   			<a href="blog/2015/12/05-貓空茶香環狀步道半日遊.html"><h1>2015-11-21 貓空茶香環狀步道半日遊</h1></a>
   			<p>2015-12-05</p>
   			<p>
@@ -173,15 +180,19 @@ abstract class Action {
   			<p>2015-12-04</p>
   			<p>
 				<h3>問題</h3><p>假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：</p>
-<!--?prettify?--><p>`<code>json</code><br/>{<br/> "action": "login",<br/> "userId": "xxx"<br/>}</p><p>{<br/> "action": "sendMessage",<br/> "message": "user Message"<br/>}<br/>```</p><p>假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。</p>
+<!--?prettify?-->
+<pre><code class="json">{
+    &quot;action&quot;: &quot;login&quot;,
+    &quot;userId&quot;: &quot;xxx&quot;
+}
+
+{
+    &quot;action&quot;: &quot;sendMessage&quot;,
+    &quot;message&quot;: &quot;user Message&quot;
+}
+</code></pre><p>假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。</p>
 
 					<a href="blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/04-貓空茶香環狀步道半日遊.html"><h1>2015-11-21 貓空茶香環狀步道半日遊</h1></a>
-  			<p>2015-12-04</p>
-  			<p>
-				<p>又到了周末步道遊的時間了，因為之前在<a href="http://tw.hiking.biji.co/">健行筆記</a>看到的<a href="http://tw.hiking.biji.co/index.php?q=news&act=info&id=4167&subtitle=%08%E3%80%90%E6%96%B0%E8%81%9E%E3%80%91%E8%B2%93%E7%A9%BA%E6%96%B0%E6%AD%A5%E9%81%93+%E8%8C%B6%E9%A6%99%E7%92%B0%E7%8B%80%E6%AD%A5%E9%81%93">新聞</a>，所以這次就是它啦！</p><p>先來張導覽圖，圖是連到上面說的那則新聞裡的導覽圖。<br/><a class="fancybox" rel="group" href="http://tw.hiking.biji.co/static/upload/5552cd7f65289.jpg"><img src="http://tw.hiking.biji.co/static/upload/5552cd7f65289.jpg" style="height: 447px; width: 350px;" /></a></p><p>因為有小朋友還是開車方便，所以路線就是開車到「茶展中心步道」入口處的停車場，只走「茶展中心步道」和「健康步道」。</p><p>運氣不錯，中午才到竟然有位子停，停好後旁邊就有個「小天空步道」的標示，但是其實是從它左邊的階梯往下走「茶展中心步道」。<br/><a class="fancybox" rel="group" href="https://lh3.googleusercontent.com/xwTPdsL1qn8-weX7eR18-2kohmJxlRYy4DyXAf2QSSbTDg2pdBZEUjYhn1CAFYAlHZHrJ2ZkUiLHJlXm8vxD1ZzbEzUtLGKOt10mD8gB5MZl1LstvxUH-1hDre2j7FaQ2__saVGN39Z5UfTkwWy7pAkb5tNNug4kqhmt_JxwMeWJZsAvK58TLNF1sYjTRrrg8XJrXupSAONGDhesyhUAZZGfqaAtiSDdFqgc8QNEX_N6vz2uVrP1PvpQSGTlHbgZUIm09l1kEUTVIfhmwE1jonIkDOfLdc1Wc_sSQrpoLppt_xW5De0mKYio3FtHqLMMZt-j1eVxEFM3DIwZii8fJhKG9hS1RUejSAIu5SERaLPbXV6E46gYshZFyhbNSFjY_oXkRaM237eLP90CD5sWw6YHwObCFMBcSCzwYxmZCz56YaxMa1_6374PGwQUdsX4E1hXMb1oP6eisHh-5JpCbhmHzDtoXd2Into3CZyoWpLNAbb4JZHNxZzossL75ck8QpeAT7Aeg-hulU7rioKEQoWcET3kMiCvypSu5BE9A3Q=w660-h495-no"><img src="https://lh3.googleusercontent.com/xwTPdsL1qn8-weX7eR18-2kohmJxlRYy4DyXAf2QSSbTDg2pdBZEUjYhn1CAFYAlHZHrJ2ZkUiLHJlXm8vxD1ZzbEzUtLGKOt10mD8gB5MZl1LstvxUH-1hDre2j7FaQ2__saVGN39Z5UfTkwWy7pAkb5tNNug4kqhmt_JxwMeWJZsAvK58TLNF1sYjTRrrg8XJrXupSAONGDhesyhUAZZGfqaAtiSDdFqgc8QNEX_N6vz2uVrP1PvpQSGTlHbgZUIm09l1kEUTVIfhmwE1jonIkDOfLdc1Wc_sSQrpoLppt_xW5De0mKYio3FtHqLMMZt-j1eVxEFM3DIwZii8fJhKG9hS1RUejSAIu5SERaLPbXV6E46gYshZFyhbNSFjY_oXkRaM237eLP90CD5sWw6YHwObCFMBcSCzwYxmZCz56YaxMa1_6374PGwQUdsX4E1hXMb1oP6eisHh-5JpCbhmHzDtoXd2Into3CZyoWpLNAbb4JZHNxZzossL75ck8QpeAT7Aeg-hulU7rioKEQoWcET3kMiCvypSu5BE9A3Q=w660-h495-no" style="height: 300px; width: 400px;" /></a></p>
 			</p>
 			<hr/>
   			<a href="blog/2015/12/03-Spring-WebSocket-Handshake-failed.html"><h1>Handshake failed due to invalid Upgrade header: null</h1></a>

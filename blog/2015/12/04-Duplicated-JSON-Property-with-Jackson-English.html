@@ -69,6 +69,7 @@
                   <li><a href="../../../tags/git.html">git</a></li>
                   <li><a href="../../../tags/linux.html">linux</a></li>
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
+                  <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
                 <!--
@@ -96,6 +97,10 @@
 	</div>
 
 	<p><em>2015-12-04 15:36</em></p>
+
+		<p><em>Tags:</em>
+		<a href="../../../tags/java.html">java</a>
+		</p>
 
 	<p><p>Following problem found in the previous post, certain property got duplicated in the JSON after serialized polymorphic objects with Jackson.</p><p>According to <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">this article</a>, Jackson will output <code>action</code> property based on the value of <code>@JsonSubTypes.Type</code>, and then serialize the object. Since <code>action</code> property is used for polymorphic object deserialization and as an actual member of the class, <code>action</code> get duplicated.</p><p>The solution is simple and can be found in the same artitle. Just change <code>JsonTypeInfo.As.PROPERTY</code> in <code>@JsonTypeInfo</code> to <code>JsonTypeInfo.As.EXISTING_PROPERTY</code>.</p>
 <!--?prettify?-->

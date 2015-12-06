@@ -69,6 +69,7 @@
                   <li><a href="../../../tags/git.html">git</a></li>
                   <li><a href="../../../tags/linux.html">linux</a></li>
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
+                  <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
                 <!--
@@ -97,8 +98,22 @@
 
 	<p><em>2015-12-04 14:21</em></p>
 
+		<p><em>Tags:</em>
+		<a href="../../../tags/java.html">java</a>
+		</p>
+
 	<p><h3>問題</h3><p>假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：</p>
-<!--?prettify?--><p>`<code>json</code><br/>{<br/> "action": "login",<br/> "userId": "xxx"<br/>}</p><p>{<br/> "action": "sendMessage",<br/> "message": "user Message"<br/>}<br/>```</p><p>假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。</p>
+<!--?prettify?-->
+<pre><code class="json">{
+    &quot;action&quot;: &quot;login&quot;,
+    &quot;userId&quot;: &quot;xxx&quot;
+}
+
+{
+    &quot;action&quot;: &quot;sendMessage&quot;,
+    &quot;message&quot;: &quot;user Message&quot;
+}
+</code></pre><p>假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。</p>
 <!--more--><h3>解法</h3><p>從 <a href="http://programmerbruce.blogspot.tw/2011/05/deserialize-json-with-jackson-into.html">Deserialize JSON with Jackson into Polymorphic Types - A Complete Example</a> 這篇文章可以看到很多有用的例子。在這邊可以參考 Example 5，不過用不到 MixIn，不知道是不是因為我用的是 Jackson 2.6。</p>
 <!--?prettify?-->
 <pre><code class="java">import com.fasterxml.jackson.databind.ObjectMapper;
