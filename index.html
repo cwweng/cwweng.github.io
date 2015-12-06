@@ -95,6 +95,17 @@
 	<div class="page-header">
 		<h1>Just Do It</h1>
 	</div>
+  			<a href="blog/2015/12/07-fancyBox-cause-page-to-jump-to-top.html"><h1>修正 fancyBox 點擊圖片後會跳到網頁最上方的問題</h1></a>
+  			<p>2015-12-07</p>
+  			<p>
+				<p>處理好 fancyBox 和 Google Photos 的問題後，又跑出了另一個問題：點了圖以後會直接跳到文章的最開頭！一樣也是 Google 後找到<a href="http://stackoverflow.com/questions/13547007/fancybox2-fancybox-causes-page-to-to-jump-to-the-top">解法</a>，參考其中一個修改 css 的方法就搞定了！</p><p><strong>jquery.fancybox.css</strong></p>
+<pre><code class="css">.fancybox-lock {
+    /* overflow: hidden !important; */ /* comment out this one */
+    width: auto;
+}
+</code></pre>
+			</p>
+			<hr/>
   			<a href="blog/2015/12/07-fancyBox-with-Google-Photos.html"><h1>fancyBox 和 Google Photos 不太合作 (fancyBox doesn&apos;t work with Google Photos)</h1></a>
   			<p>2015-12-07</p>
   			<p>
