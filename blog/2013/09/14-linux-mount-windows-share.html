@@ -2,12 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Linux 掛載 Windows 網芳 </title>
+        <title>Linux 掛載 Windows 網芳</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="安裝
+
+apt-get install smbclient
+apt-get install cifs-utils
+瀏覽
+
+smbclient -L //IP/Share -U domain/usern">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
+
+    <meta property="og:title" content="Linux 掛載 Windows 網芳">
+    <meta property="og:description" content="                安裝
+
+apt-get install smbclient
+apt-get install cifs-utils
+瀏覽
+
+smbclient -L //IP/Share -U domain/usern
+">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share.html">
+
 
     <!-- Le styles -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +121,8 @@
 		<a href="../../../tags/linux.html">linux</a>
 		</p>
 
-	<p><h4>安裝</h4>
+	<article>
+		<p><h4>安裝</h4>
 <!--?prettify?-->
 <pre><code class="bash">apt-get install smbclient
 apt-get install cifs-utils
@@ -112,6 +132,7 @@ apt-get install cifs-utils
 </code></pre><h3>掛載</h3>
 <pre><code class="bash">mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;password&gt; //IP/Share/subdirectory /mount_point
 </code></pre></p>
+	</article>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -122,7 +143,7 @@ apt-get install cifs-utils
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2013/09/14-linux-mount-windows-share.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 

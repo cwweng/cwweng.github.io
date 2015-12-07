@@ -2,12 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>用 Jackson 將 JSON 反序列化成 Polymorphic 物件</title>
+        <title>用 Jackson 將 JSON 反序列化成 Polymorphic 物件</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="問題假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：
+
+{
+    &quot;action&quot;: &quot;login&quot;,
+    &quot;userId&q">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
+
+    <meta property="og:title" content="用 Jackson 將 JSON 反序列化成 Polymorphic 物件">
+    <meta property="og:description" content="                問題假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：
+
+{
+    &quot;action&quot;: &quot;login&quot;,
+    &quot;userId&q
+">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://cwweng.github.io/blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html">
+
 
     <!-- Le styles -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +117,8 @@
 		<a href="../../../tags/java.html">java</a>
 		</p>
 
-	<p><h3>問題</h3><p>假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：</p>
+	<article>
+		<p><h3>問題</h3><p>假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：</p>
 <!--?prettify?-->
 <pre><code class="json">{
     &quot;action&quot;: &quot;login&quot;,
@@ -178,6 +194,7 @@ class LoginAction extends Action {
     }
 } 
 </code></pre><p>從上面範例的輸出可以看到反序列化後的物件其類別會對應到真正的類別，這樣接下來的程式就可以用物件化的方式來操作了。</p><h3>另一個問題</h3><p>雖然可以正確的反序列化了，不過如果嘗試將物件序列化成 JSON 文件會發現 action 這個屬性的資料被輸出了兩次。下一篇文章再處理吧！</p></p>
+	</article>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -188,7 +205,7 @@ class LoginAction extends Action {
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.io/blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 

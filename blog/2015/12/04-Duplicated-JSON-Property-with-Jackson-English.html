@@ -2,12 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Duplicated JSON Properties After Serialize with Jackson</title>
+        <title>Duplicated JSON Properties After Serialize with Jackson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="Following problem found in the previous post, certain property got duplicated in the JSON after seri">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
+
+    <meta property="og:title" content="Duplicated JSON Properties After Serialize with Jackson">
+    <meta property="og:description" content="                Following problem found in the previous post, certain property got duplicated in the JSON after seri
+">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://cwweng.github.io/blog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html">
+
 
     <!-- Le styles -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +109,8 @@
 		<a href="../../../tags/java.html">java</a>
 		</p>
 
-	<p><p>Following problem found in the previous post, certain property got duplicated in the JSON after serialized polymorphic objects with Jackson.</p><p>According to <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">this article</a>, Jackson will output <code>action</code> property based on the value of <code>@JsonSubTypes.Type</code>, and then serialize the object. Since <code>action</code> property is used for polymorphic object deserialization and as an actual member of the class, <code>action</code> get duplicated.</p><p>The solution is simple and can be found in the same artitle. Just change <code>JsonTypeInfo.As.PROPERTY</code> in <code>@JsonTypeInfo</code> to <code>JsonTypeInfo.As.EXISTING_PROPERTY</code>.</p>
+	<article>
+		<p><p>Following problem found in the previous post, certain property got duplicated in the JSON after serialized polymorphic objects with Jackson.</p><p>According to <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">this article</a>, Jackson will output <code>action</code> property based on the value of <code>@JsonSubTypes.Type</code>, and then serialize the object. Since <code>action</code> property is used for polymorphic object deserialization and as an actual member of the class, <code>action</code> get duplicated.</p><p>The solution is simple and can be found in the same artitle. Just change <code>JsonTypeInfo.As.PROPERTY</code> in <code>@JsonTypeInfo</code> to <code>JsonTypeInfo.As.EXISTING_PROPERTY</code>.</p>
 <!--?prettify?-->
 <pre><code class="java">@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, visible = true, property = &quot;action&quot;)
 @JsonSubTypes({
@@ -121,6 +129,7 @@ abstract class Action {
     }
 }
 </code></pre></p>
+	</article>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -131,7 +140,7 @@ abstract class Action {
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.io/blog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 

@@ -2,12 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</title>
+        <title>WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="問題測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題直接執行 WSDLToJava PerformanceDa">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
+
+    <meta property="og:title" content="WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤">
+    <meta property="og:description" content="                問題測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題直接執行 WSDLToJava PerformanceDa
+">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">
+
 
     <!-- Le styles -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +109,8 @@
 		<a href="../../../tags/java.html">java</a>
 		</p>
 
-	<p><h2>問題</h2><p>測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題</p><p>直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span> 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題</p>
+	<article>
+		<p><h2>問題</h2><p>測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題</p><p>直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span> 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題</p>
 <!--?prettify?-->
 <pre><code class="xml">&lt;s:complexType name=&quot;MonitorFilter&quot;&gt;
   &lt;s:sequence&gt;
@@ -159,6 +167,7 @@
   <li><a href="http://www.jroller.com/ouertani/entry/wsdl_integration_problem_two_declarations">WSDL integration problem : Two declarations cause a collision</a></li>
   <li><a href="http://stackoverflow.com/questions/2163719/tell-jaxb-to-not-remove-underscores">tell jaxb to not remove underscores</a></li>
 </ul></p>
+	</article>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -169,7 +178,7 @@
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 

@@ -2,12 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>fancyBox 和 Google Photos 不太合作 (fancyBox doesn&apos;t work with Google Photos)</title>
+        <title>fancyBox 和 Google Photos 不太合作 (fancyBox doesn&apos;t work with Google Photos)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="為新 Blog 放上了 fancyBox 後發現不支援 Google Photos 圖檔的網址，查了一下發現原來 fancyBox 會去判斷副檔名，剛好 Google Photos 提供的網址都沒有副">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
+
+    <meta property="og:title" content="fancyBox 和 Google Photos 不太合作 (fancyBox doesn&apos;t work with Google Photos)">
+    <meta property="og:description" content="                為新 Blog 放上了 fancyBox 後發現不支援 Google Photos 圖檔的網址，查了一下發現原來 fancyBox 會去判斷副檔名，剛好 Google Photos 提供的網址都沒有副
+">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://cwweng.github.io/blog/2015/12/07-fancyBox-with-Google-Photos.html">
+
 
     <!-- Le styles -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +109,9 @@
 		<a href="../../../tags/blog.html">blog</a>
 		</p>
 
-	<p><p>為新 Blog 放上了 <a href="http://fancyapps.com/fancybox/">fancyBox</a> 後發現不支援 Google Photos 圖檔的網址，<a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51">查了一下</a>發現原來 fancyBox 會去判斷副檔名，剛好 Google Photos 提供的網址都沒有副檔名。根據該文章的說明，把 Google Photos 提供的網址最後加上 <strong>#.jpg</strong> 讓它看起來有副檔名就行了。</p><p>After adding support for <a href="http://fancyapps.com/fancybox/">fancyBox</a>, I found that it doesn't work with Google Photos. According to <a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51">this article</a>, fancyBox requires extension at the end of the URL, and URL provided by Google Photos has none. Just Adding <strong>#.jpg</strong> at the end of the URL as the article suggested and everything works !</p></p>
+	<article>
+		<p><p>為新 Blog 放上了 <a href="http://fancyapps.com/fancybox/">fancyBox</a> 後發現不支援 Google Photos 圖檔的網址，<a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51">查了一下</a>發現原來 fancyBox 會去判斷副檔名，剛好 Google Photos 提供的網址都沒有副檔名。根據該文章的說明，把 Google Photos 提供的網址最後加上 <strong>#.jpg</strong> 讓它看起來有副檔名就行了。</p><p>After adding support for <a href="http://fancyapps.com/fancybox/">fancyBox</a>, I found that it doesn't work with Google Photos. According to <a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51">this article</a>, fancyBox requires extension at the end of the URL, and URL provided by Google Photos has none. Just Adding <strong>#.jpg</strong> at the end of the URL as the article suggested and everything works !</p></p>
+	</article>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -113,7 +122,7 @@
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2015/12/07-fancyBox-with-Google-Photos.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.io/blog/2015/12/07-fancyBox-with-Google-Photos.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 

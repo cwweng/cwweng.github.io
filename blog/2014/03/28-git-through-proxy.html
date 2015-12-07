@@ -2,12 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>如何透過 proxy 存取 git://</title>
+        <title>如何透過 proxy 存取 git://</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="網路上找到的解決辦法都是設 proxy，比如
+
+git config --global http.proxy http://user:pwd@proxy.server.com:8080
+git con">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
+
+    <meta property="og:title" content="如何透過 proxy 存取 git://">
+    <meta property="og:description" content="                網路上找到的解決辦法都是設 proxy，比如
+
+git config --global http.proxy http://user:pwd@proxy.server.com:8080
+git con
+">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://cwweng.github.io/blog/2014/03/28-git-through-proxy.html">
+
 
     <!-- Le styles -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -103,7 +116,8 @@
 		<a href="../../../tags/git.html">git</a>
 		</p>
 
-	<p><p>網路上找到的解決辦法都是設 proxy，比如</p>
+	<article>
+		<p><p>網路上找到的解決辦法都是設 proxy，比如</p>
 <!--?prettify?-->
 <pre><code class="bash">git config --global http.proxy http://user:pwd@proxy.server.com:8080
 git config --global https.proxy http://user:pwd@proxy.server.com:8080
@@ -111,6 +125,7 @@ git config --global https.proxy http://user:pwd@proxy.server.com:8080
 <!--?prettify?-->
 <pre><code class="bash">git config --global url.&quot;https://&quot;.insteadOf git://
 </code></pre><p>參考 <a href="https://coderwall.com/p/89zmpg%22Git%20protocol%20behind%20a%20proxy%22">Git protocol behind a proxy</a></p></p>
+	</article>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -121,7 +136,7 @@ git config --global https.proxy http://user:pwd@proxy.server.com:8080
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2014/03/28-git-through-proxy.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.io/blog/2014/03/28-git-through-proxy.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 

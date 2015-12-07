@@ -2,12 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Jackson 序列化後的 JSON 出現重複的屬性</title>
+        <title>Jackson 序列化後的 JSON 出現重複的屬性</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。根據這篇文章的說法，Jackson 在續列化時會根據 @JsonSubTypes.Type 的值先輸">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
+
+    <meta property="og:title" content="Jackson 序列化後的 JSON 出現重複的屬性">
+    <meta property="og:description" content="                接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。根據這篇文章的說法，Jackson 在續列化時會根據 @JsonSubTypes.Type 的值先輸
+">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://cwweng.github.io/blog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html">
+
 
     <!-- Le styles -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +109,8 @@
 		<a href="../../../tags/java.html">java</a>
 		</p>
 
-	<p><p>接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。</p><p>根據<a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">這篇文章</a>的說法，Jackson 在續列化時會根據 <code>@JsonSubTypes.Type</code> 的值先輸出 <code>action</code> 屬性，接著才把物件內容序列化。碰巧該物件也有一個 <code>action</code> 屬性，所以被輸出了兩次。會發生這樣的問題是因為 <code>action</code> 被同時用來判斷物件類別以及其他用途。</p><p>要解決很簡單，同一篇文章就有答案了。把 <code>@JsonTypeInfo</code> 裡的 <code>JsonTypeInfo.As.PROPERTY</code> 改成 <code>JsonTypeInfo.As.EXISTING_PROPERTY</code> 即可。如下</p>
+	<article>
+		<p><p>接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。</p><p>根據<a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">這篇文章</a>的說法，Jackson 在續列化時會根據 <code>@JsonSubTypes.Type</code> 的值先輸出 <code>action</code> 屬性，接著才把物件內容序列化。碰巧該物件也有一個 <code>action</code> 屬性，所以被輸出了兩次。會發生這樣的問題是因為 <code>action</code> 被同時用來判斷物件類別以及其他用途。</p><p>要解決很簡單，同一篇文章就有答案了。把 <code>@JsonTypeInfo</code> 裡的 <code>JsonTypeInfo.As.PROPERTY</code> 改成 <code>JsonTypeInfo.As.EXISTING_PROPERTY</code> 即可。如下</p>
 <!--?prettify?-->
 <pre><code class="java">@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, visible = true, property = &quot;action&quot;)
 @JsonSubTypes({
@@ -121,6 +129,7 @@ abstract class Action {
     }
 }
 </code></pre></p>
+	</article>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -131,7 +140,7 @@ abstract class Action {
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.io/blog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 

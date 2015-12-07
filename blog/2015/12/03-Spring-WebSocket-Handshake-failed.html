@@ -2,12 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Handshake failed due to invalid Upgrade header: null</title>
+        <title>Handshake failed due to invalid Upgrade header: null</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="昨天用 Chrome 的 Simple WebSocket Client 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 org.springframewo">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
+
+    <meta property="og:title" content="Handshake failed due to invalid Upgrade header: null">
+    <meta property="og:description" content="                昨天用 Chrome 的 Simple WebSocket Client 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 org.springframewo
+">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://cwweng.github.io/blog/2015/12/03-Spring-WebSocket-Handshake-failed.html">
+
 
     <!-- Le styles -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -102,8 +109,10 @@
 		<a href="../../../tags/java.html">java</a>
 		</p>
 
-	<p><p>昨天用 Chrome 的 <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a> 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 <code>org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null</code> 的錯誤訊息。但是用 Wireshark 抓封包看到送出的 Request 其實是有 <code>Upgrade: websocket</code>。</p><p>用 Google 大神找不到有用的解法，原始的 log 也看不出什麼有用的資訊。打開 Spring 的 debug log 後看到了個似乎相關的訊息：<code>OriginHandshakeInterceptor - Handshake request rejected, Origin header value chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo not allowed</code>。查了<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">文件</a>發現原來 Spring 預設只允許相同來源的 Request，但是 Simple WebSocket Client 送出的是 <code>Origin: chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo</code>，所以就被擋掉了。為了測試只好設 <code>allowed-origins=&quot;*&quot;</code>，設好後重啟就可以用了。</p><p>詳細的設定可以參考 Spring 官方文件的 <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">Configuring allowed origins</a></p>
+	<article>
+		<p><p>昨天用 Chrome 的 <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a> 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 <code>org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null</code> 的錯誤訊息。但是用 Wireshark 抓封包看到送出的 Request 其實是有 <code>Upgrade: websocket</code>。</p><p>用 Google 大神找不到有用的解法，原始的 log 也看不出什麼有用的資訊。打開 Spring 的 debug log 後看到了個似乎相關的訊息：<code>OriginHandshakeInterceptor - Handshake request rejected, Origin header value chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo not allowed</code>。查了<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">文件</a>發現原來 Spring 預設只允許相同來源的 Request，但是 Simple WebSocket Client 送出的是 <code>Origin: chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo</code>，所以就被擋掉了。為了測試只好設 <code>allowed-origins=&quot;*&quot;</code>，設好後重啟就可以用了。</p><p>詳細的設定可以參考 Spring 官方文件的 <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">Configuring allowed origins</a></p>
 <hr/><h4>English Version</h4><p>While testing my Spring-based WebSocket application using <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a>, server log keeps saying <code>org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null</code>. However, packets captured by Wireshark indeed contains <code>Upgrade: websocket</code>.</p><p>No luck with Google, and the log show nothing useful. Forced to turn on Spring debug log, something suspicious appears: <code>OriginHandshakeInterceptor - Handshake request rejected, Origin header value chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo not allowed</code>. According to the <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">reference</a>, it turns out that Spring by default allows only same origin requests. That's why the request is denied since Simple WebSocket Client sends out <code>Origin: chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo</code>. After setting <code>allowed-origins=&quot;*&quot;</code>, everything works!</p><p>Detail setting can be found in <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">Configuring allowed origins</a>.</p></p>
+	</article>
 
 	<hr />
 <div id="disqus_thread"></div>
@@ -114,7 +123,7 @@
      */
 
     var disqus_config = function () {
-        this.page.url = `https://cwweng.github.ioblog/2015/12/03-Spring-WebSocket-Handshake-failed.html`;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = `https://cwweng.github.io/blog/2015/12/03-Spring-WebSocket-Handshake-failed.html`;  // Replace PAGE_URL with your page's canonical URL variable
         //this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
