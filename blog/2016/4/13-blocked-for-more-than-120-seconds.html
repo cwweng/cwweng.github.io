@@ -111,7 +111,11 @@
 		</p>
 
 	<article>
-		<p><p>公司 VM 的 IO 很慢，最近出現 <code>task XXX blocked for more than 120 seconds</code>，然後就 Kernel Panic 整個不動了。</p><p>參考<a href="http://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/">網路上的文章</a>，原因是 Linux 要把 file system cache 的資料寫回硬碟時如果 IO 太慢沒辦法在 120 秒內寫完，後續的資料又一直進來，就卡住了。</p><p>解決辦法就是降低 cache 的大小，增加寫入的頻率。<br/>* vm.dirty_background_ratio = 2 降低 cache，當超過這個百分比時就開始背景寫回硬碟。<br/>* vm.dirty_ratio = 5 當超過這個百分比時就強制寫回硬碟。</p></p>
+		<p><p>公司 VM 的 IO 很慢，最近出現 <code>task XXX blocked for more than 120 seconds</code>，然後就 Kernel Panic 整個不動了。</p><p>參考<a href="http://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/">網路上的文章</a>，原因是 Linux 要把 file system cache 的資料寫回硬碟時如果 IO 太慢沒辦法在 120 秒內寫完，後續的資料又一直進來，就卡住了。</p><p>解決辦法就是降低 cache 的大小，增加寫入的頻率。</p>
+<ul>
+  <li><code>vm.dirty_background_ratio = 2</code> 降低 cache，當超過這個百分比時就開始背景寫回硬碟。</li>
+  <li><code>vm.dirty_ratio = 5</code> 當超過這個百分比時就強制寫回硬碟。</li>
+</ul></p>
 	</article>
 
 	<hr />
