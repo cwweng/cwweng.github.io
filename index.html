@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-        <title>Just Do It</title>
+    >
+    <title>        Just Do It
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="cwweng">
@@ -101,6 +103,12 @@
 	<div class="page-header">
 		<h1>Just Do It</h1>
 	</div>
+  			<a href="blog/2016/4/13-blocked-for-more-than-120-seconds.html"><h1>task XXX blocked for more than 120 seconds</h1></a>
+  			<p>2016-04-13</p>
+  			<p>
+				<p>公司 VM 的 IO 很慢，最近出現 <code>task XXX blocked for more than 120 seconds</code>，然後就 Kernel Panic 整個不動了。</p><p>參考<a href="http://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/">網路上的文章</a>，原因是 Linux 要把 file system cache 的資料寫回硬碟時如果 IO 太慢沒辦法在 120 秒內寫完，後續的資料又一直進來，就卡住了。</p><p>解決辦法就是降低 cache 的大小，增加寫入的頻率。<br/>* vm.dirty_background_ratio = 2 降低 cache，當超過這個百分比時就開始背景寫回硬碟。<br/>* vm.dirty_ratio = 5 當超過這個百分比時就強制寫回硬碟。</p>
+			</p>
+			<hr/>
   			<a href="blog/2015/12/07-fancyBox-cause-page-to-jump-to-top.html"><h1>修正 fancyBox 點擊圖片後會跳到網頁最上方的問題</h1></a>
   			<p>2015-12-07</p>
   			<p>

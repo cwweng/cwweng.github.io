@@ -6,13 +6,22 @@
     <atom:link href="https://cwweng.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Tue, 8 Dec 2015 02:00:50 +0800</pubDate>
-    <lastBuildDate>Tue, 8 Dec 2015 02:00:50 +0800</lastBuildDate>
+    <pubDate>星期三, 13 四月 2016 16:25:00 +0800</pubDate>
+    <lastBuildDate>星期三, 13 四月 2016 16:25:00 +0800</lastBuildDate>
 
+    <item>
+      <title>task XXX blocked for more than 120 seconds</title>
+      <link>https://cwweng.github.io/blog/2016/4/13-blocked-for-more-than-120-seconds.html</link>
+      <pubDate>星期三, 13 四月 2016 15:58:00 +0800</pubDate>
+      <guid isPermaLink="false">blog/2016/4/13-blocked-for-more-than-120-seconds.html</guid>
+      	<description>
+	&lt;p&gt;公司 VM 的 IO 很慢，最近出現 &lt;code&gt;task XXX blocked for more than 120 seconds&lt;/code&gt;，然後就 Kernel Panic 整個不動了。&lt;/p&gt;&lt;p&gt;參考&lt;a href=&quot;http://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/&quot;&gt;網路上的文章&lt;/a&gt;，原因是 Linux 要把 file system cache 的資料寫回硬碟時如果 IO 太慢沒辦法在 120 秒內寫完，後續的資料又一直進來，就卡住了。&lt;/p&gt;&lt;p&gt;解決辦法就是降低 cache 的大小，增加寫入的頻率。&lt;br/&gt;* vm.dirty_background_ratio = 2 降低 cache，當超過這個百分比時就開始背景寫回硬碟。&lt;br/&gt;* vm.dirty_ratio = 5 當超過這個百分比時就強制寫回硬碟。&lt;/p&gt;
+	</description>
+    </item>
     <item>
       <title>修正 fancyBox 點擊圖片後會跳到網頁最上方的問題</title>
       <link>https://cwweng.github.io/blog/2015/12/07-fancyBox-cause-page-to-jump-to-top.html</link>
-      <pubDate>Mon, 7 Dec 2015 02:33:00 +0800</pubDate>
+      <pubDate>星期一, 7 十二月 2015 02:33:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/07-fancyBox-cause-page-to-jump-to-top.html</guid>
       	<description>
 	&lt;p&gt;處理好 fancyBox 和 Google Photos 的問題後，又跑出了另一個問題：點了圖以後會直接跳到文章的最開頭！一樣也是 Google 後找到&lt;a href=&quot;http://stackoverflow.com/questions/13547007/fancybox2-fancybox-causes-page-to-to-jump-to-the-top&quot;&gt;解法&lt;/a&gt;，參考其中一個修改 css 的方法就搞定了！&lt;/p&gt;&lt;p&gt;&lt;strong&gt;jquery.fancybox.css&lt;/strong&gt;&lt;/p&gt;
@@ -26,7 +35,7 @@
     <item>
       <title>fancyBox 和 Google Photos 不太合作 (fancyBox doesn&apos;t work with Google Photos)</title>
       <link>https://cwweng.github.io/blog/2015/12/07-fancyBox-with-Google-Photos.html</link>
-      <pubDate>Mon, 7 Dec 2015 01:21:00 +0800</pubDate>
+      <pubDate>星期一, 7 十二月 2015 01:21:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/07-fancyBox-with-Google-Photos.html</guid>
       	<description>
 	&lt;p&gt;為新 Blog 放上了 &lt;a href=&quot;http://fancyapps.com/fancybox/&quot;&gt;fancyBox&lt;/a&gt; 後發現不支援 Google Photos 圖檔的網址，&lt;a href=&quot;https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51&quot;&gt;查了一下&lt;/a&gt;發現原來 fancyBox 會去判斷副檔名，剛好 Google Photos 提供的網址都沒有副檔名。根據該文章的說明，把 Google Photos 提供的網址最後加上 &lt;strong&gt;#.jpg&lt;/strong&gt; 讓它看起來有副檔名就行了。&lt;/p&gt;&lt;p&gt;After adding support for &lt;a href=&quot;http://fancyapps.com/fancybox/&quot;&gt;fancyBox&lt;/a&gt;, I found that it doesn&apos;t work with Google Photos. According to &lt;a href=&quot;https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51&quot;&gt;this article&lt;/a&gt;, fancyBox requires extension at the end of the URL, and URL provided by Google Photos has none. Just Adding &lt;strong&gt;#.jpg&lt;/strong&gt; at the end of the URL as the article suggested and everything works !&lt;/p&gt;
@@ -35,7 +44,7 @@
     <item>
       <title>2015-11-21 貓空茶香環狀步道半日遊</title>
       <link>https://cwweng.github.io/blog/2015/12/05-貓空茶香環狀步道半日遊.html</link>
-      <pubDate>Sat, 5 Dec 2015 14:20:00 +0800</pubDate>
+      <pubDate>星期六, 5 十二月 2015 14:20:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/05-貓空茶香環狀步道半日遊.html</guid>
       	<description>
 	&lt;p&gt;又到了周末步道遊的時間了，因為之前在&lt;a href=&quot;http://tw.hiking.biji.co/&quot;&gt;健行筆記&lt;/a&gt;看到的&lt;a href=&quot;http://tw.hiking.biji.co/index.php?q=news&amp;act=info&amp;id=4167&amp;subtitle=%08%E3%80%90%E6%96%B0%E8%81%9E%E3%80%91%E8%B2%93%E7%A9%BA%E6%96%B0%E6%AD%A5%E9%81%93+%E8%8C%B6%E9%A6%99%E7%92%B0%E7%8B%80%E6%AD%A5%E9%81%93&quot;&gt;新聞&lt;/a&gt;，所以這次就是它啦！&lt;/p&gt;&lt;p&gt;先來張導覽圖，圖是連到上面說的那則新聞裡的導覽圖。&lt;br/&gt;&lt;img src=&quot;http://tw.hiking.biji.co/static/upload/5552cd7f65289.jpg&quot; style=&quot;width: 470px; heigh: 600px&quot; alt=&quot;茶香環狀步道導覽圖&quot; /&gt;&lt;/p&gt;
@@ -45,7 +54,7 @@
     <item>
       <title>Duplicated JSON Properties After Serialize with Jackson</title>
       <link>https://cwweng.github.io/blog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html</link>
-      <pubDate>Fri, 4 Dec 2015 15:36:00 +0800</pubDate>
+      <pubDate>星期五, 4 十二月 2015 15:36:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html</guid>
       	<description>
 	&lt;p&gt;Following problem found in the previous post, certain property got duplicated in the JSON after serialized polymorphic objects with Jackson.&lt;/p&gt;&lt;p&gt;According to &lt;a href=&quot;http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson&quot;&gt;this article&lt;/a&gt;, Jackson will output &lt;code&gt;action&lt;/code&gt; property based on the value of &lt;code&gt;@JsonSubTypes.Type&lt;/code&gt;, and then serialize the object. Since &lt;code&gt;action&lt;/code&gt; property is used for polymorphic object deserialization and as an actual member of the class, &lt;code&gt;action&lt;/code&gt; get duplicated.&lt;/p&gt;&lt;p&gt;The solution is simple and can be found in the same artitle. Just change &lt;code&gt;JsonTypeInfo.As.PROPERTY&lt;/code&gt; in &lt;code&gt;@JsonTypeInfo&lt;/code&gt; to &lt;code&gt;JsonTypeInfo.As.EXISTING_PROPERTY&lt;/code&gt;.&lt;/p&gt;
@@ -72,7 +81,7 @@ abstract class Action {
     <item>
       <title>Jackson 序列化後的 JSON 出現重複的屬性</title>
       <link>https://cwweng.github.io/blog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html</link>
-      <pubDate>Fri, 4 Dec 2015 15:26:00 +0800</pubDate>
+      <pubDate>星期五, 4 十二月 2015 15:26:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html</guid>
       	<description>
 	&lt;p&gt;接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。&lt;/p&gt;&lt;p&gt;根據&lt;a href=&quot;http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson&quot;&gt;這篇文章&lt;/a&gt;的說法，Jackson 在續列化時會根據 &lt;code&gt;@JsonSubTypes.Type&lt;/code&gt; 的值先輸出 &lt;code&gt;action&lt;/code&gt; 屬性，接著才把物件內容序列化。碰巧該物件也有一個 &lt;code&gt;action&lt;/code&gt; 屬性，所以被輸出了兩次。會發生這樣的問題是因為 &lt;code&gt;action&lt;/code&gt; 被同時用來判斷物件類別以及其他用途。&lt;/p&gt;&lt;p&gt;要解決很簡單，同一篇文章就有答案了。把 &lt;code&gt;@JsonTypeInfo&lt;/code&gt; 裡的 &lt;code&gt;JsonTypeInfo.As.PROPERTY&lt;/code&gt; 改成 &lt;code&gt;JsonTypeInfo.As.EXISTING_PROPERTY&lt;/code&gt; 即可。如下&lt;/p&gt;
@@ -99,7 +108,7 @@ abstract class Action {
     <item>
       <title>Deserialize JSON Into Polymorphic Types With Jackson</title>
       <link>https://cwweng.github.io/blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types-English.html</link>
-      <pubDate>Fri, 4 Dec 2015 14:57:00 +0800</pubDate>
+      <pubDate>星期五, 4 十二月 2015 14:57:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types-English.html</guid>
       	<description>
 	&lt;h3&gt;Problem&lt;/h3&gt;&lt;p&gt;Assume you have two types of JSON documents, and the following actions depend on the value of specific attribute.&lt;/p&gt;
@@ -183,7 +192,7 @@ class LoginAction extends Action {
     <item>
       <title>用 Jackson 將 JSON 反序列化成 Polymorphic 物件</title>
       <link>https://cwweng.github.io/blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html</link>
-      <pubDate>Fri, 4 Dec 2015 14:21:00 +0800</pubDate>
+      <pubDate>星期五, 4 十二月 2015 14:21:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html</guid>
       	<description>
 	&lt;h3&gt;問題&lt;/h3&gt;&lt;p&gt;假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：&lt;/p&gt;
@@ -267,7 +276,7 @@ class LoginAction extends Action {
     <item>
       <title>Handshake failed due to invalid Upgrade header: null</title>
       <link>https://cwweng.github.io/blog/2015/12/03-Spring-WebSocket-Handshake-failed.html</link>
-      <pubDate>Thu, 3 Dec 2015 15:24:00 +0800</pubDate>
+      <pubDate>星期四, 3 十二月 2015 15:24:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/03-Spring-WebSocket-Handshake-failed.html</guid>
       	<description>
 	&lt;p&gt;昨天用 Chrome 的 &lt;a href=&quot;https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo&quot;&gt;Simple WebSocket Client&lt;/a&gt; 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 &lt;code&gt;org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null&lt;/code&gt; 的錯誤訊息。但是用 Wireshark 抓封包看到送出的 Request 其實是有 &lt;code&gt;Upgrade: websocket&lt;/code&gt;。&lt;/p&gt;&lt;p&gt;用 Google 大神找不到有用的解法，原始的 log 也看不出什麼有用的資訊。打開 Spring 的 debug log 後看到了個似乎相關的訊息：&lt;code&gt;OriginHandshakeInterceptor - Handshake request rejected, Origin header value chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo not allowed&lt;/code&gt;。查了&lt;a href=&quot;http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins&quot;&gt;文件&lt;/a&gt;發現原來 Spring 預設只允許相同來源的 Request，但是 Simple WebSocket Client 送出的是 &lt;code&gt;Origin: chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo&lt;/code&gt;，所以就被擋掉了。為了測試只好設 &lt;code&gt;allowed-origins=&amp;quot;*&amp;quot;&lt;/code&gt;，設好後重啟就可以用了。&lt;/p&gt;&lt;p&gt;詳細的設定可以參考 Spring 官方文件的 &lt;a href=&quot;http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins&quot;&gt;Configuring allowed origins&lt;/a&gt;&lt;/p&gt;
@@ -277,7 +286,7 @@ class LoginAction extends Action {
     <item>
       <title>重新出發</title>
       <link>https://cwweng.github.io/blog/2015/11/30-new-start.html</link>
-      <pubDate>Mon, 30 Nov 2015 16:32:00 +0800</pubDate>
+      <pubDate>星期一, 30 十一月 2015 16:32:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/11/30-new-start.html</guid>
       	<description>
 	&lt;p&gt;公司把 &lt;a href=&quot;https://www.tumblr.com&quot;&gt;Tumblr&lt;/a&gt; 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。&lt;/p&gt;&lt;p&gt;這次改用 &lt;a href=&quot;http://jbake.org&quot;&gt;JBake&lt;/a&gt; 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。&lt;/p&gt;
@@ -286,7 +295,7 @@ class LoginAction extends Action {
     <item>
       <title>如何透過 proxy 存取 git://</title>
       <link>https://cwweng.github.io/blog/2014/03/28-git-through-proxy.html</link>
-      <pubDate>Fri, 28 Mar 2014 14:56:00 +0800</pubDate>
+      <pubDate>星期五, 28 三月 2014 14:56:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2014/03/28-git-through-proxy.html</guid>
       	<description>
 	&lt;p&gt;網路上找到的解決辦法都是設 proxy，比如&lt;/p&gt;
@@ -302,7 +311,7 @@ git config --global https.proxy http://user:pwd@proxy.server.com:8080
     <item>
       <title>Linux 掛載 Windows 網芳 </title>
       <link>https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share.html</link>
-      <pubDate>Sat, 14 Sep 2013 14:41:00 +0800</pubDate>
+      <pubDate>星期六, 14 九月 2013 14:41:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2013/09/14-linux-mount-windows-share.html</guid>
       	<description>
 	&lt;h4&gt;安裝&lt;/h4&gt;
@@ -320,7 +329,7 @@ apt-get install cifs-utils
     <item>
       <title>「回到明朝當王爺」觀後感</title>
       <link>https://cwweng.github.io/blog/2011/08/03-回到明朝當王爺.html</link>
-      <pubDate>Wed, 3 Aug 2011 11:16:00 +0800</pubDate>
+      <pubDate>星期三, 3 八月 2011 11:16:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/08/03-回到明朝當王爺.html</guid>
       	<description>
 	&lt;p&gt;打個分數：四顆星&lt;/p&gt;&lt;p&gt;拜&lt;a href=&quot;http://www.haodoo.net/&quot;&gt;網路&lt;/a&gt;和 Kindle 的幫助，在幾乎睜開眼有時間的情況下就是拿來看&lt;a href=&quot;http://www.haodoo.net/?M=Share&amp;P=0937&quot;&gt;回到明朝當王爺&lt;/a&gt;。就算是這樣也花了半個月以上的時間，真的是很長的一本小說。&lt;/p&gt;&lt;p&gt;簡單來說，就是男主角陰錯陽差的回到了明朝附身在一個邊疆的秀才身上，又很強運的在兩三年內一路狂升，從邊疆的驛丞、太子侍讀、神機營參將、內廠廠督、威武侯、威武公直至威武王。又運用了一些現代人的知識和身旁高手的協助，鬥倒掉了劉謹、開海禁、滅倭寇海盜、驅夷人收復滿刺加、平四川蠻族叛亂、平白巾賊響馬盜內亂，連蒙古韃靼也被他解決了，最後還封疆蒙古準備北上吃掉西伯利亞。過程中還一路取了嬌妻美妾，這還不夠強運嗎！&lt;/p&gt;
@@ -330,7 +339,7 @@ apt-get install cifs-utils
     <item>
       <title>2011-07 日月潭兩天一夜</title>
       <link>https://cwweng.github.io/blog/2011/07/07-日月潭兩天一夜.html</link>
-      <pubDate>Thu, 7 Jul 2011 23:06:00 +0800</pubDate>
+      <pubDate>星期四, 7 七月 2011 23:06:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/07/07-日月潭兩天一夜.html</guid>
       	<description>
 	&lt;p&gt;六月初經由&lt;a href=&quot;http://uhooamber.com&quot;&gt;李小淮&lt;/a&gt;得知了南投縣魚池鄉『日月潭頭社休閒農業區』自行車逍遙遊的活動，再加上&lt;a href=&quot;http://uhooamber.com&quot;&gt;好心人&lt;/a&gt;贊助的日月潭湖景房，所以 7/2 就往南投出發啦！&lt;/p&gt;&lt;p&gt;第一站是埔里酒廠，天氣很熱。首先就買了好像大家一定會的買紹興香腸，一支才 $25，不貴也不錯吃啦！&lt;br/&gt;&lt;a href=&quot;https://picasaweb.google.com/lh/photo/NhJwims_wv8-z1V1mvjn5zaAC5HF2o1tXqZbEROtLHM?feat=embedwebsite&quot;&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/-oTq1Mn6hg14/ThXBa45SAUI/AAAAAAAAAQY/3oNnbOtOva0/s400/IMG_1295.JPG&quot; height=&quot;300&quot; width=&quot;400&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -340,7 +349,7 @@ apt-get install cifs-utils
     <item>
       <title>WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</title>
       <link>https://cwweng.github.io/blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</link>
-      <pubDate>Tue, 28 Jun 2011 11:46:00 +0800</pubDate>
+      <pubDate>星期二, 28 六月 2011 11:46:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</guid>
       	<description>
 	&lt;p&gt;&lt;em&gt;Update&lt;/em&gt; : I migrate from tumblr to Github Page and slightly modify and re-post this article.&lt;/p&gt;&lt;p&gt;This is the English version of my &lt;a href=&quot;http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html&quot;&gt;another post&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;Problem&lt;/h2&gt;&lt;p&gt;While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : &lt;span style=&quot;color: red&quot;&gt;WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl&lt;/span&gt;.&lt;/p&gt;&lt;p&gt;Turns out it was the following section cause the error&lt;/p&gt;
@@ -409,7 +418,7 @@ apt-get install cifs-utils
     <item>
       <title>Amazon Kindle 3 入手</title>
       <link>https://cwweng.github.io/blog/2011/06/24-kindle-3.html</link>
-      <pubDate>Fri, 24 Jun 2011 13:14:00 +0800</pubDate>
+      <pubDate>星期五, 24 六月 2011 13:14:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/24-kindle-3.html</guid>
       	<description>
 	&lt;p&gt;抓了很多電子書，但是用電腦看的缺點就是眼睛會越看越乾，久了就累了想睡覺。另外就是開會或是出差閒閒沒事時沒辦法看，要用手機看電子書不如拿來玩遊戲。所以買一台電子書閱讀器就是最好的選擇啦！雖然原因那麼多，但最主要的是最近發獎金有一筆小錢啦！&lt;/p&gt;&lt;p&gt;iPad 紅歸紅，一樣有看久會累的問題，而且買了 iPad 應該大部份時間都不會是看電子書吧，而且...它很貴。總之，買了台 Kindle 3 Wifi-only，正值台幣值錢，加上稅金運費也只要台幣 4800 就搞定了。&lt;/p&gt;
@@ -419,7 +428,7 @@ apt-get install cifs-utils
     <item>
       <title>香港四天三夜自由行 ─ 第四天</title>
       <link>https://cwweng.github.io/blog/2011/06/17-Hong-Kong-Day4.html</link>
-      <pubDate>Fri, 17 Jun 2011 17:04:00 +0800</pubDate>
+      <pubDate>星期五, 17 六月 2011 17:04:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/17-Hong-Kong-Day4.html</guid>
       	<description>
 	&lt;p&gt;第四天了，拖了兩年多終於要寫完啦！&lt;/p&gt;&lt;p&gt;這天一大早就辦退房了，但是退房後可以寄放行李，這樣就能輕輕鬆鬆出去玩了，有這種服務真棒！&lt;/p&gt;&lt;p&gt;早餐原本好像是要吃「澳洲牛奶公司」，不過變成了「美心快餐」，也是很好吃，尤其是蘿蔔糕，讚！&lt;br/&gt;&lt;a href=&quot;https://picasaweb.google.com/lh/photo/WkZYSfH3UMn7qCkgDj7rZ33Peb3-iAfJG4h-wH49law?feat=embedwebsite&quot;&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/-K9LtD-2xdUs/Te-U_QE2_kI/AAAAAAAAANA/6DcBUE2GmoY/s400/20090205-085712.jpg&quot; height=&quot;300&quot; width=&quot;400&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -440,7 +449,7 @@ apt-get install cifs-utils
     <item>
       <title>香港四天三夜自由行 ─ 第三天</title>
       <link>https://cwweng.github.io/blog/2011/06/14-Hong-Kong-Day3.html</link>
-      <pubDate>Tue, 14 Jun 2011 15:58:00 +0800</pubDate>
+      <pubDate>星期二, 14 六月 2011 15:58:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/14-Hong-Kong-Day3.html</guid>
       	<description>
 	&lt;p&gt;隔兩年了，要動&lt;strike&gt;筆&lt;/strike&gt;手真難&lt;/p&gt;&lt;p&gt;今天計畫很簡單，可是不太輕鬆，加上前一晚太累，所以一大早就拖延了。早餐吃的是「潮樓」，照慣例有著香港不怎麼樣的服務態度，但又很美味的食物，真的是又愛又恨啊！&lt;/p&gt;
@@ -463,7 +472,7 @@ apt-get install cifs-utils
     <item>
       <title>WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</title>
       <link>https://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</link>
-      <pubDate>Fri, 3 Jun 2011 11:15:00 +0800</pubDate>
+      <pubDate>星期五, 3 六月 2011 11:15:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</guid>
       	<description>
 	&lt;h2&gt;問題&lt;/h2&gt;&lt;p&gt;測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題&lt;/p&gt;&lt;p&gt;直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 &lt;span style=&quot;color: red&quot;&gt;WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl&lt;/span&gt; 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題&lt;/p&gt;
@@ -528,7 +537,7 @@ apt-get install cifs-utils
     <item>
       <title>香港四天三夜自由行 ─ 第二天</title>
       <link>https://cwweng.github.io/blog/2009/11/07-Hong-Kong-Day2.html</link>
-      <pubDate>Sat, 7 Nov 2009 22:15:00 +0800</pubDate>
+      <pubDate>星期六, 7 十一月 2009 22:15:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2009/11/07-Hong-Kong-Day2.html</guid>
       	<description>
 	&lt;p&gt;這次更扯啦！距離前一篇已經超過五個月囉！寫遊記實在不是我的強項。&lt;/p&gt;&lt;p&gt;第二天大概八點起床吧，雖然說是自由行，不過如果睡太晚就虧大囉。今天的行程主要是去海洋公園、太平山夜景、還有蘭桂芳，不過重點還是香港美食啦！&lt;/p&gt;
@@ -538,7 +547,7 @@ apt-get install cifs-utils
     <item>
       <title>香港四天三夜自由行 ─ 第一天</title>
       <link>https://cwweng.github.io/blog/2009/05/28-Hong-Kong-Day1.html</link>
-      <pubDate>Thu, 28 May 2009 15:00:00 +0800</pubDate>
+      <pubDate>星期四, 28 五月 2009 15:00:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2009/05/28-Hong-Kong-Day1.html</guid>
       	<description>
 	&lt;p&gt;距離前一篇已經過了三個月了，人懶起來真的是很恐佈的！&lt;/p&gt;&lt;p&gt;行程的開頭當然是去機場啦，幸好刷國泰的卡可以免費停外圍的五福停車場，不然交通真的是很麻煩的一件事，雖然如此，路癡我還是迷了路幸好沒有延誤。登機的地方是第二航廈，不過就算是第二航廈還是很不怎麼樣，輸國外很多啊！&lt;/p&gt;&lt;p&gt;行程的第一站就誤點了，因為飛機重新降落，果然計劃趕不上變化啊！一出關就很明顯就看到中旅社的櫃台了，把「單程纜車+凌霄閣」套票和海洋公園的票買好，再買八達通，港幣去掉快大半了。接著就去 Hotel Link 登記等著上巴士然後就到了要睡四天的金御假日了。東西放一放就往第一站「半島酒店下午茶」出發啦！&lt;/p&gt;
@@ -560,7 +569,7 @@ apt-get install cifs-utils
     <item>
       <title>香港四天三夜自由行 ─ 行前規劃</title>
       <link>https://cwweng.github.io/blog/2009/02/08-Hong-Kong-plan.html</link>
-      <pubDate>Sun, 8 Feb 2009 20:08:00 +0800</pubDate>
+      <pubDate>星期日, 8 二月 2009 20:08:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2009/02/08-Hong-Kong-plan.html</guid>
       	<description>
 	&lt;p&gt;因為老婆放寒假，本來是想趁過年去紐西蘭玩的，查了一下以後發現......貴死人，加上現在經濟不景氣我們還是低調點的好，所以就變成香港啦。其實我是個懶人，想到要自己規劃行程又更懶了，所以拖到過年前一週才開始研究，一經老婆提醒才想到過年銀行都沒開，緊急草率算了一下趕快去換的結果就是現金徹底的不夠，差點在香港沒錢吃飯。&lt;/p&gt;&lt;p&gt;第一步當然就是確定出去玩的日期、酒店和飛機了。很不巧的有同事跟我撞期要去日本，，只好選擇 2/2 ~ 2/5 這四天，週末的假一天都沒有派上用場 :-( 不過這樣也沒啥不好，至少每個點都不用人擠人浪費時間。機加酒最後是選擇了&lt;a href=&quot;http://www.kktravel.com.tw&quot;&gt;自遊網&lt;/a&gt;的金御假日酒店和長榮航空早去晚回（含機場酒店接送及簽證），因為金御假日就在地鐵站出口旁，而且也比喜來登便宜多了。&lt;/p&gt;&lt;p&gt;規劃行程是最麻煩的了，要參考一堆別人的行程，研究自己想去的點、想吃的店、想逛的商場，還得參考地圖。最後行程的部份大部份是參考&lt;a href=&quot;http://www.backpackers.com.tw&quot;&gt;背包客&lt;/a&gt;網站和 PTT 的 Hong_Kong 板，地圖用 &lt;a href=&quot;http://maps.google.com.tw&quot;&gt;Google Map&lt;/a&gt;，餐廳的位置就靠&lt;a href=&quot;http://www.openprice.com&quot;&gt;開飯網&lt;/a&gt;，還有一堆網站用來查公車、門票、叮叮車、船班等等。用 Google Map 的好處是可以把每個要去的點都先標示出來再排行程可以比較有概念，至於大家都推薦的&lt;a href=&quot;http://www.centamap.com&quot;&gt;中原地圖&lt;/a&gt;感覺頗複雜，所以就沒有用了。最推薦的網站就是&lt;a href=&quot;http://hk.myblog.yahoo.com/catjacob2004&quot;&gt;Cat Jacob&apos;s 香港吃喝玩樂情報站&lt;/a&gt;，即使沒有用到他上面提供的行程，但是靠上面的資料就可把很多點之間的交通方式給串出來了。&lt;/p&gt;
