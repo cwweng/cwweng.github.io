@@ -103,6 +103,60 @@
 	<div class="page-header">
 		<h1>Just Do It</h1>
 	</div>
+  			<a href="blog/2016/6/01-Eclipse-large-icon-size.html"><h1>Linux 下的 Eclipse 4 的 toolbar 變超大</h1></a>
+  			<p>2016-06-01</p>
+  			<p>
+				<p>因為要開發 Android 程式裝了 Eclipse 4.5，啟動後發現 toolbar 的 icon 浪費很多空間。參考 <a href="https://github.com/jeeeyul/eclipse-themes/wiki/Linux-Huge-Toolbar-Problem">Linux Huge Toolbar Problem</a> 發現是因為 Eclipse 4 預設用 GTK3。但是它提供的 GTK3 解法不能用，因為都找不到 <code>gtk-widgets.css</code> 這個檔。</p><p>最後是參考 <a href="https://www.eclipse.org/forums/index.php/t/1071268/">[solved] Eclipse (Linux) force GTK2</a>，修改 <code>eclipse.ini</code>，加上下面兩行後雖然醜了點但變得比較正常了。</p>
+<!--?prettify?-->
+<pre><code class="sh">--launcher.GTK_version
+2
+</code></pre><p>如果要再縮可以參考 <a href="http://ubuntuforums.org/showthread.php?t=1465712">Eclipse tab bar bigger on ubuntu</a>，修改或新增 <code>~/.gtkrc-2.0</code> 這個檔，加上</p>
+<!--?prettify?-->
+<pre><code class="sh">style &quot;compact-toolbar&quot;
+{
+	GtkToolbar::internal-padding = 0
+	xthickness = 1
+	ythickness = 1
+}
+
+style &quot;compact-button&quot;
+{
+	xthickness = 0
+	ythickness = 0
+}
+
+class &quot;GtkToolbar&quot;   				style &quot;compact-toolbar&quot; 
+widget_class &quot;*&lt;GtkToolbar&gt;*&lt;GtkButton&gt;&quot;	style &quot;compact-button&quot;
+</code></pre><p>還有另一個建議如下，但是沒測過</p>
+<!--?prettify?-->
+<pre><code class="sh">style &quot;gtkcompact&quot; {
+	GtkButton::default_border={0,0,0,0}
+	GtkButton::default_outside_border={0,0,0,0}
+	GtkButtonBox::child_min_width=0
+	GtkButtonBox::child_min_heigth=0
+	GtkButtonBox::child_internal_pad_x=0
+	GtkButtonBox::child_internal_pad_y=0
+	GtkMenu::vertical-padding=1
+	GtkMenuBar::internal_padding=0
+	GtkMenuItem::horizontal_padding=4
+	GtkToolbar::internal-padding=0
+	GtkToolbar::space-size=0
+	GtkOptionMenu::indicator_size=0
+	GtkOptionMenu::indicator_spacing=0
+	GtkPaned::handle_size=4
+	GtkRange::trough_border=0
+	GtkRange::stepper_spacing=0
+	GtkScale::value_spacing=0
+	GtkScrolledWindow::scrollbar_spacing=0
+	GtkTreeView::vertical-separator=0
+	GtkTreeView::horizontal-separator=0
+	GtkTreeView::fixed-height-mode=TRUE
+	GtkWidget::focus_padding=0
+}
+class &quot;GtkWidget&quot; style &quot;gtkcompact&quot;
+</code></pre>
+			</p>
+			<hr/>
   			<a href="blog/2016/4/13-blocked-for-more-than-120-seconds.html"><h1>task XXX blocked for more than 120 seconds</h1></a>
   			<p>2016-04-13</p>
   			<p>
