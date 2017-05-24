@@ -119,40 +119,36 @@
   			<a href="blog/2017/5/24-Kubernetes-on-CentOS-7-Guest-in-VirtualBox.html"><h1>在 VirtualBox 的 CentOS 7 VM 上建置 Kubernetes Cluster</h1></a>
   			<p>2017-05-24</p>
   			<p>
-				<p>搞了兩三天，終於成功了。</p><p>主要是參考 Kubernetes 官方的 <a href="https://kubernetes.io/docs/getting-started-guides/kubeadm/">Installing Kubernetes on Linux with kubeadm</a>，雖然是 Beta，不過應該是未來的趨勢，衝了。不得不說，如果是用 VM 又躲在防火牆後面又雙網卡，那只按照官方文件做真的是地獄。</p><h3>環境說明</h3><p>公司很龜毛，有防火牆，所以要連到 internet 抓東西就要透過 proxy。公司也很機車，IP 有管制，沒申請的 IP 連 gateway 都出不去。公司也很省，配的設備不怎麼樣，所以一台 PC 裝多個 VM 互連會哭出來。</p><p>解法就是</p>
+				<p>搞了兩三天，終於成功了。</p><p>主要是參考 Kubernetes 官方的 <a href="https://kubernetes.io/docs/getting-started-guides/kubeadm/">Installing Kubernetes on Linux with kubeadm</a>，雖然是 Beta，不過應該是未來的趨勢，衝了。不得不說，如果是用 VM 又躲在防火牆後面又雙網卡，那只按照官方文件做真的會搞老半天。</p><h2>環境說明</h2><p>公司很龜毛，有防火牆，所以要連到 internet 抓東西就要透過 proxy。公司也很機車，IP 有管制，沒申請的 IP 連 gateway 都出不去。公司也很省，配的設備不怎麼樣，所以一台 PC 裝多個 VM 互連會哭出來。</p><p>解法就是</p>
 <ul>
   <li>2 台 PC 跑 3 個 VirtualBox VM，上面都安裝 CentOS 7。</li>
   <li>每個 VM 都用雙網卡，一張 NAT 用來透過主機網路連上 internet 抓東西。一張用「橋接介面卡」給內部網路 IP，用來讓 VM 互連，比如 192.168.1.XX。</li>
-</ul><h3>環境設定</h3><p>每台 VM 都要做的設定</p><h4>網卡設定</h4><p>CentOS 7 在安裝完後不知為何沒有把第二張網卡的設定存下來，所以要自己手動再做一次。</p>
+</ul><h2>環境設定</h2><p>每台 VM 都要做的設定</p><h4>網卡</h4><p>CentOS 7 在安裝完後不知為何沒有把第二張網卡的設定存下來，所以要自己手動再做一次。</p>
 <!--?prettify?-->
 <pre><code class="sh">$ nmcli con mod enp0s8 ipv4.address 192.168.1.10/24 connection.autoconnect yes
-</code></pre><h4>Proxy 設定</h4><p>修改 <code>/etc/environment</code> 增加 proxy 設定，記得把把 VM 用來互連的 IP 加進 no_proxy</p>
+</code></pre><h4>Proxy</h4><p>修改 <code>/etc/environment</code> 增加 proxy 設定，記得把把 VM 用來互連的 IP 加進 no_proxy</p>
 <!--?prettify?-->
 <pre><code class="sh">http_proxy=http://proxy-ip:proxy-port
 https_proxy=http://proxy-ip:proxy-port
 HTTP_PROXY=http://proxy-ip:proxy-port
 HTTPS_PROXY=http://proxy-ip:proxy-port
 no_proxy=localhost,127.0.0.1,192.168.1.10,192.168.1.11,192.168.1.12
-</code></pre><p>修改 <code>/etc/sysconfig/docker</code> 增加 proxy 設定，Docker 似乎沒參考 /etc/environment 的設定，找出這個問題就花了半天 :(</p>
-<!--?prettify?-->
-<pre><code class="sh">HTTP_PROXY=http://proxy-ip:proxy-port
-HTTPS_PROXY=http://proxy-ip:proxy-port
 </code></pre><h4>停用 SELinux 和防火牆</h4><p>大概是這兩個東西太複雜了，官網也是教大家先停用</p>
 <ul>
   <li>修改 <code>/etc/selinux/config</code>，把 SELINUX=enforcing 改為 <code>SELINUX=permissive</code></li>
   <li>執行 <code>setenforce 0</code> 先停用 SELinux，這樣就不用重開機了</li>
   <li>停用和關閉防火牆：<code>systemctl disable firewalld &amp;&amp; systemctl stop firewalld</code></li>
-</ul><h3>安裝 Kubernetes</h3><p>這邊沒啥問題，就照官網的做，把該裝的 RPM 都裝一裝。</p><p>裝好後修改 <code>/etc/sysconfig/docker</code> 增加 proxy 設定，Docker 似乎沒參考 /etc/environment 的設定，沒設的話抓 image 會有問題，找出這個問題就花了半天 :(</p>
+</ul><h2>安裝 Kubernetes</h2><p>這邊沒啥問題，就照官網的做，把該裝的 RPM 都裝一裝。</p><p>裝好後修改 <code>/etc/sysconfig/docker</code> 增加 proxy 設定，Docker 似乎沒參考 /etc/environment 的設定，沒設的話抓 image 會有問題，找出這個問題就花了半天 :(</p>
 <!--?prettify?-->
 <pre><code class="sh">HTTP_PROXY=http://proxy-ip:proxy-port
 HTTPS_PROXY=http://proxy-ip:proxy-port
-</code></pre><h3>初始化 Master</h3><p>主要仍是參考官網文件，但是如果前一步的 Docker proxy 沒設就會卡住，因為初始化需要下載許多 images。又因為是雙網卡，為了避免 Kubernetes 弄錯，要按照官網說明另外加參數。至於 Pod Network 的部份，據說現在比較建議 Weave Net，所以就不像 Flannel 要再另外加參數了。總結指令如下：</p>
+</code></pre><h2>初始化 Master</h2><p>主要仍是參考官網文件，但是如果前一步的 Docker proxy 沒設就會卡住，因為初始化需要下載許多 images。又因為是雙網卡，為了避免 Kubernetes 弄錯，要按照官網說明另外加參數。至於 Pod Network 的部份，據說現在比較建議 Weave Net，所以就不像 Flannel 要再另外加參數了。總結指令如下：</p>
 <!--?prettify?-->
 <pre><code class="sh">$ kubeadm init --apiserver-advertise-address=192.168.1.10
-</code></pre><h3>安裝 Pod Network</h3><p>一樣是按照官網文件就好，不過記得要按照前一步驟最後的指示把 kubectl 的設定設好。安裝 Weave Net 的指令如下：</p>
+</code></pre><h2>安裝 Pod Network</h2><p>一樣是按照官網文件就好，不過記得要按照前一步驟最後的指示把 kubectl 的設定設好。安裝 Weave Net 的指令如下：</p>
 <!--?prettify?-->
 <pre><code class="sh">$ kubectl apply -f https://git.io/weave-kube-1.6
-</code></pre><h3>加入其他 Node</h3><p>這個步驟比較機車，因為雙網卡所以 Kubernetes 的部份要走第二張網卡，如果沒有額外設定 routing 的話，Pod Network 會走預設的 routing，結果就會連不上 api server，即使成功加入，狀態也一直都是 NotReady。</p><p>假如在初始化 Master 時沒有設定 Pod Network，那預設應該是 10.96.0.0/16，所以要在每個 Node 加上額外的 routing：</p>
+</code></pre><h2>增加其他 Node</h2><p>這個步驟比較機車，因為雙網卡所以 Kubernetes 的部份要走第二張網卡，如果沒有額外設定 routing 的話，Pod Network 會走預設的 routing，結果就會連不上 api server，即使成功加入，狀態也一直都是 NotReady。</p><p>假如在初始化 Master 時沒有設定 Pod Network，那預設應該是 10.96.0.0/16，所以要在每個 Node 加上額外的 routing：</p>
 <!--?prettify?-->
 <pre><code class="sh">$ nmcli con mod enp0s8 +ipv4.routes &quot;10.96.0.0/16 192.168.1.XX&quot;
 </code></pre><p>做完上面的步驟後，按照指示執行 kubeadm join 應該就成功了</p>
