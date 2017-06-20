@@ -6,13 +6,15 @@
     <title>        WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Update : I migrate from tumblr to Github Page and slightly modify and re-post this article.This is t">
+    <meta name="description" content="Update : I migrate from tumblr to Github Page and slightly modify and re-post this article.
+This is">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
     <meta property="og:title" content="WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class">
-    <meta property="og:description" content="Update : I migrate from tumblr to Github Page and slightly modify and re-post this article.This is t">
+    <meta property="og:description" content="Update : I migrate from tumblr to Github Page and slightly modify and re-post this article.
+This is">
         <meta property="og:type" content="article">
         <meta property="og:url" content="https://cwweng.github.io/blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">
 
@@ -21,7 +23,7 @@
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
-    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/tomorrow-night.min.css" rel="stylesheet">
 
     <!-- Add fancyBox -->
     <link href="../../../css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
@@ -84,6 +86,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/kubernetes.html">kubernetes</a></li>
                   <li><a href="../../../tags/遊山玩水.html">遊山玩水</a></li>
                   <li><a href="../../../tags/java.html">java</a></li>
                   <li><a href="../../../tags/git.html">git</a></li>
@@ -91,7 +94,9 @@
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
                   <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
+                  <li><a href="../../../tags/rabbitmq.html">rabbitmq</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                  <li><a href="../../../tags/docker.html">docker</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -123,63 +128,92 @@
 		</p>
 
 	<article>
-		<p><p><em>Update</em> : I migrate from tumblr to Github Page and slightly modify and re-post this article.</p><p>This is the English version of my <a href="http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">another post</a>.</p><h2>Problem</h2><p>While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span>.</p><p>Turns out it was the following section cause the error</p>
+		<p><p><em>Update</em> : I migrate from tumblr to Github Page and slightly modify and re-post this article.</p>
+<p>This is the English version of my <a href="http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">another post</a>.</p>
+<h2>Problem</h2>
+<p>While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span>.</p>
+<p>Turns out it was the following section cause the error</p>
 <!--?prettify?-->
-<pre><code class="xml">&lt;s:complexType name=&quot;MonitorFilter&quot;&gt;
+<pre class="prettyprint">
+&lt;s:complexType name="MonitorFilter"&gt;
   &lt;s:sequence&gt;
-    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;_sumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;s:element minOccurs="1" maxOccurs="1" name="_sumInstances" type="s:boolean" /&gt;
     &lt;!-- irrelevant --&gt;
-    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;SumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;s:element minOccurs="1" maxOccurs="1" name="SumInstances" type="s:boolean" /&gt;
     &lt;!-- irrelevant --&gt;
  &lt;/s:sequence&gt;
 &lt;/s:complexType&gt;
-</code></pre><p>The root cause is that <strong>_sumInstances and SumInstances produce the same property</strong></p>
-<!--more--><h2>Solutions</h2><p>There are seems several solutions I found, but none of them gives me a complete solution. Here they are :</p><h4>Solution 1</h4><p>Adding <em>-autoNameResolution</em> argument to WSDL2Java. My test shows no effect, and the error remains.</p>
-<hr/><h4>Solution 2</h4><p>Do not strip _ by using JAXB binding :</p>
+</pre>
+<p>The root cause is that <strong>_sumInstances and SumInstances produce the same property</strong></p>
+<!--more-->
+<h2>Solutions</h2>
+<p>There are seems several solutions I found, but none of them gives me a complete solution. Here they are :</p>
+<h4>Solution 1</h4>
+<p>Adding <em>-autoNameResolution</em> argument to WSDL2Java. My test shows no effect, and the error remains.</p>
+<hr/>
+<h4>Solution 2</h4>
+<p>Do not strip _ by using JAXB binding :</p>
 <!--?prettify?-->
-<pre><code class="xml">&lt;jaxb:bindings
-  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
-  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
-  version=&quot;1.0&quot;&gt;
+<pre class="prettyprint">
+&lt;jaxb:bindings
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:s="http://www.w3.org/2001/XMLSchema"
+  version="1.0"&gt;
  
-  &lt;jaxb:globalBindings underscoreBinding=&quot;asCharInWord&quot;/&gt;
+  &lt;jaxb:globalBindings underscoreBinding="asCharInWord"/&gt;
 &lt;/jaxb:bindings&gt;
-</code></pre><p>After adding <em>-b binding.xml</em> argument, the error message changed to <span style="color: red">WSDLToJava Error: java.lang.IllegalArgumentException: trying to create the same field twice: sumInstances</span></p>
-<hr/><h4>Solution 3</h4><p>Rename _sumInstances to underscoreBinding by JAXWS binding :</p>
+</pre>
+<p>After adding <em>-b binding.xml</em> argument, the error message changed to <span style="color: red">WSDLToJava Error: java.lang.IllegalArgumentException: trying to create the same field twice: sumInstances</span></p>
+<hr/>
+<h4>Solution 3</h4>
+<p>Rename _sumInstances to underscoreBinding by JAXWS binding :</p>
 <!--?prettify?-->
-<pre><code class="xml">&lt;jaxws:bindings version=&quot;1.0&quot;
-  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
-  xmlns:jaxws=&quot;http://java.sun.com/xml/ns/jaxws&quot;
-  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
-  xmlns:wsdl=&quot;http://schemas.xmlsoap.org/wsdl/&quot;
-  wsdlLocation=&quot;PerformanceDataCollectionWS.wsdl&quot;
-  xmlns=&quot;http://java.sun.com/xml/ns/jaxws&quot;
-  xmlns:tns1=&quot;VOLARISWS&quot;&gt;
+<pre class="prettyprint">
+&lt;jaxws:bindings version="1.0"
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+  xmlns:s="http://www.w3.org/2001/XMLSchema"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  wsdlLocation="PerformanceDataCollectionWS.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws"
+  xmlns:tns1="VOLARISWS"&gt;
  
   &lt;jaxws:schemabindings&gt;
-    &lt;jaxws:bindings node=&quot;wsdl:definitions&quot;&gt;
-      &lt;jaxws:bindings node=&quot;//s:element[@nam=&#39;_sumInstances&#39;]&quot;&gt;
-        &lt;jaxb:property name=&quot;underscoreSumInstances&quot; /&gt;
+    &lt;jaxws:bindings node="wsdl:definitions"&gt;
+      &lt;jaxws:bindings node="//s:element[@nam='_sumInstances']"&gt;
+        &lt;jaxb:property name="underscoreSumInstances" /&gt;
       &lt;/jaxws:bindings&gt;
     &lt;/jaxws:bindings&gt;
   &lt;/jaxws:schemabindings&gt;
 &lt;/jaxws:bindings&gt;
-</code></pre><p>The argument is the same as the previous one: <em>-b binding.xml</em>. The error became <span style="color: red">WSDLToJava Error: Could not find any node with the XPath expression: //wsdl:definitions///s:element[@nam=’_sumInstances’]</span>. </p><p>WTF !!!</p>
-<hr/><h4>Solution 4</h4><p>Rename _sumInstances to underscoreBinding by JAXB binding :</p>
+</pre>
+<p>The argument is the same as the previous one: <em>-b binding.xml</em>. The error became <span style="color: red">WSDLToJava Error: Could not find any node with the XPath expression: //wsdl:definitions///s:element[@nam=’_sumInstances’]</span>. </p>
+<p>WTF !!!</p>
+<hr/>
+<h4>Solution 4</h4>
+<p>Rename _sumInstances to underscoreBinding by JAXB binding :</p>
 <!--?prettify?-->
-<pre><code class="xml">&lt;jaxb:bindings
-  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
-  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
-  version=&quot;1.0&quot;&gt;
+<pre class="prettyprint">
+&lt;jaxb:bindings
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:s="http://www.w3.org/2001/XMLSchema"
+  version="1.0"&gt;
  
-  &lt;jaxb:bindings schemaLocation=&quot;file:PerformanceDataCollectionWS.wsdl&quot; node=&quot;/s:schema&quot;&gt;
-    &lt;jaxb:bindings node=&quot;//s:element[@name=&#39;_sumInstances&#39;]&quot;&gt;
-      &lt;jaxb:property name=&quot;underscoreSumInstances&quot;&gt;&lt;/jaxb:property&gt;
+  &lt;jaxb:bindings schemaLocation="file:PerformanceDataCollectionWS.wsdl" node="/s:schema"&gt;
+    &lt;jaxb:bindings node="//s:element[@name='_sumInstances']"&gt;
+      &lt;jaxb:property name="underscoreSumInstances"&gt;&lt;/jaxb:property&gt;
     &lt;/jaxb:bindings&gt;
   &lt;/jaxb:bindings&gt; 
 &lt;/jaxb:bindings&gt;
-</code></pre><p>The result was <span style="color: red">WSDLToJava Error: Thrown by JAXB: “file:/PerformanceDataCollectionWS.wsdl” is not a part of this compilation. Is this a mistake for “file:/PerformanceDataCollectionWS.wsdl#types1”? at line 6 column 91 of schema file:/binding.xml</span>. </p><p>It's driving me crazy.</p>
-<hr/><h4>Hint</h4><p><a href="http://mail-archives.apache.org/mod_mbox/cxf-issues/200906.mbox/%3C584927696.1244148907615.JavaMail.jira@brutus%3E">This post</a> said Won’t Fix ! and we should use JAXWS instead of JAXB (However, JAXWS did not work in my previous test). The post did give me a solution for the error. After adding #types1 to the filename value of the schemaLocation attribute in binding.xml, that is <span style="color: red"> <strong>schemaLocation=”file:PerformanceDataCollectionWS.wsdl#types1”</strong> </span>, and it worked !</p><h2>Conclusion</h2><p><strong>The modified 4th solution plus the hint works</strong></p><h2>Reference</h2>
+</pre>
+<p>The result was <span style="color: red">WSDLToJava Error: Thrown by JAXB: “file:/PerformanceDataCollectionWS.wsdl” is not a part of this compilation. Is this a mistake for “file:/PerformanceDataCollectionWS.wsdl#types1”? at line 6 column 91 of schema file:/binding.xml</span>. </p>
+<p>It's driving me crazy.</p>
+<hr/>
+<h4>Hint</h4>
+<p><a href="http://mail-archives.apache.org/mod_mbox/cxf-issues/200906.mbox/%3C584927696.1244148907615.JavaMail.jira@brutus%3E">This post</a> said Won’t Fix ! and we should use JAXWS instead of JAXB (However, JAXWS did not work in my previous test). The post did give me a solution for the error. After adding #types1 to the filename value of the schemaLocation attribute in binding.xml, that is <span style="color: red"> <strong>schemaLocation=”file:PerformanceDataCollectionWS.wsdl#types1”</strong> </span>, and it worked !</p>
+<h2>Conclusion</h2>
+<p><strong>The modified 4th solution plus the hint works</strong></p>
+<h2>Reference</h2>
 <ul>
   <li><a href="http://www.jroller.com/ouertani/entry/wsdl_integration_problem_two_declarations">WSDL integration problem : Two declarations cause a collision</a></li>
   <li><a href="http://stackoverflow.com/questions/2163719/tell-jaxb-to-not-remove-underscores">tell jaxb to not remove underscores</a></li>
@@ -226,7 +260,7 @@
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
       </div>
     </div>
     

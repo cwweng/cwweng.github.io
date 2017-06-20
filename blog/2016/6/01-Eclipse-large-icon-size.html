@@ -21,7 +21,7 @@
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
-    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/tomorrow-night.min.css" rel="stylesheet">
 
     <!-- Add fancyBox -->
     <link href="../../../css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
@@ -84,6 +84,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/kubernetes.html">kubernetes</a></li>
                   <li><a href="../../../tags/遊山玩水.html">遊山玩水</a></li>
                   <li><a href="../../../tags/java.html">java</a></li>
                   <li><a href="../../../tags/git.html">git</a></li>
@@ -91,7 +92,9 @@
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
                   <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
+                  <li><a href="../../../tags/rabbitmq.html">rabbitmq</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                  <li><a href="../../../tags/docker.html">docker</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -124,30 +127,36 @@
 		</p>
 
 	<article>
-		<p><p>因為要開發 Android 程式裝了 Eclipse 4.5，啟動後發現 toolbar 的 icon 浪費很多空間。參考 <a href="https://github.com/jeeeyul/eclipse-themes/wiki/Linux-Huge-Toolbar-Problem">Linux Huge Toolbar Problem</a> 發現是因為 Eclipse 4 預設用 GTK3。但是它提供的 GTK3 解法不能用，因為都找不到 <code>gtk-widgets.css</code> 這個檔。</p><p>最後是參考 <a href="https://www.eclipse.org/forums/index.php/t/1071268/">[solved] Eclipse (Linux) force GTK2</a>，修改 <code>eclipse.ini</code>，加上下面兩行後雖然醜了點但變得比較正常了。</p>
+		<p><p>因為要開發 Android 程式裝了 Eclipse 4.5，啟動後發現 toolbar 的 icon 浪費很多空間。參考 <a href="https://github.com/jeeeyul/eclipse-themes/wiki/Linux-Huge-Toolbar-Problem">Linux Huge Toolbar Problem</a> 發現是因為 Eclipse 4 預設用 GTK3。但是它提供的 GTK3 解法不能用，因為都找不到 <code>gtk-widgets.css</code> 這個檔。</p>
+<p>最後是參考 <a href="https://www.eclipse.org/forums/index.php/t/1071268/">[solved] Eclipse (Linux) force GTK2</a>，修改 <code>eclipse.ini</code>，加上下面兩行後雖然醜了點但變得比較正常了。</p>
 <!--?prettify?-->
-<pre><code class="sh">--launcher.GTK_version
+<pre class="prettyprint">
+--launcher.GTK_version
 2
-</code></pre><p>如果要再縮可以參考 <a href="http://ubuntuforums.org/showthread.php?t=1465712">Eclipse tab bar bigger on ubuntu</a>，修改或新增 <code>~/.gtkrc-2.0</code> 這個檔，加上</p>
+</pre>
+<p>如果要再縮可以參考 <a href="http://ubuntuforums.org/showthread.php?t=1465712">Eclipse tab bar bigger on ubuntu</a>，修改或新增 <code>~/.gtkrc-2.0</code> 這個檔，加上</p>
 <!--?prettify?-->
-<pre><code class="sh">style &quot;compact-toolbar&quot;
+<pre class="prettyprint">
+style "compact-toolbar"
 {
 	GtkToolbar::internal-padding = 0
 	xthickness = 1
 	ythickness = 1
 }
 
-style &quot;compact-button&quot;
+style "compact-button"
 {
 	xthickness = 0
 	ythickness = 0
 }
 
-class &quot;GtkToolbar&quot;   				style &quot;compact-toolbar&quot; 
-widget_class &quot;*&lt;GtkToolbar&gt;*&lt;GtkButton&gt;&quot;	style &quot;compact-button&quot;
-</code></pre><p>還有另一個建議如下，但是沒測過</p>
+class "GtkToolbar"   				style "compact-toolbar" 
+widget_class "*<GtkToolbar>*<GtkButton>"	style "compact-button"
+</pre>
+<p>還有另一個建議如下，但是沒測過</p>
 <!--?prettify?-->
-<pre><code class="sh">style &quot;gtkcompact&quot; {
+<pre class="prettyprint">
+style "gtkcompact" {
 	GtkButton::default_border={0,0,0,0}
 	GtkButton::default_outside_border={0,0,0,0}
 	GtkButtonBox::child_min_width=0
@@ -171,8 +180,8 @@ widget_class &quot;*&lt;GtkToolbar&gt;*&lt;GtkButton&gt;&quot;	style &quot;compa
 	GtkTreeView::fixed-height-mode=TRUE
 	GtkWidget::focus_padding=0
 }
-class &quot;GtkWidget&quot; style &quot;gtkcompact&quot;
-</code></pre></p>
+class "GtkWidget" style "gtkcompact"
+</pre></p>
 	</article>
 
 	<hr />
@@ -215,7 +224,7 @@ class &quot;GtkWidget&quot; style &quot;gtkcompact&quot;
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
       </div>
     </div>
     

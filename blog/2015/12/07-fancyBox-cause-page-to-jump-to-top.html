@@ -21,7 +21,7 @@
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
-    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/tomorrow-night.min.css" rel="stylesheet">
 
     <!-- Add fancyBox -->
     <link href="../../../css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
@@ -84,6 +84,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/kubernetes.html">kubernetes</a></li>
                   <li><a href="../../../tags/遊山玩水.html">遊山玩水</a></li>
                   <li><a href="../../../tags/java.html">java</a></li>
                   <li><a href="../../../tags/git.html">git</a></li>
@@ -91,7 +92,9 @@
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
                   <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
+                  <li><a href="../../../tags/rabbitmq.html">rabbitmq</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                  <li><a href="../../../tags/docker.html">docker</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -123,12 +126,14 @@
 		</p>
 
 	<article>
-		<p><p>處理好 fancyBox 和 Google Photos 的問題後，又跑出了另一個問題：點了圖以後會直接跳到文章的最開頭！一樣也是 Google 後找到<a href="http://stackoverflow.com/questions/13547007/fancybox2-fancybox-causes-page-to-to-jump-to-the-top">解法</a>，參考其中一個修改 css 的方法就搞定了！</p><p><strong>jquery.fancybox.css</strong></p>
-<pre><code class="css">.fancybox-lock {
+		<p><p>處理好 fancyBox 和 Google Photos 的問題後，又跑出了另一個問題：點了圖以後會直接跳到文章的最開頭！一樣也是 Google 後找到<a href="http://stackoverflow.com/questions/13547007/fancybox2-fancybox-causes-page-to-to-jump-to-the-top">解法</a>，參考其中一個修改 css 的方法就搞定了！</p>
+<p><strong>jquery.fancybox.css</strong></p>
+<pre class="prettyprint">
+.fancybox-lock {
     /* overflow: hidden !important; */ /* comment out this one */
     width: auto;
 }
-</code></pre></p>
+</pre></p>
 	</article>
 
 	<hr />
@@ -171,7 +176,7 @@
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
       </div>
     </div>
     

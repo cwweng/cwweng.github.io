@@ -6,21 +6,33 @@
     <title>        用 Jackson 將 JSON 反序列化成 Polymorphic 物件
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="問題假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：
+    <meta name="description" content="問題
+假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：
+
 
 {
-    &quot;action&quot;: &quot;login&quot;,
-    &quot;userId&q">
+    "action": "login",
+    "userId": "xxx"
+}
+
+{
+    "action">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
     <meta property="og:title" content="用 Jackson 將 JSON 反序列化成 Polymorphic 物件">
-    <meta property="og:description" content="問題假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：
+    <meta property="og:description" content="問題
+假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：
+
 
 {
-    &quot;action&quot;: &quot;login&quot;,
-    &quot;userId&q">
+    "action": "login",
+    "userId": "xxx"
+}
+
+{
+    "action">
         <meta property="og:type" content="article">
         <meta property="og:url" content="https://cwweng.github.io/blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html">
 
@@ -29,7 +41,7 @@
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
-    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/tomorrow-night.min.css" rel="stylesheet">
 
     <!-- Add fancyBox -->
     <link href="../../../css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
@@ -92,6 +104,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/kubernetes.html">kubernetes</a></li>
                   <li><a href="../../../tags/遊山玩水.html">遊山玩水</a></li>
                   <li><a href="../../../tags/java.html">java</a></li>
                   <li><a href="../../../tags/git.html">git</a></li>
@@ -99,7 +112,9 @@
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
                   <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
+                  <li><a href="../../../tags/rabbitmq.html">rabbitmq</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                  <li><a href="../../../tags/docker.html">docker</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -131,29 +146,35 @@
 		</p>
 
 	<article>
-		<p><h3>問題</h3><p>假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：</p>
+		<p><h3>問題</h3>
+<p>假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：</p>
 <!--?prettify?-->
-<pre><code class="json">{
-    &quot;action&quot;: &quot;login&quot;,
-    &quot;userId&quot;: &quot;xxx&quot;
+<pre class="prettyprint">
+{
+    "action": "login",
+    "userId": "xxx"
 }
 
 {
-    &quot;action&quot;: &quot;sendMessage&quot;,
-    &quot;message&quot;: &quot;user Message&quot;
+    "action": "sendMessage",
+    "message": "user Message"
 }
-</code></pre><p>假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。</p>
-<!--more--><h3>解法</h3><p>從 <a href="http://programmerbruce.blogspot.tw/2011/05/deserialize-json-with-jackson-into.html">Deserialize JSON with Jackson into Polymorphic Types - A Complete Example</a> 這篇文章可以看到很多有用的例子。在這邊可以參考 Example 5，不過用不到 MixIn，不知道是不是因為我用的是 Jackson 2.6。</p>
+</pre>
+<p>假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。</p>
+<!--more-->
+<h3>解法</h3>
+<p>從 <a href="http://programmerbruce.blogspot.tw/2011/05/deserialize-json-with-jackson-into.html">Deserialize JSON with Jackson into Polymorphic Types - A Complete Example</a> 這篇文章可以看到很多有用的例子。在這邊可以參考 Example 5，不過用不到 MixIn，不知道是不是因為我用的是 Jackson 2.6。</p>
 <!--?prettify?-->
-<pre><code class="java">import com.fasterxml.jackson.databind.ObjectMapper;
+<pre class="prettyprint">
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 public class JacksonTypeTest  {
     public static void main(String[] args) throws Exception {
-        String sendMessageJson = &quot;{ \&quot;action\&quot;: \&quot;sendMessage\&quot;, \&quot;message\&quot;: \&quot;testMessage\&quot;}&quot;;
-        String loginJson = &quot;{ \&quot;action\&quot;: \&quot;login\&quot;, \&quot;userId\&quot;: \&quot;123456\&quot;}&quot;;
+        String sendMessageJson = "{ \"action\": \"sendMessage\", \"message\": \"testMessage\"}";
+        String loginJson = "{ \"action\": \"login\", \"userId\": \"123456\"}";
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -166,10 +187,10 @@ public class JacksonTypeTest  {
 }
 
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, visible = true, property = &quot;action&quot;)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, visible = true, property = "action")
 @JsonSubTypes({
-    @Type(value = SendMessageAction.class, name = &quot;sendMessage&quot;),
-    @Type(value = LoginAction.class, name = &quot;login&quot;)
+    @Type(value = SendMessageAction.class, name = "sendMessage"),
+    @Type(value = LoginAction.class, name = "login")
 })
 abstract class Action {
     protected String action;
@@ -206,7 +227,10 @@ class LoginAction extends Action {
         this.userId = userId;
     }
 } 
-</code></pre><p>從上面範例的輸出可以看到反序列化後的物件其類別會對應到真正的類別，這樣接下來的程式就可以用物件化的方式來操作了。</p><h3>另一個問題</h3><p>雖然可以正確的反序列化了，不過如果嘗試將物件序列化成 JSON 文件會發現 action 這個屬性的資料被輸出了兩次。下一篇文章再處理吧！</p></p>
+</pre>
+<p>從上面範例的輸出可以看到反序列化後的物件其類別會對應到真正的類別，這樣接下來的程式就可以用物件化的方式來操作了。</p>
+<h3>另一個問題</h3>
+<p>雖然可以正確的反序列化了，不過如果嘗試將物件序列化成 JSON 文件會發現 action 這個屬性的資料被輸出了兩次。下一篇文章再處理吧！</p></p>
 	</article>
 
 	<hr />
@@ -249,7 +273,7 @@ class LoginAction extends Action {
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
       </div>
     </div>
     

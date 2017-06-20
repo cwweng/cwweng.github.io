@@ -6,13 +6,17 @@
     <title>        WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="問題測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題直接執行 WSDLToJava PerformanceDa">
+    <meta name="description" content="問題
+測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題
+直接執行 WSDLToJava Performance">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
     <meta property="og:title" content="WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤">
-    <meta property="og:description" content="問題測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題直接執行 WSDLToJava PerformanceDa">
+    <meta property="og:description" content="問題
+測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題
+直接執行 WSDLToJava Performance">
         <meta property="og:type" content="article">
         <meta property="og:url" content="https://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">
 
@@ -21,7 +25,7 @@
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
-    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/tomorrow-night.min.css" rel="stylesheet">
 
     <!-- Add fancyBox -->
     <link href="../../../css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
@@ -84,6 +88,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/kubernetes.html">kubernetes</a></li>
                   <li><a href="../../../tags/遊山玩水.html">遊山玩水</a></li>
                   <li><a href="../../../tags/java.html">java</a></li>
                   <li><a href="../../../tags/git.html">git</a></li>
@@ -91,7 +96,9 @@
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
                   <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
+                  <li><a href="../../../tags/rabbitmq.html">rabbitmq</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                  <li><a href="../../../tags/docker.html">docker</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -123,59 +130,84 @@
 		</p>
 
 	<article>
-		<p><h2>問題</h2><p>測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題</p><p>直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span> 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題</p>
+		<p><h2>問題</h2>
+<p>測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題</p>
+<p>直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span> 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題</p>
 <!--?prettify?-->
-<pre><code class="xml">&lt;s:complexType name=&quot;MonitorFilter&quot;&gt;
+<pre class="prettyprint">
+&lt;s:complexType name="MonitorFilter"&gt;
   &lt;s:sequence&gt;
-    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;_sumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;s:element minOccurs="1" maxOccurs="1" name="_sumInstances" type="s:boolean" /&gt;
     &lt;!-- 省略 --&gt;
-    &lt;s:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;SumInstances&quot; type=&quot;s:boolean&quot; /&gt;
+    &lt;s:element minOccurs="1" maxOccurs="1" name="SumInstances" type="s:boolean" /&gt;
     &lt;!-- 省略 --&gt;
  &lt;/s:sequence&gt;
 &lt;/s:complexType&gt;
-</code></pre><p>因為 <strong>_sumInstances 和 SumInstances 會產生相同的 property</strong></p>
-<!--more--><h2>解法</h2><p>網路上解法有很多個，但幾乎都沒用</p><h4>第 1 種</h4><p>加上 -autoNameResolution 的參數，測試結果是……無效，一樣的錯誤訊息。</p><h4>第 2 種</h4><p>透過 JAXB binding 讓 _ 不要被移掉：</p>
+</pre>
+<p>因為 <strong>_sumInstances 和 SumInstances 會產生相同的 property</strong></p>
+<!--more-->
+<h2>解法</h2>
+<p>網路上解法有很多個，但幾乎都沒用</p>
+<h4>第 1 種</h4>
+<p>加上 -autoNameResolution 的參數，測試結果是……無效，一樣的錯誤訊息。</p>
+<h4>第 2 種</h4>
+<p>透過 JAXB binding 讓 _ 不要被移掉：</p>
 <!--?prettify?-->
-<pre><code class="xml">&lt;jaxb:bindings
-  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
-  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
-  version=&quot;1.0&quot;&gt;
+<pre class="prettyprint">
+&lt;jaxb:bindings
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:s="http://www.w3.org/2001/XMLSchema"
+  version="1.0"&gt;
  
-  &lt;jaxb:globalBindings underscoreBinding=&quot;asCharInWord&quot;/&gt;
+  &lt;jaxb:globalBindings underscoreBinding="asCharInWord"/&gt;
 &lt;/jaxb:bindings&gt;
-</code></pre><p>參數加上 -b binding.xml 錯誤訊息變成了 <span style="color: red">WSDLToJava Error: java.lang.IllegalArgumentException: trying to create the same field twice: sumInstances</span></p><h4>第 3 種</h4><p>用 JAXWS binding 把 _sumInstances 改成 underscoreBinding</p>
+</pre>
+<p>參數加上 -b binding.xml 錯誤訊息變成了 <span style="color: red">WSDLToJava Error: java.lang.IllegalArgumentException: trying to create the same field twice: sumInstances</span></p>
+<h4>第 3 種</h4>
+<p>用 JAXWS binding 把 _sumInstances 改成 underscoreBinding</p>
 <!--?prettify?-->
-<pre><code class="xml">&lt;jaxws:bindings version=&quot;1.0&quot;
-  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
-  xmlns:jaxws=&quot;http://java.sun.com/xml/ns/jaxws&quot;
-  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
-  xmlns:wsdl=&quot;http://schemas.xmlsoap.org/wsdl/&quot;
-  wsdlLocation=&quot;PerformanceDataCollectionWS.wsdl&quot;
-  xmlns=&quot;http://java.sun.com/xml/ns/jaxws&quot;
-  xmlns:tns1=&quot;VOLARISWS&quot;&gt;
+<pre class="prettyprint">
+&lt;jaxws:bindings version="1.0"
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+  xmlns:s="http://www.w3.org/2001/XMLSchema"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  wsdlLocation="PerformanceDataCollectionWS.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws"
+  xmlns:tns1="VOLARISWS"&gt;
  
   &lt;jaxws:schemabindings&gt;
-    &lt;jaxws:bindings node=&quot;wsdl:definitions&quot;&gt;
-      &lt;jaxws:bindings node=&quot;//s:element[@nam=&#39;_sumInstances&#39;]&quot;&gt;
-        &lt;jaxb:property name=&quot;underscoreSumInstances&quot; /&gt;
+    &lt;jaxws:bindings node="wsdl:definitions"&gt;
+      &lt;jaxws:bindings node="//s:element[@nam='_sumInstances']"&gt;
+        &lt;jaxb:property name="underscoreSumInstances" /&gt;
       &lt;/jaxws:bindings&gt;
     &lt;/jaxws:bindings&gt;
   &lt;/jaxws:schemabindings&gt;
 &lt;/jaxws:bindings&gt;
-</code></pre><p>參數一樣是 -b binding.xml，結果錯誤訊息變成了 <span style="color: red">WSDLToJava Error: Could not find any node with the XPath expression: //wsdl:definitions///s:element[@nam=’_sumInstances’]</span></p><p>WTF !!!</p><h4>第 4 種</h4><p>用 JAXB binding 把 _sumInstances 改成 underscoreBinding</p>
+</pre>
+<p>參數一樣是 -b binding.xml，結果錯誤訊息變成了 <span style="color: red">WSDLToJava Error: Could not find any node with the XPath expression: //wsdl:definitions///s:element[@nam=’_sumInstances’]</span></p>
+<p>WTF !!!</p>
+<h4>第 4 種</h4>
+<p>用 JAXB binding 把 _sumInstances 改成 underscoreBinding</p>
 <!--?prettify?-->
-<pre><code class="xml">&lt;jaxb:bindings
-  xmlns:jaxb=&quot;http://java.sun.com/xml/ns/jaxb&quot;
-  xmlns:s=&quot;http://www.w3.org/2001/XMLSchema&quot;
-  version=&quot;1.0&quot;&gt;
+<pre class="prettyprint">
+&lt;jaxb:bindings
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  xmlns:s="http://www.w3.org/2001/XMLSchema"
+  version="1.0"&gt;
  
-  &lt;jaxb:bindings schemaLocation=&quot;file:PerformanceDataCollectionWS.wsdl&quot; node=&quot;/s:schema&quot;&gt;
-    &lt;jaxb:bindings node=&quot;//s:element[@name=&#39;_sumInstances&#39;]&quot;&gt;
-      &lt;jaxb:property name=&quot;underscoreSumInstances&quot;&gt;&lt;/jaxb:property&gt;
+  &lt;jaxb:bindings schemaLocation="file:PerformanceDataCollectionWS.wsdl" node="/s:schema"&gt;
+    &lt;jaxb:bindings node="//s:element[@name='_sumInstances']"&gt;
+      &lt;jaxb:property name="underscoreSumInstances"&gt;&lt;/jaxb:property&gt;
     &lt;/jaxb:bindings&gt;
   &lt;/jaxb:bindings&gt; 
 &lt;/jaxb:bindings&gt;
-</code></pre><p>結果錯誤訊息變成了 <span style="color: red">WSDLToJava Error: Thrown by JAXB: “file:/PerformanceDataCollectionWS.wsdl” is not a part of this compilation. Is this a mistake for “file:/PerformanceDataCollectionWS.wsdl#types1”? at line 6 column 91 of schema file:/binding.xml</span>。快瘋了</p><h4>正確解答</h4><p><a href="http://mail-archives.apache.org/mod_mbox/cxf-issues/200906.mbox/%3C584927696.1244148907615.JavaMail.jira@brutus%3E">這一篇</a>說 Won’t Fix ! 應該要用 JAXWS 而不是 JAXB (前面用 JAXWS 就吃屎啦)。<br/>裡面有提到解法就是把 binding.xml 裡的 schemaLocation 檔名結尾加上 #types1 變成 <span style="color: red"> <strong>schemaLocation=”file:PerformanceDataCollectionWS.wsdl#types1”</strong> </span> 就會過了</p><p>結果就是要用修改過的第四種方法才會過啦！浪費了我一整個下午！</p><h2>參考</h2>
+</pre>
+<p>結果錯誤訊息變成了 <span style="color: red">WSDLToJava Error: Thrown by JAXB: “file:/PerformanceDataCollectionWS.wsdl” is not a part of this compilation. Is this a mistake for “file:/PerformanceDataCollectionWS.wsdl#types1”? at line 6 column 91 of schema file:/binding.xml</span>。快瘋了</p>
+<h4>正確解答</h4>
+<p><a href="http://mail-archives.apache.org/mod_mbox/cxf-issues/200906.mbox/%3C584927696.1244148907615.JavaMail.jira@brutus%3E">這一篇</a>說 Won’t Fix ! 應該要用 JAXWS 而不是 JAXB (前面用 JAXWS 就吃屎啦)。<br/>裡面有提到解法就是把 binding.xml 裡的 schemaLocation 檔名結尾加上 #types1 變成 <span style="color: red"> <strong>schemaLocation=”file:PerformanceDataCollectionWS.wsdl#types1”</strong> </span> 就會過了</p>
+<p>結果就是要用修改過的第四種方法才會過啦！浪費了我一整個下午！</p>
+<h2>參考</h2>
 <ul>
   <li><a href="http://www.jroller.com/ouertani/entry/wsdl_integration_problem_two_declarations">WSDL integration problem : Two declarations cause a collision</a></li>
   <li><a href="http://stackoverflow.com/questions/2163719/tell-jaxb-to-not-remove-underscores">tell jaxb to not remove underscores</a></li>
@@ -222,7 +254,7 @@
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
       </div>
     </div>
     

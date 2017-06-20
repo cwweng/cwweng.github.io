@@ -6,13 +6,15 @@
     <title>        Deserialize JSON Into Polymorphic Types With Jackson
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ProblemAssume you have two types of JSON documents, and the following actions depend on the value of">
+    <meta name="description" content="Problem
+Assume you have two types of JSON documents, and the following actions depend on the value o">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
     <meta property="og:title" content="Deserialize JSON Into Polymorphic Types With Jackson">
-    <meta property="og:description" content="ProblemAssume you have two types of JSON documents, and the following actions depend on the value of">
+    <meta property="og:description" content="Problem
+Assume you have two types of JSON documents, and the following actions depend on the value o">
         <meta property="og:type" content="article">
         <meta property="og:url" content="https://cwweng.github.io/blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types-English.html">
 
@@ -21,7 +23,7 @@
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
-    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/tomorrow-night.min.css" rel="stylesheet">
 
     <!-- Add fancyBox -->
     <link href="../../../css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
@@ -84,6 +86,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/kubernetes.html">kubernetes</a></li>
                   <li><a href="../../../tags/遊山玩水.html">遊山玩水</a></li>
                   <li><a href="../../../tags/java.html">java</a></li>
                   <li><a href="../../../tags/git.html">git</a></li>
@@ -91,7 +94,9 @@
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
                   <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
+                  <li><a href="../../../tags/rabbitmq.html">rabbitmq</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                  <li><a href="../../../tags/docker.html">docker</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -123,29 +128,35 @@
 		</p>
 
 	<article>
-		<p><h3>Problem</h3><p>Assume you have two types of JSON documents, and the following actions depend on the value of specific attribute.</p>
+		<p><h3>Problem</h3>
+<p>Assume you have two types of JSON documents, and the following actions depend on the value of specific attribute.</p>
 <!--?prettify?-->
-<pre><code class="json">{
-    &quot;action&quot;: &quot;login&quot;,
-    &quot;userId&quot;: &quot;xxx&quot;
+<pre class="prettyprint">
+{
+    "action": "login",
+    "userId": "xxx"
 }
 
 {
-    &quot;action&quot;: &quot;sendMessage&quot;,
-    &quot;message&quot;: &quot;user Message&quot;
+    "action": "sendMessage",
+    "message": "user Message"
 }
-</code></pre><p>If both types of JSON documents can be received, the simplest way is to deserialized them into Map, but that would be very not object-oriented. What you need is a way to automatically deserialize them into right type of objects.</p>
-<!--more--><h3>Solution</h3><p><a href="http://programmerbruce.blogspot.tw/2011/05/deserialize-json-with-jackson-into.html">Deserialize JSON with Jackson into Polymorphic Types - A Complete Example</a> demonstrate many useful examples. What we need is Example 5, but Mixin is not necessary in our case, not sure if it's because we use Jackson 2.6.</p>
+</pre>
+<p>If both types of JSON documents can be received, the simplest way is to deserialized them into Map, but that would be very not object-oriented. What you need is a way to automatically deserialize them into right type of objects.</p>
+<!--more-->
+<h3>Solution</h3>
+<p><a href="http://programmerbruce.blogspot.tw/2011/05/deserialize-json-with-jackson-into.html">Deserialize JSON with Jackson into Polymorphic Types - A Complete Example</a> demonstrate many useful examples. What we need is Example 5, but Mixin is not necessary in our case, not sure if it's because we use Jackson 2.6.</p>
 <!--?prettify?-->
-<pre><code class="java">import com.fasterxml.jackson.databind.ObjectMapper;
+<pre class="prettyprint">
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 public class JacksonTypeTest  {
     public static void main(String[] args) throws Exception {
-        String sendMessageJson = &quot;{ \&quot;action\&quot;: \&quot;sendMessage\&quot;, \&quot;message\&quot;: \&quot;testMessage\&quot;}&quot;;
-        String loginJson = &quot;{ \&quot;action\&quot;: \&quot;login\&quot;, \&quot;userId\&quot;: \&quot;123456\&quot;}&quot;;
+        String sendMessageJson = "{ \"action\": \"sendMessage\", \"message\": \"testMessage\"}";
+        String loginJson = "{ \"action\": \"login\", \"userId\": \"123456\"}";
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -158,10 +169,10 @@ public class JacksonTypeTest  {
 }
 
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, visible = true, property = &quot;action&quot;)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, visible = true, property = "action")
 @JsonSubTypes({
-    @Type(value = SendMessageAction.class, name = &quot;sendMessage&quot;),
-    @Type(value = LoginAction.class, name = &quot;login&quot;)
+    @Type(value = SendMessageAction.class, name = "sendMessage"),
+    @Type(value = LoginAction.class, name = "login")
 })
 abstract class Action {
     protected String action;
@@ -198,7 +209,10 @@ class LoginAction extends Action {
         this.userId = userId;
     }
 } 
-</code></pre><p>From the output of the example, we see that the JSON documents are deserialized into right type of objects. Now we can operate on objects.</p><h3>Another Problem</h3><p>Trying to serialize the deserialized objects, <code>action</code> attribute got duplicated in the generated JSON. Solving it in the next post.</p></p>
+</pre>
+<p>From the output of the example, we see that the JSON documents are deserialized into right type of objects. Now we can operate on objects.</p>
+<h3>Another Problem</h3>
+<p>Trying to serialize the deserialized objects, <code>action</code> attribute got duplicated in the generated JSON. Solving it in the next post.</p></p>
 	</article>
 
 	<hr />
@@ -241,7 +255,7 @@ class LoginAction extends Action {
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
       </div>
     </div>
     

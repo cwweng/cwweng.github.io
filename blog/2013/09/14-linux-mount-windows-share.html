@@ -3,16 +3,19 @@
   <head>
     <meta charset="utf-8"/>
     >
-    <title>        Linux 掛載 Windows 網芳 
+    <title>        Linux 掛載 Windows 網芳
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="安裝
 
+
 apt-get install smbclient
 apt-get install cifs-utils
+
 瀏覽
 
-smbclient -L //IP/Share -U domain/usern">
+
+smbclient -L //IP/Share -U domain/us">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
@@ -20,11 +23,14 @@ smbclient -L //IP/Share -U domain/usern">
     <meta property="og:title" content="Linux 掛載 Windows 網芳">
     <meta property="og:description" content="安裝
 
+
 apt-get install smbclient
 apt-get install cifs-utils
+
 瀏覽
 
-smbclient -L //IP/Share -U domain/usern">
+
+smbclient -L //IP/Share -U domain/us">
         <meta property="og:type" content="article">
         <meta property="og:url" content="https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share.html">
 
@@ -33,7 +39,7 @@ smbclient -L //IP/Share -U domain/usern">
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
-    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/tomorrow-night.min.css" rel="stylesheet">
 
     <!-- Add fancyBox -->
     <link href="../../../css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
@@ -96,6 +102,7 @@ smbclient -L //IP/Share -U domain/usern">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="../../../tags/jbake.html">jbake</a></li>
+                  <li><a href="../../../tags/kubernetes.html">kubernetes</a></li>
                   <li><a href="../../../tags/遊山玩水.html">遊山玩水</a></li>
                   <li><a href="../../../tags/java.html">java</a></li>
                   <li><a href="../../../tags/git.html">git</a></li>
@@ -103,7 +110,9 @@ smbclient -L //IP/Share -U domain/usern">
                   <li><a href="../../../tags/碎碎唸.html">碎碎唸</a></li>
                   <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
+                  <li><a href="../../../tags/rabbitmq.html">rabbitmq</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                  <li><a href="../../../tags/docker.html">docker</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -125,7 +134,7 @@ smbclient -L //IP/Share -U domain/usern">
     <div class="container">
 	
 	<div class="page-header">
-		<h1>Linux 掛載 Windows 網芳 </h1>
+		<h1>Linux 掛載 Windows 網芳</h1>
 	</div>
 
 	<p><em>2013-09-14 14:41</em></p>
@@ -137,14 +146,19 @@ smbclient -L //IP/Share -U domain/usern">
 	<article>
 		<p><h4>安裝</h4>
 <!--?prettify?-->
-<pre><code class="bash">apt-get install smbclient
+<pre class="prettyprint">
+apt-get install smbclient
 apt-get install cifs-utils
-</code></pre><h3>瀏覽</h3>
+</pre>
+<h3>瀏覽</h3>
 <!--?prettify?-->
-<pre><code class="bash">smbclient -L //IP/Share -U domain/username -D subdirectory
-</code></pre><h3>掛載</h3>
-<pre><code class="bash">mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;password&gt; //IP/Share/subdirectory /mount_point
-</code></pre></p>
+<pre class="prettyprint">
+smbclient -L //IP/Share -U domain/username -D subdirectory
+</pre>
+<h3>掛載</h3>
+<pre class="prettyprint">
+mount -t cifs -o user=<username>,domain=<domain>,password=<password> //IP/Share/subdirectory /mount_point
+</pre></p>
 	</article>
 
 	<hr />
@@ -187,7 +201,7 @@ apt-get install cifs-utils
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
       </div>
     </div>
     

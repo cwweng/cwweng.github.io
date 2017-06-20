@@ -6,13 +6,15 @@
     <title>        task XXX blocked for more than 120 seconds
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="公司 VM 的 IO 很慢，最近出現 task XXX blocked for more than 120 seconds，然後就 Kernel Panic 整個不動了。參考網路上的文章，原因是 Li">
+    <meta name="description" content="公司 VM 的 IO 很慢，最近出現 task XXX blocked for more than 120 seconds，然後就 Kernel Panic 整個不動了。
+參考網路上的文章，原因是 L">
     <meta name="author" content="cwweng">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
     <meta property="og:title" content="task XXX blocked for more than 120 seconds">
-    <meta property="og:description" content="公司 VM 的 IO 很慢，最近出現 task XXX blocked for more than 120 seconds，然後就 Kernel Panic 整個不動了。參考網路上的文章，原因是 Li">
+    <meta property="og:description" content="公司 VM 的 IO 很慢，最近出現 task XXX blocked for more than 120 seconds，然後就 Kernel Panic 整個不動了。
+參考網路上的文章，原因是 L">
         <meta property="og:type" content="article">
         <meta property="og:url" content="https://cwweng.github.io/blog/2016/4/13-blocked-for-more-than-120-seconds.html">
 
@@ -21,7 +23,7 @@
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
-    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/tomorrow-night.min.css" rel="stylesheet">
 
     <!-- Add fancyBox -->
     <link href="../../../css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
@@ -92,6 +94,7 @@
                   <li><a href="../../../tags/blog.html">blog</a></li>
                   <li><a href="../../../tags/kindle.html">kindle</a></li>
                   <li><a href="../../../tags/開卷有益.html">開卷有益</a></li>
+                  <li><a href="../../../tags/Kubernetes.html">Kubernetes</a></li>
                 <!--
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -123,7 +126,9 @@
 		</p>
 
 	<article>
-		<p><p>公司 VM 的 IO 很慢，最近出現 <code>task XXX blocked for more than 120 seconds</code>，然後就 Kernel Panic 整個不動了。</p><p>參考<a href="http://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/">網路上的文章</a>，原因是 Linux 要把 file system cache 的資料寫回硬碟時如果 IO 太慢沒辦法在 120 秒內寫完，後續的資料又一直進來，就卡住了。</p><p>解決辦法就是降低 cache 的大小，增加寫入的頻率。</p>
+		<p><p>公司 VM 的 IO 很慢，最近出現 <code>task XXX blocked for more than 120 seconds</code>，然後就 Kernel Panic 整個不動了。</p>
+<p>參考<a href="http://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/">網路上的文章</a>，原因是 Linux 要把 file system cache 的資料寫回硬碟時如果 IO 太慢沒辦法在 120 秒內寫完，後續的資料又一直進來，就卡住了。</p>
+<p>解決辦法就是降低 cache 的大小，增加寫入的頻率。</p>
 <ul>
   <li><code>vm.dirty_background_ratio = 2</code> 降低 cache，當超過這個百分比時就開始背景寫回硬碟。</li>
   <li><code>vm.dirty_ratio = 5</code> 當超過這個百分比時就強制寫回硬碟。</li>
@@ -170,7 +175,7 @@
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.2</a></p>
+        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
       </div>
     </div>
     
