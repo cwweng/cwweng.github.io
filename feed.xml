@@ -6,8 +6,8 @@
     <atom:link href="https://cwweng.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>星期二, 20 六月 2017 16:07:50 +0800</pubDate>
-    <lastBuildDate>星期二, 20 六月 2017 16:07:50 +0800</lastBuildDate>
+    <pubDate>星期三, 21 六月 2017 10:55:23 +0800</pubDate>
+    <lastBuildDate>星期三, 21 六月 2017 10:55:23 +0800</lastBuildDate>
 
     <item>
       <title>Kubernetes 透過自建的 Docker Registry 取得 Image</title>
@@ -19,102 +19,6 @@
 &lt;h3&gt;自建 Docker Registry&lt;/h3&gt;
 &lt;p&gt;網路上資料很多，不過其實也沒有很麻煩，官網的 &lt;a href=&quot;https://docs.docker.com/registry/deploying/&quot;&gt;Deploying a registry server&lt;/a&gt; 最詳細，只是我覺得順序或排版看得不太順。以下是參考其他文章後建置的順序：&lt;/p&gt;
 &lt;!--more--&gt;
-&lt;h4&gt;建立自簽憑證&lt;/h4&gt;
-&lt;p&gt;因為是在 VM 上測試，所以暫時用自簽憑證解決，有憑證才能遠端存取。這裡的步驟主要是參考&lt;a href=&quot;http://mycodetub.logdown.com/posts/798060-build-your-own-docker-registry&quot;&gt;這篇文章&lt;/a&gt;&lt;/p&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-$ mkdir -p /opt/registry/certs
-$ cd /opt/registry/certs
-$ openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
-&lt;/pre&gt;
-&lt;p&gt;產生憑證過程的資料可以隨便填，不過 Common Name 這個要填 Domain Name，在這邊測試時是填 master.kubernetes&lt;/p&gt;
-&lt;h4&gt;複製憑證&lt;/h4&gt;
-&lt;p&gt;如果是自簽憑證，那這個步驟在每個會用到 Docker 服務的機器都要做，這樣才能正確登入 Docker Registry。&lt;/p&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-$ mkdir /etc/docker/certs.d/master.kubernetes:5000/
-$ cp domain.crt /etc/docker/certs.d/master.kubernetes:5000/ca.crt
-&lt;/pre&gt;
-&lt;h4&gt;建立帳號密碼&lt;/h4&gt;
-&lt;p&gt;這個步驟是建立遠端存取時的帳號密碼，這邊是用 htpasswd 建立帳號是 admin，密碼是 123456 的使用者&lt;/p&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-$ mkdir /opt/registry/auth
-$ cd /opt/registry/auth
-$ docker run --entrypoint htpasswd registry:2 -Bbn admin 123456 &gt;&gt; htpasswd
-&lt;/pre&gt;
-&lt;h4&gt;啟動 Docker Registry&lt;/h4&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-$ mkdir /opt/registry/data
-$ docker run -d -p 5000:5000 --restart=always --name registry -v /opt/registry/data:/var/lib/registry -v /opt/registry/certs:/certs -v /opt/registry/auth:/auth -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key -e REGISTRY_AUTH=htpasswd -e &quot;REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm&quot; -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd registry:2
-&lt;/pre&gt;
-&lt;h4&gt;測試&lt;/h4&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-$ docker login master.kubernetes:5000
-&lt;/pre&gt;
-&lt;h3&gt;Kubernetes 從自建的 Docker Registry 取得 Image&lt;/h3&gt;
-&lt;p&gt;建好 Docker Registry 後，理論上參考 Kubernetes 的 &lt;a href=&quot;https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/&quot;&gt;Pull an Image from a Private Registry&lt;/a&gt; 應該就行了，可是照著做沒有成功。最後是參考 &lt;a href=&quot;https://blog.cloudhelix.io/using-a-private-docker-registry-with-kubernetes-f8d5f6b8f646&quot;&gt;Using a private Docker Registry with Kubernetes&lt;/a&gt; 這篇。&lt;/p&gt;
-&lt;h4&gt;建立 Secret&lt;/h4&gt;
-&lt;p&gt;首先執行 &lt;code&gt;docker login&lt;/code&gt; 後，會產生 &lt;code&gt;~/.docker/config.json&lt;/code&gt; ,這個檔，裡面存的是登入相關的資料。接著執行下列指令取得其 base64 編碼的值：&lt;/p&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-$ cat ~/.docker/config.json | base64 | tr -d \\n
-&lt;/pre&gt;
-&lt;p&gt;接下來是產生 YAML 檔案，內容如下：&lt;/p&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-apiVersion: v1
-kind: Secret
-metadata:
-    name: regsecret
-    data:
-        .dockerconfigjson: &lt;前一步驟 base64 編碼後的值&gt;
-    type: kubernetes.io/dockerconfigjson
-&lt;/pre&gt;
-&lt;p&gt;然後產生 Secret&lt;/p&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-$ kubectl create -f my-secret.yaml
-&lt;/pre&gt;
-&lt;h4&gt;測試&lt;/h4&gt;
-&lt;p&gt;建立一個從 Docker Registry 取出 Image 的 Deployment 來測試，YAML 檔如下：&lt;/p&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-    name: test-deployment
-spec:
-    template:
-        metadata:
-			name: test-deployment
-        spec:
-            containers:
-            - image: master.kubernetes:5000/test-image:1
-              name: test-container
-            imagePullSecrets:
-            - name: regsecret
-
-&lt;/pre&gt;
-&lt;p&gt;建立 Deployment&lt;/p&gt;
-&lt;!--?prettify?--&gt;
-&lt;pre class=&quot;prettyprint&quot;&gt;
-$ kubectl create -f my-deployment.yaml
-&lt;/pre&gt;
-&lt;p&gt;如果有跑起來就算成功啦！&lt;/p&gt;
-	</description>
-    </item>
-    <item>
-      <title>Kubernetes 透過自建的 Docker Registry 取得 Image</title>
-      <link>https://cwweng.github.io/blog/2017/6/20-Deploy-Docker-Registry-Server.html</link>
-      <pubDate>星期二, 20 六月 2017 09:30:00 +0800</pubDate>
-      <guid isPermaLink="false">blog/2017/6/20-Deploy-Docker-Registry-Server.html</guid>
-      	<description>
-	&lt;p&gt;因為 image 放到 Docker Hub 太危險也不符公司資安規定，所以在用 Kubernetes 前，最好還是有個自己的 Docker Registry，不然還要自己手動把每個 image 放到每個 node，太麻煩！&lt;/p&gt;
-&lt;h3&gt;自建 Docker Registry&lt;/h3&gt;
-&lt;p&gt;網路上資料很多，不過其實也沒有很麻煩，官網的 &lt;a href=&quot;https://docs.docker.com/registry/deploying/&quot;&gt;Deploying a registry server&lt;/a&gt; 最詳細，只是我覺得順序或排版看得不太順。以下是參考其他文章後建置的順序：&lt;/p&gt;
 &lt;h4&gt;建立自簽憑證&lt;/h4&gt;
 &lt;p&gt;因為是在 VM 上測試，所以暫時用自簽憑證解決，有憑證才能遠端存取。這裡的步驟主要是參考&lt;a href=&quot;http://mycodetub.logdown.com/posts/798060-build-your-own-docker-registry&quot;&gt;這篇文章&lt;/a&gt;&lt;/p&gt;
 &lt;!--?prettify?--&gt;

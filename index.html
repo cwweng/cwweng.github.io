@@ -51,7 +51,7 @@
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-175902-4', 'auto');
   ga('send', 'pageview');
@@ -126,99 +126,6 @@
 <p>網路上資料很多，不過其實也沒有很麻煩，官網的 <a href="https://docs.docker.com/registry/deploying/">Deploying a registry server</a> 最詳細，只是我覺得順序或排版看得不太順。以下是參考其他文章後建置的順序：</p>
 
 					<a href="blog/2017/6/20-Kubernetes-Pull-Images-From-Private-Docker-Registry-Servier.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2017/6/20-Deploy-Docker-Registry-Server.html"><h1>Kubernetes 透過自建的 Docker Registry 取得 Image</h1></a>
-  			<p>2017-06-20</p>
-  			<p>
-				<p>因為 image 放到 Docker Hub 太危險也不符公司資安規定，所以在用 Kubernetes 前，最好還是有個自己的 Docker Registry，不然還要自己手動把每個 image 放到每個 node，太麻煩！</p>
-<h3>自建 Docker Registry</h3>
-<p>網路上資料很多，不過其實也沒有很麻煩，官網的 <a href="https://docs.docker.com/registry/deploying/">Deploying a registry server</a> 最詳細，只是我覺得順序或排版看得不太順。以下是參考其他文章後建置的順序：</p>
-<h4>建立自簽憑證</h4>
-<p>因為是在 VM 上測試，所以暫時用自簽憑證解決，有憑證才能遠端存取。這裡的步驟主要是參考<a href="http://mycodetub.logdown.com/posts/798060-build-your-own-docker-registry">這篇文章</a></p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ mkdir -p /opt/registry/certs
-$ cd /opt/registry/certs
-$ openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
-</pre>
-<p>產生憑證過程的資料可以隨便填，不過 Common Name 這個要填 Domain Name，在這邊測試時是填 master.kubernetes</p>
-<h4>複製憑證</h4>
-<p>如果是自簽憑證，那這個步驟在每個會用到 Docker 服務的機器都要做，這樣才能正確登入 Docker Registry。</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ mkdir /etc/docker/certs.d/master.kubernetes:5000/
-$ cp domain.crt /etc/docker/certs.d/master.kubernetes:5000/ca.crt
-</pre>
-<h4>建立帳號密碼</h4>
-<p>這個步驟是建立遠端存取時的帳號密碼，這邊是用 htpasswd 建立帳號是 admin，密碼是 123456 的使用者</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ mkdir /opt/registry/auth
-$ cd /opt/registry/auth
-$ docker run --entrypoint htpasswd registry:2 -Bbn admin 123456 >> htpasswd
-</pre>
-<h4>啟動 Docker Registry</h4>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ mkdir /opt/registry/data
-$ docker run -d -p 5000:5000 --restart=always --name registry -v /opt/registry/data:/var/lib/registry -v /opt/registry/certs:/certs -v /opt/registry/auth:/auth -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key -e REGISTRY_AUTH=htpasswd -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd registry:2
-</pre>
-<h4>測試</h4>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ docker login master.kubernetes:5000
-</pre>
-<h3>Kubernetes 從自建的 Docker Registry 取得 Image</h3>
-<p>建好 Docker Registry 後，理論上參考 Kubernetes 的 <a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/">Pull an Image from a Private Registry</a> 應該就行了，可是照著做沒有成功。最後是參考 <a href="https://blog.cloudhelix.io/using-a-private-docker-registry-with-kubernetes-f8d5f6b8f646">Using a private Docker Registry with Kubernetes</a> 這篇。</p>
-<h4>建立 Secret</h4>
-<p>首先執行 <code>docker login</code> 後，會產生 <code>~/.docker/config.json</code> ,這個檔，裡面存的是登入相關的資料。接著執行下列指令取得其 base64 編碼的值：</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ cat ~/.docker/config.json | base64 | tr -d \\n
-</pre>
-<p>接下來是產生 YAML 檔案，內容如下：</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-apiVersion: v1
-kind: Secret
-metadata:
-    name: regsecret
-    data:
-        .dockerconfigjson: <前一步驟 base64 編碼後的值>
-    type: kubernetes.io/dockerconfigjson
-</pre>
-<p>然後產生 Secret</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ kubectl create -f my-secret.yaml
-</pre>
-<h4>測試</h4>
-<p>建立一個從 Docker Registry 取出 Image 的 Deployment 來測試，YAML 檔如下：</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-    name: test-deployment
-spec:
-    template:
-        metadata:
-			name: test-deployment
-        spec:
-            containers:
-            - image: master.kubernetes:5000/test-image:1
-              name: test-container
-            imagePullSecrets:
-            - name: regsecret
-
-</pre>
-<p>建立 Deployment</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ kubectl create -f my-deployment.yaml
-</pre>
-<p>如果有跑起來就算成功啦！</p>
 			</p>
 			<hr/>
   			<a href="blog/2017/6/20-RabbitMQ-on-Docker.html"><h1>建立預先設定好 Exchange/Queue/User 的 RabbitMQ Docker Image</h1></a>
