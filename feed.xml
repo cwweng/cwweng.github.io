@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JBake</title>
-    <link>https://cwweng.github.io</link>
-    <atom:link href="https://cwweng.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://cwweng.github.io/</link>
+    <atom:link href="https://cwweng.github.io//feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>星期一, 24 七月 2017 16:13:37 +0800</pubDate>
-    <lastBuildDate>星期一, 24 七月 2017 16:13:37 +0800</lastBuildDate>
+    <pubDate>星期三, 7 二月 2018 16:13:21 +0800</pubDate>
+    <lastBuildDate>星期三, 7 二月 2018 16:13:21 +0800</lastBuildDate>
 
     <item>
       <title>Intellij IDEA 出現 Unindexed remote maven repositories found 的錯誤訊息</title>
-      <link>https://cwweng.github.io/blog/2017/7/24-IntellijIDEA-Unindexed-remote-maven-repositories-found.html</link>
+      <link>https://cwweng.github.io//blog/2017/7/24-IntellijIDEA-Unindexed-remote-maven-repositories-found.html</link>
       <pubDate>星期一, 24 七月 2017 15:30:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2017/7/24-IntellijIDEA-Unindexed-remote-maven-repositories-found.html</guid>
       	<description>
@@ -27,7 +27,7 @@
     </item>
     <item>
       <title>Kubernetes 透過自建的 Docker Registry 取得 Image</title>
-      <link>https://cwweng.github.io/blog/2017/6/20-Kubernetes-Pull-Images-From-Private-Docker-Registry-Servier.html</link>
+      <link>https://cwweng.github.io//blog/2017/6/20-Kubernetes-Pull-Images-From-Private-Docker-Registry-Servier.html</link>
       <pubDate>星期二, 20 六月 2017 16:05:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2017/6/20-Kubernetes-Pull-Images-From-Private-Docker-Registry-Servier.html</guid>
       	<description>
@@ -124,7 +124,7 @@ $ kubectl create -f my-deployment.yaml
     </item>
     <item>
       <title>建立預先設定好 Exchange/Queue/User 的 RabbitMQ Docker Image</title>
-      <link>https://cwweng.github.io/blog/2017/6/20-RabbitMQ-on-Docker.html</link>
+      <link>https://cwweng.github.io//blog/2017/6/20-RabbitMQ-on-Docker.html</link>
       <pubDate>星期二, 20 六月 2017 09:30:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2017/6/20-RabbitMQ-on-Docker.html</guid>
       	<description>
@@ -196,7 +196,7 @@ ADD definitions.json /etc/rabbitmq/
     </item>
     <item>
       <title>在 VirtualBox 的 CentOS 7 VM 上建置 Kubernetes Cluster</title>
-      <link>https://cwweng.github.io/blog/2017/5/24-Kubernetes-on-CentOS-7-Guest-in-VirtualBox.html</link>
+      <link>https://cwweng.github.io//blog/2017/5/24-Kubernetes-on-CentOS-7-Guest-in-VirtualBox.html</link>
       <pubDate>星期三, 24 五月 2017 16:21:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2017/5/24-Kubernetes-on-CentOS-7-Guest-in-VirtualBox.html</guid>
       	<description>
@@ -266,7 +266,7 @@ $ nmcli con mod enp0s8 +ipv4.routes &quot;10.96.0.0/16 192.168.1.XX&quot;
     </item>
     <item>
       <title>Linux 下的 Eclipse 4 的 toolbar 變超大</title>
-      <link>https://cwweng.github.io/blog/2016/6/01-Eclipse-large-icon-size.html</link>
+      <link>https://cwweng.github.io//blog/2016/6/01-Eclipse-large-icon-size.html</link>
       <pubDate>星期三, 1 六月 2016 11:15:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2016/6/01-Eclipse-large-icon-size.html</guid>
       	<description>
@@ -329,7 +329,7 @@ class &quot;GtkWidget&quot; style &quot;gtkcompact&quot;
     </item>
     <item>
       <title>task XXX blocked for more than 120 seconds</title>
-      <link>https://cwweng.github.io/blog/2016/4/13-blocked-for-more-than-120-seconds.html</link>
+      <link>https://cwweng.github.io//blog/2016/4/13-blocked-for-more-than-120-seconds.html</link>
       <pubDate>星期三, 13 四月 2016 15:58:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2016/4/13-blocked-for-more-than-120-seconds.html</guid>
       	<description>
@@ -344,7 +344,7 @@ class &quot;GtkWidget&quot; style &quot;gtkcompact&quot;
     </item>
     <item>
       <title>修正 fancyBox 點擊圖片後會跳到網頁最上方的問題</title>
-      <link>https://cwweng.github.io/blog/2015/12/07-fancyBox-cause-page-to-jump-to-top.html</link>
+      <link>https://cwweng.github.io//blog/2015/12/07-fancyBox-cause-page-to-jump-to-top.html</link>
       <pubDate>星期一, 7 十二月 2015 02:33:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/07-fancyBox-cause-page-to-jump-to-top.html</guid>
       	<description>
@@ -360,7 +360,7 @@ class &quot;GtkWidget&quot; style &quot;gtkcompact&quot;
     </item>
     <item>
       <title>fancyBox 和 Google Photos 不太合作 (fancyBox doesn&apos;t work with Google Photos)</title>
-      <link>https://cwweng.github.io/blog/2015/12/07-fancyBox-with-Google-Photos.html</link>
+      <link>https://cwweng.github.io//blog/2015/12/07-fancyBox-with-Google-Photos.html</link>
       <pubDate>星期一, 7 十二月 2015 01:21:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/07-fancyBox-with-Google-Photos.html</guid>
       	<description>
@@ -370,7 +370,7 @@ class &quot;GtkWidget&quot; style &quot;gtkcompact&quot;
     </item>
     <item>
       <title>2015-11-21 貓空茶香環狀步道半日遊</title>
-      <link>https://cwweng.github.io/blog/2015/12/05-貓空茶香環狀步道半日遊.html</link>
+      <link>https://cwweng.github.io//blog/2015/12/05-貓空茶香環狀步道半日遊.html</link>
       <pubDate>星期六, 5 十二月 2015 14:20:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/05-貓空茶香環狀步道半日遊.html</guid>
       	<description>
@@ -402,7 +402,7 @@ class &quot;GtkWidget&quot; style &quot;gtkcompact&quot;
     </item>
     <item>
       <title>Duplicated JSON Properties After Serialize with Jackson</title>
-      <link>https://cwweng.github.io/blog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html</link>
+      <link>https://cwweng.github.io//blog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html</link>
       <pubDate>星期五, 4 十二月 2015 15:36:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html</guid>
       	<description>
@@ -432,7 +432,7 @@ abstract class Action {
     </item>
     <item>
       <title>Jackson 序列化後的 JSON 出現重複的屬性</title>
-      <link>https://cwweng.github.io/blog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html</link>
+      <link>https://cwweng.github.io//blog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html</link>
       <pubDate>星期五, 4 十二月 2015 15:26:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html</guid>
       	<description>
@@ -462,7 +462,7 @@ abstract class Action {
     </item>
     <item>
       <title>Deserialize JSON Into Polymorphic Types With Jackson</title>
-      <link>https://cwweng.github.io/blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types-English.html</link>
+      <link>https://cwweng.github.io//blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types-English.html</link>
       <pubDate>星期五, 4 十二月 2015 14:57:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types-English.html</guid>
       	<description>
@@ -555,7 +555,7 @@ class LoginAction extends Action {
     </item>
     <item>
       <title>用 Jackson 將 JSON 反序列化成 Polymorphic 物件</title>
-      <link>https://cwweng.github.io/blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html</link>
+      <link>https://cwweng.github.io//blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html</link>
       <pubDate>星期五, 4 十二月 2015 14:21:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html</guid>
       	<description>
@@ -648,7 +648,7 @@ class LoginAction extends Action {
     </item>
     <item>
       <title>Handshake failed due to invalid Upgrade header: null</title>
-      <link>https://cwweng.github.io/blog/2015/12/03-Spring-WebSocket-Handshake-failed.html</link>
+      <link>https://cwweng.github.io//blog/2015/12/03-Spring-WebSocket-Handshake-failed.html</link>
       <pubDate>星期四, 3 十二月 2015 15:24:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/12/03-Spring-WebSocket-Handshake-failed.html</guid>
       	<description>
@@ -664,7 +664,7 @@ class LoginAction extends Action {
     </item>
     <item>
       <title>重新出發</title>
-      <link>https://cwweng.github.io/blog/2015/11/30-new-start.html</link>
+      <link>https://cwweng.github.io//blog/2015/11/30-new-start.html</link>
       <pubDate>星期一, 30 十一月 2015 16:32:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2015/11/30-new-start.html</guid>
       	<description>
@@ -674,7 +674,7 @@ class LoginAction extends Action {
     </item>
     <item>
       <title>如何透過 proxy 存取 git://</title>
-      <link>https://cwweng.github.io/blog/2014/03/28-git-through-proxy.html</link>
+      <link>https://cwweng.github.io//blog/2014/03/28-git-through-proxy.html</link>
       <pubDate>星期五, 28 三月 2014 14:56:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2014/03/28-git-through-proxy.html</guid>
       	<description>
@@ -695,7 +695,7 @@ git config --global url.&quot;https://&quot;.insteadOf git://
     </item>
     <item>
       <title>Linux 掛載 Windows 網芳</title>
-      <link>https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share.html</link>
+      <link>https://cwweng.github.io//blog/2013/09/14-linux-mount-windows-share.html</link>
       <pubDate>星期六, 14 九月 2013 14:41:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2013/09/14-linux-mount-windows-share.html</guid>
       	<description>
@@ -718,7 +718,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>「回到明朝當王爺」觀後感</title>
-      <link>https://cwweng.github.io/blog/2011/08/03-回到明朝當王爺.html</link>
+      <link>https://cwweng.github.io//blog/2011/08/03-回到明朝當王爺.html</link>
       <pubDate>星期三, 3 八月 2011 11:16:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/08/03-回到明朝當王爺.html</guid>
       	<description>
@@ -736,7 +736,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>2011-07 日月潭兩天一夜</title>
-      <link>https://cwweng.github.io/blog/2011/07/07-日月潭兩天一夜.html</link>
+      <link>https://cwweng.github.io//blog/2011/07/07-日月潭兩天一夜.html</link>
       <pubDate>星期四, 7 七月 2011 23:06:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/07/07-日月潭兩天一夜.html</guid>
       	<description>
@@ -766,7 +766,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</title>
-      <link>https://cwweng.github.io/blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</link>
+      <link>https://cwweng.github.io//blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</link>
       <pubDate>星期二, 28 六月 2011 11:46:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</guid>
       	<description>
@@ -864,7 +864,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>Amazon Kindle 3 入手</title>
-      <link>https://cwweng.github.io/blog/2011/06/24-kindle-3.html</link>
+      <link>https://cwweng.github.io//blog/2011/06/24-kindle-3.html</link>
       <pubDate>星期五, 24 六月 2011 13:14:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/24-kindle-3.html</guid>
       	<description>
@@ -884,7 +884,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>香港四天三夜自由行 ─ 第四天</title>
-      <link>https://cwweng.github.io/blog/2011/06/17-Hong-Kong-Day4.html</link>
+      <link>https://cwweng.github.io//blog/2011/06/17-Hong-Kong-Day4.html</link>
       <pubDate>星期五, 17 六月 2011 17:04:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/17-Hong-Kong-Day4.html</guid>
       	<description>
@@ -921,7 +921,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>香港四天三夜自由行 ─ 第三天</title>
-      <link>https://cwweng.github.io/blog/2011/06/14-Hong-Kong-Day3.html</link>
+      <link>https://cwweng.github.io//blog/2011/06/14-Hong-Kong-Day3.html</link>
       <pubDate>星期二, 14 六月 2011 15:58:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/14-Hong-Kong-Day3.html</guid>
       	<description>
@@ -965,7 +965,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</title>
-      <link>https://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</link>
+      <link>https://cwweng.github.io//blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</link>
       <pubDate>星期五, 3 六月 2011 11:15:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html</guid>
       	<description>
@@ -1055,7 +1055,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>香港四天三夜自由行 ─ 第二天</title>
-      <link>https://cwweng.github.io/blog/2009/11/07-Hong-Kong-Day2.html</link>
+      <link>https://cwweng.github.io//blog/2009/11/07-Hong-Kong-Day2.html</link>
       <pubDate>星期六, 7 十一月 2009 22:15:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2009/11/07-Hong-Kong-Day2.html</guid>
       	<description>
@@ -1109,7 +1109,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>香港四天三夜自由行 ─ 第一天</title>
-      <link>https://cwweng.github.io/blog/2009/05/28-Hong-Kong-Day1.html</link>
+      <link>https://cwweng.github.io//blog/2009/05/28-Hong-Kong-Day1.html</link>
       <pubDate>星期四, 28 五月 2009 15:00:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2009/05/28-Hong-Kong-Day1.html</guid>
       	<description>
@@ -1149,7 +1149,7 @@ mount -t cifs -o user=&lt;username&gt;,domain=&lt;domain&gt;,password=&lt;passwo
     </item>
     <item>
       <title>香港四天三夜自由行 ─ 行前規劃</title>
-      <link>https://cwweng.github.io/blog/2009/02/08-Hong-Kong-plan.html</link>
+      <link>https://cwweng.github.io//blog/2009/02/08-Hong-Kong-plan.html</link>
       <pubDate>星期日, 8 二月 2009 20:08:00 +0800</pubDate>
       <guid isPermaLink="false">blog/2009/02/08-Hong-Kong-plan.html</guid>
       	<description>
