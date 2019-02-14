@@ -1,0 +1,491 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<section id="home">
+        <ul>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2015/12/05-%E8%B2%93%E7%A9%BA%E8%8C%B6%E9%A6%99%E7%92%B0%E7%8B%80%E6%AD%A5%E9%81%93%E5%8D%8A%E6%97%A5%E9%81%8A/" title="2015-11-21 貓空茶香環狀步道半日遊">2015-11-21 貓空茶香環狀步道半日遊</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-12-05T14:20:00&#43;08:00">Dec 5, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>又到了周末步道遊的時間了，因為之前在<a href="http://tw.hiking.biji.co/">健行筆記</a>看到的<a href="http://tw.hiking.biji.co/index.php?q=news&amp;act=info&amp;id=4167&amp;subtitle=%08%E3%80%90%E6%96%B0%E8%81%9E%E3%80%91%E8%B2%93%E7%A9%BA%E6%96%B0%E6%AD%A5%E9%81%93+%E8%8C%B6%E9%A6%99%E7%92%B0%E7%8B%80%E6%AD%A5%E9%81%93">新聞</a>，所以這次就是它啦！</p>
+
+<p>先來張導覽圖，圖是連到上面說的那則新聞裡的導覽圖。
+<img src="http://tw.hiking.biji.co/static/upload/5552cd7f65289.jpg" style="width: 470px; heigh: 600px" alt="茶香環狀步道導覽圖" /></p></p>
+            
+            <a href="/blog/2015/12/05-%E8%B2%93%E7%A9%BA%E8%8C%B6%E9%A6%99%E7%92%B0%E7%8B%80%E6%AD%A5%E9%81%93%E5%8D%8A%E6%97%A5%E9%81%8A/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2015/12/04-duplicated-json-property-with-jackson-english/" title="Duplicated JSON Properties After Serialize with Jackson">Duplicated JSON Properties After Serialize with Jackson</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-12-04T15:36:00&#43;08:00">Dec 4, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>Following problem found in the previous post, certain property got duplicated in the JSON after serialized polymorphic objects with Jackson.</p>
+
+<p>According to <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">this article</a>, Jackson will output <code>action</code> property based on the value of <code>@JsonSubTypes.Type</code>, and then serialize the object. Since <code>action</code> property is used for polymorphic object deserialization and as an actual member of the class, <code>action</code> get duplicated.</p>
+
+<p>The solution is simple and can be found in the same artitle. Just change <code>JsonTypeInfo.As.PROPERTY</code> in <code>@JsonTypeInfo</code> to <code>JsonTypeInfo.As.EXISTING_PROPERTY</code>.</p></p>
+            
+            <a href="/blog/2015/12/04-duplicated-json-property-with-jackson-english/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2015/12/04-duplicated-json-property-with-jackson/" title="Jackson 序列化後的 JSON 出現重複的屬性">Jackson 序列化後的 JSON 出現重複的屬性</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-12-04T15:26:00&#43;08:00">Dec 4, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。</p>
+
+<p>根據<a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">這篇文章</a>的說法，Jackson 在續列化時會根據 <code>@JsonSubTypes.Type</code> 的值先輸出 <code>action</code> 屬性，接著才把物件內容序列化。碰巧該物件也有一個 <code>action</code> 屬性，所以被輸出了兩次。會發生這樣的問題是因為 <code>action</code> 被同時用來判斷物件類別以及其他用途。</p>
+
+<p>要解決很簡單，同一篇文章就有答案了。把 <code>@JsonTypeInfo</code> 裡的 <code>JsonTypeInfo.As.PROPERTY</code> 改成 <code>JsonTypeInfo.As.EXISTING_PROPERTY</code> 即可。如下</p></p>
+            
+            <a href="/blog/2015/12/04-duplicated-json-property-with-jackson/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2015/12/04-jackson-deserialize-into-polymorphic-types-english/" title="Deserialize JSON Into Polymorphic Types With Jackson">Deserialize JSON Into Polymorphic Types With Jackson</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-12-04T14:57:00&#43;08:00">Dec 4, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><h3 id="problem">Problem</h3>
+
+<p>Assume you have two types of JSON documents, and the following actions depend on the value of specific attribute.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;action&#34;</span>: <span style="color:#e6db74">&#34;login&#34;</span>,
+    <span style="color:#f92672">&#34;userId&#34;</span>: <span style="color:#e6db74">&#34;xxx&#34;</span>
+}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;action&#34;</span>: <span style="color:#e6db74">&#34;sendMessage&#34;</span>,
+    <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;user Message&#34;</span>
+}</code></pre></div>
+<p>The simplest way is to deserialized them into Map, but that would be very not object-oriented. We need to find a way to automatically deserialize them into right type of objects.</p></p>
+            
+            <a href="/blog/2015/12/04-jackson-deserialize-into-polymorphic-types-english/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2015/12/04-jackson-deserialize-into-polymorphic-types/" title="用 Jackson 將 JSON 反序列化成 Polymorphic 物件">用 Jackson 將 JSON 反序列化成 Polymorphic 物件</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-12-04T14:21:00&#43;08:00">Dec 4, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><h3 id="問題">問題</h3>
+
+<p>假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;action&#34;</span>: <span style="color:#e6db74">&#34;login&#34;</span>,
+    <span style="color:#f92672">&#34;userId&#34;</span>: <span style="color:#e6db74">&#34;xxx&#34;</span>
+}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;action&#34;</span>: <span style="color:#e6db74">&#34;sendMessage&#34;</span>,
+    <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;user Message&#34;</span>
+}</code></pre></div>
+<p>假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。</p></p>
+            
+            <a href="/blog/2015/12/04-jackson-deserialize-into-polymorphic-types/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2015/12/03-spring-websocket-handshake-failed/" title="Handshake failed due to invalid Upgrade header: null">Handshake failed due to invalid Upgrade header: null</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-12-03T15:24:00&#43;08:00">Dec 3, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>昨天用 Chrome 的 <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a> 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 <code>org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null</code> 的錯誤訊息。但是用 Wireshark 抓封包看到送出的 Request 其實是有 <code>Upgrade: websocket</code>。</p></p>
+            
+            <a href="/blog/2015/12/03-spring-websocket-handshake-failed/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2015/11/30-new-start/" title="重新出發">重新出發</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-11-30T16:32:00&#43;08:00">Nov 30, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%94%B8/">#碎碎唸</a>
+                
+                    , 
+                    <a href="/tags/jbake/">#jbake</a>
+                
+                    , 
+                    <a href="/tags/blog/">#blog</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p>公司把 Tumblr 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。
+這次改用 JBake 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。</p>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share/" title="Linux 掛載 Windows 網芳">Linux 掛載 Windows 網芳</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2013-09-14T14:41:00&#43;08:00">Sep 14, 2013</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/linux/">#linux</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><h4 id="安裝">安裝</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apt-get install smbclient
+apt-get install cifs-utils</code></pre></div>
+<h4 id="瀏覽">瀏覽</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">smbclient -L //IP/Share -U domain/username -D subdirectory</code></pre></div>
+<h4 id="掛載">掛載</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mount -t cifs -o user<span style="color:#f92672">=</span>&lt;username&gt;,domain<span style="color:#f92672">=</span>&lt;domain&gt;,password<span style="color:#f92672">=</span>&lt;password&gt; //IP/Share/subdirectory /mount_point</code></pre></div></p>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2011/08/03-%E5%9B%9E%E5%88%B0%E6%98%8E%E6%9C%9D%E7%95%B6%E7%8E%8B%E7%88%BA/" title="「回到明朝當王爺」觀後感">「回到明朝當王爺」觀後感</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-08-03T11:16:00&#43;08:00">Aug 3, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%96%8B%E5%8D%B7%E6%9C%89%E7%9B%8A/">#開卷有益</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>打個分數：四顆星</p>
+
+<p>拜<a href="http://www.haodoo.net/">網路</a>和 Kindle 的幫助，在幾乎睜開眼有時間的情況下就是拿來看<a href="http://www.haodoo.net/?M=Share&amp;P=0937">回到明朝當王爺</a>。就算是這樣也花了半個月以上的時間，真的是很長的一本小說。</p>
+
+<p>簡單來說，就是男主角陰錯陽差的回到了明朝附身在一個邊疆的秀才身上，又很強運的在兩三年內一路狂升，從邊疆的驛丞、太子侍讀、神機營參將、內廠廠督、威武侯、威武公直至威武王。又運用了一些現代人的知識和身旁高手的協助，鬥倒掉了劉謹、開海禁、滅倭寇海盜、驅夷人收復滿刺加、平四川蠻族叛亂、平白巾賊響馬盜內亂，連蒙古韃靼也被他解決了，最後還封疆蒙古準備北上吃掉西伯利亞。過程中還一路取了嬌妻美妾，這還不夠強運嗎！</p></p>
+            
+            <a href="/blog/2011/08/03-%E5%9B%9E%E5%88%B0%E6%98%8E%E6%9C%9D%E7%95%B6%E7%8E%8B%E7%88%BA/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2011/07/07-%E6%97%A5%E6%9C%88%E6%BD%AD%E5%85%A9%E5%A4%A9%E4%B8%80%E5%A4%9C/" title="2011-07 日月潭兩天一夜">2011-07 日月潭兩天一夜</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-07-07T23:06:00&#43;08:00">Jul 7, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>六月初經由<a href="http://uhooamber.com">李小淮</a>得知了南投縣魚池鄉『日月潭頭社休閒農業區』自行車逍遙遊的活動，再加上<a href="http://uhooamber.com">好心人</a>贊助的日月潭湖景房，所以 <sup>7</sup>&frasl;<sub>2</sub> 就往南投出發啦！</p>
+
+<p>第一站是埔里酒廠，天氣很熱。首先就買了好像大家一定會的買紹興香腸，一支才 $25，不貴也不錯吃啦！</p>
+
+<p><img src="https://lh3.googleusercontent.com/fB4ilvQy-aD9qXYleiaakyK6tBsQSnAk9xMTHTuHd2DYNIn3t8BByYlEzp1Zyy5AzkjiMc2XiFBq7e5SaA=w640" alt="埔里酒廠紹興香腸" /></p></p>
+            
+            <a href="/blog/2011/07/07-%E6%97%A5%E6%9C%88%E6%BD%AD%E5%85%A9%E5%A4%A9%E4%B8%80%E5%A4%9C/">Read more&hellip;</a>
+            
+          </li>
+          
+          
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+    <a href="/page/2/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/page/3/">3</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/4/">4</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+        </ul>
+      </section>
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

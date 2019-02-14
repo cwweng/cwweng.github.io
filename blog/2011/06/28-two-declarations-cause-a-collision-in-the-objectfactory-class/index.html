@@ -1,0 +1,278 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-06-28T11:46:00&#43;08:00">Jun 28, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+    
+
+    <p><em>Update</em> : I migrate from tumblr to Github Page, slightly modify and re-post this article.</p>
+
+<p>This is the English version of my <a href="http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">another post</a>.</p>
+
+<h2 id="problem">Problem</h2>
+
+<p>While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span>.</p>
+
+<p>Turns out it was the following section cause the error</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;s:complexType</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;MonitorFilter&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;s:sequence&gt;</span>
+    <span style="color:#f92672">&lt;s:element</span> <span style="color:#a6e22e">minOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">maxOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;_sumInstances&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;s:boolean&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#75715e">&lt;!-- irrelevant --&gt;</span>
+    <span style="color:#f92672">&lt;s:element</span> <span style="color:#a6e22e">minOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">maxOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;SumInstances&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;s:boolean&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#75715e">&lt;!-- irrelevant --&gt;</span>
+ <span style="color:#f92672">&lt;/s:sequence&gt;</span>
+<span style="color:#f92672">&lt;/s:complexType&gt;</span></code></pre></div>
+<p>The root cause is that <strong>_sumInstances and SumInstances produce the same property</strong></p>
+
+<h2 id="solutions">Solutions</h2>
+
+<p>There are seems several solutions I found, but none of them gives me a complete solution. Here they are :</p>
+
+<h4 id="solution-1">Solution 1</h4>
+
+<p>Adding <em>-autoNameResolution</em> argument to WSDL2Java. My test shows no effect, and the error remains.</p>
+
+<h4 id="solution-2">Solution 2</h4>
+
+<p>Do not strip _ by using JAXB binding :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;jaxb:bindings</span>
+  <span style="color:#a6e22e">xmlns:jaxb=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxb&#34;</span>
+  <span style="color:#a6e22e">xmlns:s=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema&#34;</span>
+  <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
+ 
+  <span style="color:#f92672">&lt;jaxb:globalBindings</span> <span style="color:#a6e22e">underscoreBinding=</span><span style="color:#e6db74">&#34;asCharInWord&#34;</span><span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/jaxb:bindings&gt;</span></code></pre></div>
+<p>After adding <em>-b binding.xml</em> argument, the error message changed to <span style="color: red">WSDLToJava Error: java.lang.IllegalArgumentException: trying to create the same field twice: sumInstances</span></p>
+
+<h4 id="solution-3">Solution 3</h4>
+
+<p>Rename _sumInstances to underscoreBinding by JAXWS binding :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;jaxws:bindings</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span>
+  <span style="color:#a6e22e">xmlns:jaxb=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxb&#34;</span>
+  <span style="color:#a6e22e">xmlns:jaxws=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxws&#34;</span>
+  <span style="color:#a6e22e">xmlns:s=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema&#34;</span>
+  <span style="color:#a6e22e">xmlns:wsdl=</span><span style="color:#e6db74">&#34;http://schemas.xmlsoap.org/wsdl/&#34;</span>
+  <span style="color:#a6e22e">wsdlLocation=</span><span style="color:#e6db74">&#34;PerformanceDataCollectionWS.wsdl&#34;</span>
+  <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxws&#34;</span>
+  <span style="color:#a6e22e">xmlns:tns1=</span><span style="color:#e6db74">&#34;VOLARISWS&#34;</span><span style="color:#f92672">&gt;</span>
+ 
+  <span style="color:#f92672">&lt;jaxws:schemabindings&gt;</span>
+    <span style="color:#f92672">&lt;jaxws:bindings</span> <span style="color:#a6e22e">node=</span><span style="color:#e6db74">&#34;wsdl:definitions&#34;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;jaxws:bindings</span> <span style="color:#a6e22e">node=</span><span style="color:#e6db74">&#34;//s:element[@nam=&#39;_sumInstances&#39;]&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;jaxb:property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;underscoreSumInstances&#34;</span> <span style="color:#f92672">/&gt;</span>
+      <span style="color:#f92672">&lt;/jaxws:bindings&gt;</span>
+    <span style="color:#f92672">&lt;/jaxws:bindings&gt;</span>
+  <span style="color:#f92672">&lt;/jaxws:schemabindings&gt;</span>
+<span style="color:#f92672">&lt;/jaxws:bindings&gt;</span></code></pre></div>
+<p>The argument is the same as the previous one: <em>-b binding.xml</em>. The error became <span style="color: red">WSDLToJava Error: Could not find any node with the XPath expression: //wsdl:definitions///s:element[@nam=’_sumInstances’]</span>.</p>
+
+<p>WTF !!!</p>
+
+<h4 id="solution-4">Solution 4</h4>
+
+<p>Rename _sumInstances to underscoreBinding by JAXB binding :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;jaxb:bindings</span>
+  <span style="color:#a6e22e">xmlns:jaxb=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxb&#34;</span>
+  <span style="color:#a6e22e">xmlns:s=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema&#34;</span>
+  <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
+ 
+  <span style="color:#f92672">&lt;jaxb:bindings</span> <span style="color:#a6e22e">schemaLocation=</span><span style="color:#e6db74">&#34;file:PerformanceDataCollectionWS.wsdl&#34;</span> <span style="color:#a6e22e">node=</span><span style="color:#e6db74">&#34;/s:schema&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;jaxb:bindings</span> <span style="color:#a6e22e">node=</span><span style="color:#e6db74">&#34;//s:element[@name=&#39;_sumInstances&#39;]&#34;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;jaxb:property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;underscoreSumInstances&#34;</span><span style="color:#f92672">&gt;&lt;/jaxb:property&gt;</span>
+    <span style="color:#f92672">&lt;/jaxb:bindings&gt;</span>
+  <span style="color:#f92672">&lt;/jaxb:bindings&gt;</span> 
+<span style="color:#f92672">&lt;/jaxb:bindings&gt;</span></code></pre></div>
+<p>The result was <span style="color: red">WSDLToJava Error: Thrown by JAXB: “file:/PerformanceDataCollectionWS.wsdl” is not a part of this compilation. Is this a mistake for “file:/PerformanceDataCollectionWS.wsdl#types1”? at line 6 column 91 of schema file:/binding.xml</span>.</p>
+
+<p>It&rsquo;s driving me crazy.</p>
+
+<h4 id="hint">Hint</h4>
+
+<p><a href="http://mail-archives.apache.org/mod_mbox/cxf-issues/200906.mbox/%3C584927696.1244148907615.JavaMail.jira@brutus%3E">This post</a> said Won’t Fix ! and we should use JAXWS instead of JAXB (However, JAXWS did not work in my previous test). The post did give me a solution for the error. After adding #types1 to the filename value of the schemaLocation attribute in binding.xml, that is <span style="color: red"> <strong>schemaLocation=”file:PerformanceDataCollectionWS.wsdl#types1”</strong> </span>, and it worked !</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p><strong>The modified 4th solution plus the hint works</strong></p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="http://www.jroller.com/ouertani/entry/wsdl_integration_problem_two_declarations">WSDL integration problem : Two declarations cause a collision</a></li>
+<li><a href="http://stackoverflow.com/questions/2163719/tell-jaxb-to-not-remove-underscores">tell jaxb to not remove underscores</a></li>
+</ul>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2011/06/24-kindle-3/"><i class="fa fa-chevron-circle-left"></i> Amazon Kindle 3 入手</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2011/07/07-%E6%97%A5%E6%9C%88%E6%BD%AD%E5%85%A9%E5%A4%A9%E4%B8%80%E5%A4%9C/">2011-07 日月潭兩天一夜 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments-o"></i> Add/View Comments</button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'cwweng-github';
+            var disqus_button = document.getElementById("show-comments");
+
+            disqus_button.style.display = "";
+            disqus_button.addEventListener("click", disqus, false);
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,638 +1,523 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-        <title>Just Do It</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="cwweng">
-    <meta name="keywords" content="">
-    <meta name="generator" content="JBake">
+<!doctype html>
 
-    <meta property="og:title" content="Just Do It">
-    <meta property="og:description" content="">
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="">
+<html lang="zh-TW">
 
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
 
-    <!-- Le styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/asciidoctor.css" rel="stylesheet">
-    <link href="css/base.css" rel="stylesheet">
-    <link href="css/tomorrow-night.min.css" rel="stylesheet">
-
-    <!-- Add fancyBox -->
-    <link href="css/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="favicon.ico">-->
-
-    <link rel="canonical" href="https://cwweng.github.io/" />
-    <script>
-        var host = "cwweng.github.io";
-
-        if ((host == window.location.host) && (window.location.protocol != "https:")) {
-            window.location.protocol = "https";
-        }
-    </script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-175902-4', 'auto');
-  ga('send', 'pageview');
-
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
-  </head>
-  <body onload="PR.prettyPrint()">
-    <div id="wrap">
-   
-	
-	<!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="">Just Do It</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <!--
-            <li><a href="index.html">Home</a></li>
-            -->
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                  <li><a href="tags/jbake.html">jbake</a></li>
-                  <li><a href="tags/kubernetes.html">kubernetes</a></li>
-                  <li><a href="tags/intellij-idea.html">intellij-idea</a></li>
-                  <li><a href="tags/碎碎唸.html">碎碎唸</a></li>
-                  <li><a href="tags/blog.html">blog</a></li>
-                  <li><a href="tags/rabbitmq.html">rabbitmq</a></li>
-                  <li><a href="tags/開卷有益.html">開卷有益</a></li>
-                  <li><a href="tags/docker.html">docker</a></li>
-                  <li><a href="tags/遊山玩水.html">遊山玩水</a></li>
-                  <li><a href="tags/java.html">java</a></li>
-                  <li><a href="tags/git.html">git</a></li>
-                  <li><a href="tags/linux.html">linux</a></li>
-                  <li><a href="tags/kindle.html">kindle</a></li>
-                <!--
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-                -->
-              </ul>
-            </li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="feed.xml">Subscribe</a></li>
-            <li><a href="about.html">About</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-    <div class="container">
+</head>
 
-	<div class="page-header">
-		<h1>Just Do It</h1>
-	</div>
-  			<a href="blog/2017/7/24-IntellijIDEA-Unindexed-remote-maven-repositories-found.html"><h1>Intellij IDEA 出現 Unindexed remote maven repositories found 的錯誤訊息</h1></a>
-  			<p>2017-07-24</p>
-  			<p>
-				<p>最近心血來潮想改用 Intellij IDEA，在匯入 Gradle 專案時出現了如下的錯誤訊息：</p>
-<pre><code>Unindexed remote maven repositories found. Disable...
-        The following repositories used in your gradle projects were not indexed yet: 
-        http://repo1.maven.org/maven2
-        If you want to use dependency completion for these repositories artifacts,
-        Open Repositories List, select required repositories and press &quot;Update&quot; button (show balloon)
-</code></pre>
-<p>Google 查了一堆解法似乎都不太對，最後從 <a href="https://stackoverflow.com/questions/1784132/intellij-community-cant-use-http-proxy-for-maven/26483623#26483623">Stack Overflow 這篇文章</a>找到正確解法，就是 Maven 的部份要額外加上 proxy 的設定，位置在 <code>File -&gt; Setting -&gt; Build, Execution, Deployment -&gt; Build Tools -&gt; Maven -&gt; Importing</code>，要在 <code>VM options for importer</code> 這個設定加上 <code>-DproxySet=true -DproxyHost=host -DproxyPort=port</code></p>
-			</p>
-			<hr/>
-  			<a href="blog/2017/6/20-Kubernetes-Pull-Images-From-Private-Docker-Registry-Servier.html"><h1>Kubernetes 透過自建的 Docker Registry 取得 Image</h1></a>
-  			<p>2017-06-20</p>
-  			<p>
-				<p>因為 image 放到 Docker Hub 太危險也不符公司資安規定，所以在用 Kubernetes 前，最好還是有個自己的 Docker Registry，不然還要自己手動把每個 image 放到每個 node，太麻煩！</p>
-<h3>自建 Docker Registry</h3>
-<p>網路上資料很多，不過其實也沒有很麻煩，官網的 <a href="https://docs.docker.com/registry/deploying/">Deploying a registry server</a> 最詳細，只是我覺得順序或排版看得不太順。以下是參考其他文章後建置的順序：</p>
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
 
-					<a href="blog/2017/6/20-Kubernetes-Pull-Images-From-Private-Docker-Registry-Servier.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2017/6/20-RabbitMQ-on-Docker.html"><h1>建立預先設定好 Exchange/Queue/User 的 RabbitMQ Docker Image</h1></a>
-  			<p>2017-06-20</p>
-  			<p>
-				<p>如果都已經用 Docker 了，結果 image 給別人以後還要按手冊建立 queue 和 exchange，這樣可能有點掉漆，幸好網路上資料很多。</p>
-<p>首先，必須先進去 RabbitMQ Management 的網頁，把原本的設定匯出，然後再更名為<code>definitions.json</code>。</p>
-<p><code>Dockerfile</code> 只要把 rabbitmq.config 和 definitions.json 加進去就行啦！</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-FROM rabbitmq:3-management
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
 
-ADD rabbitmq.config /etc/rabbitmq/
-ADD definitions.json /etc/rabbitmq/
-</pre>
-
-					<a href="blog/2017/6/20-RabbitMQ-on-Docker.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2017/5/24-Kubernetes-on-CentOS-7-Guest-in-VirtualBox.html"><h1>在 VirtualBox 的 CentOS 7 VM 上建置 Kubernetes Cluster</h1></a>
-  			<p>2017-05-24</p>
-  			<p>
-				<p>搞了兩三天，終於成功了。</p>
-<p>主要是參考 Kubernetes 官方的 <a href="https://kubernetes.io/docs/getting-started-guides/kubeadm/">Installing Kubernetes on Linux with kubeadm</a>，雖然是 Beta，不過應該是未來的趨勢，衝了。不得不說，如果是用 VM 又躲在防火牆後面又雙網卡，那只按照官方文件做真的會搞老半天。</p>
-<h2>環境說明</h2>
-<p>公司很龜毛，有防火牆，所以要連到 internet 抓東西就要透過 proxy。公司也很機車，IP 有管制，沒申請的 IP 連 gateway 都出不去。公司也很省，配的設備不怎麼樣，所以一台 PC 裝多個 VM 互連會哭出來。</p>
-<p>解法就是</p>
-<ul>
-  <li>2 台 PC 跑 3 個 VirtualBox VM，上面都安裝 CentOS 7。</li>
-  <li>每個 VM 都用雙網卡，一張 NAT 用來透過主機網路連上 internet 抓東西。一張用「橋接介面卡」給內部網路 IP，用來讓 VM 互連，比如 192.168.1.XX。</li>
-</ul>
-<h2>環境設定</h2>
-<p>每台 VM 都要做的設定</p>
-<h4>網卡</h4>
-<p>CentOS 7 在安裝完後不知為何沒有把第二張網卡的設定存下來，所以要自己手動再做一次。</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ nmcli con mod enp0s8 ipv4.address 192.168.1.10/24 connection.autoconnect yes
-</pre>
-<h4>Proxy</h4>
-<p>修改 <code>/etc/environment</code> 增加 proxy 設定，記得把把 VM 用來互連的 IP 加進 no_proxy</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-http_proxy=http://proxy-ip:proxy-port
-https_proxy=http://proxy-ip:proxy-port
-HTTP_PROXY=http://proxy-ip:proxy-port
-HTTPS_PROXY=http://proxy-ip:proxy-port
-no_proxy=localhost,127.0.0.1,192.168.1.10,192.168.1.11,192.168.1.12
-</pre>
-<h4>停用 SELinux 和防火牆</h4>
-<p>大概是這兩個東西太複雜了，官網也是教大家先停用</p>
-<ul>
-  <li>修改 <code>/etc/selinux/config</code>，把 SELINUX=enforcing 改為 <code>SELINUX=permissive</code></li>
-  <li>執行 <code>setenforce 0</code> 先停用 SELinux，這樣就不用重開機了</li>
-  <li>停用和關閉防火牆：<code>systemctl disable firewalld &amp;&amp; systemctl stop firewalld</code></li>
-</ul>
-<h2>安裝 Kubernetes</h2>
-<p>這邊沒啥問題，就照官網的做，把該裝的 RPM 都裝一裝。</p>
-<p>裝好後修改 <code>/etc/sysconfig/docker</code> 增加 proxy 設定，Docker 似乎沒參考 /etc/environment 的設定，沒設的話抓 image 會有問題，找出這個問題就花了半天 :(</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-HTTP_PROXY=http://proxy-ip:proxy-port
-HTTPS_PROXY=http://proxy-ip:proxy-port
-</pre>
-<h2>初始化 Master</h2>
-<p>主要仍是參考官網文件，但是如果前一步的 Docker proxy 沒設就會卡住，因為初始化需要下載許多 images。又因為是雙網卡，為了避免 Kubernetes 弄錯，要按照官網說明另外加參數。至於 Pod Network 的部份，據說現在比較建議 Weave Net，所以就不像 Flannel 要再另外加參數了。總結指令如下：</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ kubeadm init --apiserver-advertise-address=192.168.1.10
-</pre>
-<h2>安裝 Pod Network</h2>
-<p>一樣是按照官網文件就好，不過記得要按照前一步驟最後的指示把 kubectl 的設定設好。安裝 Weave Net 的指令如下：</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ kubectl apply -f https://git.io/weave-kube-1.6
-</pre>
-<h2>增加其他 Node</h2>
-<p>這個步驟比較機車，因為雙網卡所以 Kubernetes 的部份要走第二張網卡，如果沒有額外設定 routing 的話，Pod Network 會走預設的 routing，結果就會連不上 api server，即使成功加入，狀態也一直都是 NotReady。</p>
-<p>假如在初始化 Master 時沒有設定 Pod Network，那預設應該是 10.96.0.0/16，所以要在每個 Node 加上額外的 routing：</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-$ nmcli con mod enp0s8 +ipv4.routes "10.96.0.0/16 192.168.1.XX"
-</pre>
-<p>做完上面的步驟後，按照指示執行 kubeadm join 應該就成功了</p>
-			</p>
-			<hr/>
-  			<a href="blog/2016/6/01-Eclipse-large-icon-size.html"><h1>Linux 下的 Eclipse 4 的 toolbar 變超大</h1></a>
-  			<p>2016-06-01</p>
-  			<p>
-				<p>因為要開發 Android 程式裝了 Eclipse 4.5，啟動後發現 toolbar 的 icon 浪費很多空間。參考 <a href="https://github.com/jeeeyul/eclipse-themes/wiki/Linux-Huge-Toolbar-Problem">Linux Huge Toolbar Problem</a> 發現是因為 Eclipse 4 預設用 GTK3。但是它提供的 GTK3 解法不能用，因為都找不到 <code>gtk-widgets.css</code> 這個檔。</p>
-<p>最後是參考 <a href="https://www.eclipse.org/forums/index.php/t/1071268/">[solved] Eclipse (Linux) force GTK2</a>，修改 <code>eclipse.ini</code>，加上下面兩行後雖然醜了點但變得比較正常了。</p>
-<!--?prettify?-->
-<pre class="prettyprint">
---launcher.GTK_version
-2
-</pre>
-<p>如果要再縮可以參考 <a href="http://ubuntuforums.org/showthread.php?t=1465712">Eclipse tab bar bigger on ubuntu</a>，修改或新增 <code>~/.gtkrc-2.0</code> 這個檔，加上</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-style "compact-toolbar"
-{
-	GtkToolbar::internal-padding = 0
-	xthickness = 1
-	ythickness = 1
-}
-
-style "compact-button"
-{
-	xthickness = 0
-	ythickness = 0
-}
-
-class "GtkToolbar"   				style "compact-toolbar" 
-widget_class "*<GtkToolbar>*<GtkButton>"	style "compact-button"
-</pre>
-<p>還有另一個建議如下，但是沒測過</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-style "gtkcompact" {
-	GtkButton::default_border={0,0,0,0}
-	GtkButton::default_outside_border={0,0,0,0}
-	GtkButtonBox::child_min_width=0
-	GtkButtonBox::child_min_heigth=0
-	GtkButtonBox::child_internal_pad_x=0
-	GtkButtonBox::child_internal_pad_y=0
-	GtkMenu::vertical-padding=1
-	GtkMenuBar::internal_padding=0
-	GtkMenuItem::horizontal_padding=4
-	GtkToolbar::internal-padding=0
-	GtkToolbar::space-size=0
-	GtkOptionMenu::indicator_size=0
-	GtkOptionMenu::indicator_spacing=0
-	GtkPaned::handle_size=4
-	GtkRange::trough_border=0
-	GtkRange::stepper_spacing=0
-	GtkScale::value_spacing=0
-	GtkScrolledWindow::scrollbar_spacing=0
-	GtkTreeView::vertical-separator=0
-	GtkTreeView::horizontal-separator=0
-	GtkTreeView::fixed-height-mode=TRUE
-	GtkWidget::focus_padding=0
-}
-class "GtkWidget" style "gtkcompact"
-</pre>
-			</p>
-			<hr/>
-  			<a href="blog/2016/4/13-blocked-for-more-than-120-seconds.html"><h1>task XXX blocked for more than 120 seconds</h1></a>
-  			<p>2016-04-13</p>
-  			<p>
-				<p>公司 VM 的 IO 很慢，最近出現 <code>task XXX blocked for more than 120 seconds</code>，然後就 Kernel Panic 整個不動了。</p>
-<p>參考<a href="http://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/">網路上的文章</a>，原因是 Linux 要把 file system cache 的資料寫回硬碟時如果 IO 太慢沒辦法在 120 秒內寫完，後續的資料又一直進來，就卡住了。</p>
-<p>解決辦法就是降低 cache 的大小，增加寫入的頻率。</p>
-<ul>
-  <li><code>vm.dirty_background_ratio = 2</code> 降低 cache，當超過這個百分比時就開始背景寫回硬碟。</li>
-  <li><code>vm.dirty_ratio = 5</code> 當超過這個百分比時就強制寫回硬碟。</li>
-</ul>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/07-fancyBox-cause-page-to-jump-to-top.html"><h1>修正 fancyBox 點擊圖片後會跳到網頁最上方的問題</h1></a>
-  			<p>2015-12-07</p>
-  			<p>
-				<p>處理好 fancyBox 和 Google Photos 的問題後，又跑出了另一個問題：點了圖以後會直接跳到文章的最開頭！一樣也是 Google 後找到<a href="http://stackoverflow.com/questions/13547007/fancybox2-fancybox-causes-page-to-to-jump-to-the-top">解法</a>，參考其中一個修改 css 的方法就搞定了！</p>
-<p><strong>jquery.fancybox.css</strong></p>
-<pre class="prettyprint">
-.fancybox-lock {
-    /* overflow: hidden !important; */ /* comment out this one */
-    width: auto;
-}
-</pre>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/07-fancyBox-with-Google-Photos.html"><h1>fancyBox 和 Google Photos 不太合作 (fancyBox doesn&apos;t work with Google Photos)</h1></a>
-  			<p>2015-12-07</p>
-  			<p>
-				<p>為新 Blog 放上了 <a href="http://fancyapps.com/fancybox/">fancyBox</a> 後發現不支援 Google Photos 圖檔的網址，<a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51">查了一下</a>發現原來 fancyBox 會去判斷副檔名，剛好 Google Photos 提供的網址都沒有副檔名。根據該文章的說明，把 Google Photos 提供的網址最後加上 <strong>#.jpg</strong> 讓它看起來有副檔名就行了。</p>
-<p>After adding support for <a href="http://fancyapps.com/fancybox/">fancyBox</a>, I found that it doesn't work with Google Photos. According to <a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51">this article</a>, fancyBox requires extension at the end of the URL, and URL provided by Google Photos has none. Just Adding <strong>#.jpg</strong> at the end of the URL as the article suggested and everything works !</p>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/05-貓空茶香環狀步道半日遊.html"><h1>2015-11-21 貓空茶香環狀步道半日遊</h1></a>
-  			<p>2015-12-05</p>
-  			<p>
-				<p>又到了周末步道遊的時間了，因為之前在<a href="http://tw.hiking.biji.co/">健行筆記</a>看到的<a href="http://tw.hiking.biji.co/index.php?q=news&act=info&id=4167&subtitle=%08%E3%80%90%E6%96%B0%E8%81%9E%E3%80%91%E8%B2%93%E7%A9%BA%E6%96%B0%E6%AD%A5%E9%81%93+%E8%8C%B6%E9%A6%99%E7%92%B0%E7%8B%80%E6%AD%A5%E9%81%93">新聞</a>，所以這次就是它啦！</p>
-<p>先來張導覽圖，圖是連到上面說的那則新聞裡的導覽圖。<br/><img src="http://tw.hiking.biji.co/static/upload/5552cd7f65289.jpg" style="width: 470px; heigh: 600px" alt="茶香環狀步道導覽圖" /></p>
-
-					<a href="blog/2015/12/05-貓空茶香環狀步道半日遊.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/04-Duplicated-JSON-Property-with-Jackson-English.html"><h1>Duplicated JSON Properties After Serialize with Jackson</h1></a>
-  			<p>2015-12-04</p>
-  			<p>
-				<p>Following problem found in the previous post, certain property got duplicated in the JSON after serialized polymorphic objects with Jackson.</p>
-<p>According to <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">this article</a>, Jackson will output <code>action</code> property based on the value of <code>@JsonSubTypes.Type</code>, and then serialize the object. Since <code>action</code> property is used for polymorphic object deserialization and as an actual member of the class, <code>action</code> get duplicated.</p>
-<p>The solution is simple and can be found in the same artitle. Just change <code>JsonTypeInfo.As.PROPERTY</code> in <code>@JsonTypeInfo</code> to <code>JsonTypeInfo.As.EXISTING_PROPERTY</code>.</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, visible = true, property = "action")
-@JsonSubTypes({
-    @Type(value = SendMessageAction.class, name = "sendMessage"),
-    @Type(value = LoginAction.class, name = "login")
-})
-abstract class Action {
-    protected String action;
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
-}
-</pre>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/04-Duplicated-JSON-Property-with-Jackson.html"><h1>Jackson 序列化後的 JSON 出現重複的屬性</h1></a>
-  			<p>2015-12-04</p>
-  			<p>
-				<p>接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。</p>
-<p>根據<a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">這篇文章</a>的說法，Jackson 在續列化時會根據 <code>@JsonSubTypes.Type</code> 的值先輸出 <code>action</code> 屬性，接著才把物件內容序列化。碰巧該物件也有一個 <code>action</code> 屬性，所以被輸出了兩次。會發生這樣的問題是因為 <code>action</code> 被同時用來判斷物件類別以及其他用途。</p>
-<p>要解決很簡單，同一篇文章就有答案了。把 <code>@JsonTypeInfo</code> 裡的 <code>JsonTypeInfo.As.PROPERTY</code> 改成 <code>JsonTypeInfo.As.EXISTING_PROPERTY</code> 即可。如下</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, visible = true, property = "action")
-@JsonSubTypes({
-    @Type(value = SendMessageAction.class, name = "sendMessage"),
-    @Type(value = LoginAction.class, name = "login")
-})
-abstract class Action {
-    protected String action;
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
-}
-</pre>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types-English.html"><h1>Deserialize JSON Into Polymorphic Types With Jackson</h1></a>
-  			<p>2015-12-04</p>
-  			<p>
-				<h3>Problem</h3>
-<p>Assume you have two types of JSON documents, and the following actions depend on the value of specific attribute.</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-{
-    "action": "login",
-    "userId": "xxx"
-}
-
-{
-    "action": "sendMessage",
-    "message": "user Message"
-}
-</pre>
-<p>If both types of JSON documents can be received, the simplest way is to deserialized them into Map, but that would be very not object-oriented. What you need is a way to automatically deserialize them into right type of objects.</p>
-
-					<a href="blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types-English.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html"><h1>用 Jackson 將 JSON 反序列化成 Polymorphic 物件</h1></a>
-  			<p>2015-12-04</p>
-  			<p>
-				<h3>問題</h3>
-<p>假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-{
-    "action": "login",
-    "userId": "xxx"
-}
-
-{
-    "action": "sendMessage",
-    "message": "user Message"
-}
-</pre>
-<p>假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。</p>
-
-					<a href="blog/2015/12/04-Jackson-Deserialize-into-Polymorphic-Types.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2015/12/03-Spring-WebSocket-Handshake-failed.html"><h1>Handshake failed due to invalid Upgrade header: null</h1></a>
-  			<p>2015-12-03</p>
-  			<p>
-				<p>昨天用 Chrome 的 <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a> 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 <code>org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null</code> 的錯誤訊息。但是用 Wireshark 抓封包看到送出的 Request 其實是有 <code>Upgrade: websocket</code>。</p>
-<p>用 Google 大神找不到有用的解法，原始的 log 也看不出什麼有用的資訊。打開 Spring 的 debug log 後看到了個似乎相關的訊息：<code>OriginHandshakeInterceptor - Handshake request rejected, Origin header value chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo not allowed</code>。查了<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">文件</a>發現原來 Spring 預設只允許相同來源的 Request，但是 Simple WebSocket Client 送出的是 <code>Origin: chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo</code>，所以就被擋掉了。為了測試只好設 <code>allowed-origins=&quot;*&quot;</code>，設好後重啟就可以用了。</p>
-<p>詳細的設定可以參考 Spring 官方文件的 <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">Configuring allowed origins</a></p>
-<hr/>
-<h4>English Version</h4>
-<p>While testing my Spring-based WebSocket application using <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a>, server log keeps saying <code>org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null</code>. However, packets captured by Wireshark indeed contains <code>Upgrade: websocket</code>.</p>
-<p>No luck with Google, and the log show nothing useful. Forced to turn on Spring debug log, something suspicious appears: <code>OriginHandshakeInterceptor - Handshake request rejected, Origin header value chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo not allowed</code>. According to the <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">reference</a>, it turns out that Spring by default allows only same origin requests. That's why the request is denied since Simple WebSocket Client sends out <code>Origin: chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo</code>. After setting <code>allowed-origins=&quot;*&quot;</code>, everything works!</p>
-<p>Detail setting can be found in <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">Configuring allowed origins</a>.</p>
-			</p>
-			<hr/>
-  			<a href="blog/2015/11/30-new-start.html"><h1>重新出發</h1></a>
-  			<p>2015-11-30</p>
-  			<p>
-				<p>公司把 <a href="https://www.tumblr.com">Tumblr</a> 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。</p>
-<p>這次改用 <a href="http://jbake.org">JBake</a> 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。</p>
-			</p>
-			<hr/>
-  			<a href="blog/2014/03/28-git-through-proxy.html"><h1>如何透過 proxy 存取 git://</h1></a>
-  			<p>2014-03-28</p>
-  			<p>
-				<p>網路上找到的解決辦法都是設 proxy，比如</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-git config --global http.proxy http://user:pwd@proxy.server.com:8080
-git config --global https.proxy http://user:pwd@proxy.server.com:8080
-</pre>
-<p>不過如果 proxy 不支援 CONNECT 就失敗了。</p>
-<p>另一個方法是用 <code>https.insteadOf.git</code>，比如</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-git config --global url."https://".insteadOf git://
-</pre>
-<p>參考 <a href="https://coderwall.com/p/89zmpg%22Git%20protocol%20behind%20a%20proxy%22">Git protocol behind a proxy</a></p>
-			</p>
-			<hr/>
-  			<a href="blog/2013/09/14-linux-mount-windows-share.html"><h1>Linux 掛載 Windows 網芳</h1></a>
-  			<p>2013-09-14</p>
-  			<p>
-				<h4>安裝</h4>
-<!--?prettify?-->
-<pre class="prettyprint">
-apt-get install smbclient
-apt-get install cifs-utils
-</pre>
-<h3>瀏覽</h3>
-<!--?prettify?-->
-<pre class="prettyprint">
-smbclient -L //IP/Share -U domain/username -D subdirectory
-</pre>
-<h3>掛載</h3>
-<pre class="prettyprint">
-mount -t cifs -o user=<username>,domain=<domain>,password=<password> //IP/Share/subdirectory /mount_point
-</pre>
-			</p>
-			<hr/>
-  			<a href="blog/2011/08/03-回到明朝當王爺.html"><h1>「回到明朝當王爺」觀後感</h1></a>
-  			<p>2011-08-03</p>
-  			<p>
-				<p>打個分數：四顆星</p>
-<p>拜<a href="http://www.haodoo.net/">網路</a>和 Kindle 的幫助，在幾乎睜開眼有時間的情況下就是拿來看<a href="http://www.haodoo.net/?M=Share&P=0937">回到明朝當王爺</a>。就算是這樣也花了半個月以上的時間，真的是很長的一本小說。</p>
-<p>簡單來說，就是男主角陰錯陽差的回到了明朝附身在一個邊疆的秀才身上，又很強運的在兩三年內一路狂升，從邊疆的驛丞、太子侍讀、神機營參將、內廠廠督、威武侯、威武公直至威武王。又運用了一些現代人的知識和身旁高手的協助，鬥倒掉了劉謹、開海禁、滅倭寇海盜、驅夷人收復滿刺加、平四川蠻族叛亂、平白巾賊響馬盜內亂，連蒙古韃靼也被他解決了，最後還封疆蒙古準備北上吃掉西伯利亞。過程中還一路取了嬌妻美妾，這還不夠強運嗎！</p>
-
-					<a href="blog/2011/08/03-回到明朝當王爺.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2011/07/07-日月潭兩天一夜.html"><h1>2011-07 日月潭兩天一夜</h1></a>
-  			<p>2011-07-07</p>
-  			<p>
-				<p>六月初經由<a href="http://uhooamber.com">李小淮</a>得知了南投縣魚池鄉『日月潭頭社休閒農業區』自行車逍遙遊的活動，再加上<a href="http://uhooamber.com">好心人</a>贊助的日月潭湖景房，所以 7/2 就往南投出發啦！</p>
-<p>第一站是埔里酒廠，天氣很熱。首先就買了好像大家一定會的買紹興香腸，一支才 $25，不貴也不錯吃啦！<br/><a href="https://picasaweb.google.com/lh/photo/NhJwims_wv8-z1V1mvjn5zaAC5HF2o1tXqZbEROtLHM?feat=embedwebsite"><img src="https://lh3.googleusercontent.com/-oTq1Mn6hg14/ThXBa45SAUI/AAAAAAAAAQY/3oNnbOtOva0/s400/IMG_1295.JPG" height="300" width="400"></a></p>
-
-					<a href="blog/2011/07/07-日月潭兩天一夜.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html"><h1>WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</h1></a>
-  			<p>2011-06-28</p>
-  			<p>
-				<p><em>Update</em> : I migrate from tumblr to Github Page and slightly modify and re-post this article.</p>
-<p>This is the English version of my <a href="http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">another post</a>.</p>
-<h2>Problem</h2>
-<p>While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span>.</p>
-<p>Turns out it was the following section cause the error</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-&lt;s:complexType name="MonitorFilter"&gt;
-  &lt;s:sequence&gt;
-    &lt;s:element minOccurs="1" maxOccurs="1" name="_sumInstances" type="s:boolean" /&gt;
-    &lt;!-- irrelevant --&gt;
-    &lt;s:element minOccurs="1" maxOccurs="1" name="SumInstances" type="s:boolean" /&gt;
-    &lt;!-- irrelevant --&gt;
- &lt;/s:sequence&gt;
-&lt;/s:complexType&gt;
-</pre>
-<p>The root cause is that <strong>_sumInstances and SumInstances produce the same property</strong></p>
-
-					<a href="blog/2011/06/28-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2011/06/24-kindle-3.html"><h1>Amazon Kindle 3 入手</h1></a>
-  			<p>2011-06-24</p>
-  			<p>
-				<p>抓了很多電子書，但是用電腦看的缺點就是眼睛會越看越乾，久了就累了想睡覺。另外就是開會或是出差閒閒沒事時沒辦法看，要用手機看電子書不如拿來玩遊戲。所以買一台電子書閱讀器就是最好的選擇啦！雖然原因那麼多，但最主要的是最近發獎金有一筆小錢啦！</p>
-<p>iPad 紅歸紅，一樣有看久會累的問題，而且買了 iPad 應該大部份時間都不會是看電子書吧，而且...它很貴。總之，買了台 Kindle 3 Wifi-only，正值台幣值錢，加上稅金運費也只要台幣 4800 就搞定了。</p>
-
-					<a href="blog/2011/06/24-kindle-3.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2011/06/17-Hong-Kong-Day4.html"><h1>香港四天三夜自由行 ─ 第四天</h1></a>
-  			<p>2011-06-17</p>
-  			<p>
-				<p>第四天了，拖了兩年多終於要寫完啦！</p>
-<p>這天一大早就辦退房了，但是退房後可以寄放行李，這樣就能輕輕鬆鬆出去玩了，有這種服務真棒！</p>
-<p>早餐原本好像是要吃「澳洲牛奶公司」，不過變成了「美心快餐」，也是很好吃，尤其是蘿蔔糕，讚！<br/><a href="https://picasaweb.google.com/lh/photo/WkZYSfH3UMn7qCkgDj7rZ33Peb3-iAfJG4h-wH49law?feat=embedwebsite"><img src="https://lh3.googleusercontent.com/-K9LtD-2xdUs/Te-U_QE2_kI/AAAAAAAAANA/6DcBUE2GmoY/s400/20090205-085712.jpg" height="300" width="400"></a></p>
-
-					<a href="blog/2011/06/17-Hong-Kong-Day4.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2011/06/14-Hong-Kong-Day3.html"><h1>香港四天三夜自由行 ─ 第三天</h1></a>
-  			<p>2011-06-14</p>
-  			<p>
-				<p>隔兩年了，要動<strike>筆</strike>手真難</p>
-<p>今天計畫很簡單，可是不太輕鬆，加上前一晚太累，所以一大早就拖延了。早餐吃的是「潮樓」，照慣例有著香港不怎麼樣的服務態度，但又很美味的食物，真的是又愛又恨啊！</p>
-
-					<a href="blog/2011/06/14-Hong-Kong-Day3.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html"><h1>WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</h1></a>
-  			<p>2011-06-03</p>
-  			<p>
-				<h2>問題</h2>
-<p>測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題</p>
-<p>直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span> 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題</p>
-<!--?prettify?-->
-<pre class="prettyprint">
-&lt;s:complexType name="MonitorFilter"&gt;
-  &lt;s:sequence&gt;
-    &lt;s:element minOccurs="1" maxOccurs="1" name="_sumInstances" type="s:boolean" /&gt;
-    &lt;!-- 省略 --&gt;
-    &lt;s:element minOccurs="1" maxOccurs="1" name="SumInstances" type="s:boolean" /&gt;
-    &lt;!-- 省略 --&gt;
- &lt;/s:sequence&gt;
-&lt;/s:complexType&gt;
-</pre>
-<p>因為 <strong>_sumInstances 和 SumInstances 會產生相同的 property</strong></p>
-
-					<a href="blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2009/11/07-Hong-Kong-Day2.html"><h1>香港四天三夜自由行 ─ 第二天</h1></a>
-  			<p>2009-11-07</p>
-  			<p>
-				<p>這次更扯啦！距離前一篇已經超過五個月囉！寫遊記實在不是我的強項。</p>
-<p>第二天大概八點起床吧，雖然說是自由行，不過如果睡太晚就虧大囉。今天的行程主要是去海洋公園、太平山夜景、還有蘭桂芳，不過重點還是香港美食啦！</p>
-
-					<a href="blog/2009/11/07-Hong-Kong-Day2.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2009/05/28-Hong-Kong-Day1.html"><h1>香港四天三夜自由行 ─ 第一天</h1></a>
-  			<p>2009-05-28</p>
-  			<p>
-				<p>距離前一篇已經過了三個月了，人懶起來真的是很恐佈的！</p>
-<p>行程的開頭當然是去機場啦，幸好刷國泰的卡可以免費停外圍的五福停車場，不然交通真的是很麻煩的一件事，雖然如此，路癡我還是迷了路幸好沒有延誤。登機的地方是第二航廈，不過就算是第二航廈還是很不怎麼樣，輸國外很多啊！</p>
-<p>行程的第一站就誤點了，因為飛機重新降落，果然計劃趕不上變化啊！一出關就很明顯就看到中旅社的櫃台了，把「單程纜車+凌霄閣」套票和海洋公園的票買好，再買八達通，港幣去掉快大半了。接著就去 Hotel Link 登記等著上巴士然後就到了要睡四天的金御假日了。東西放一放就往第一站「半島酒店下午茶」出發啦！</p>
-
-					<a href="blog/2009/05/28-Hong-Kong-Day1.html">...更多</a>
-			</p>
-			<hr/>
-  			<a href="blog/2009/02/08-Hong-Kong-plan.html"><h1>香港四天三夜自由行 ─ 行前規劃</h1></a>
-  			<p>2009-02-08</p>
-  			<p>
-				<p>因為老婆放寒假，本來是想趁過年去紐西蘭玩的，查了一下以後發現......貴死人，加上現在經濟不景氣我們還是低調點的好，所以就變成香港啦。其實我是個懶人，想到要自己規劃行程又更懶了，所以拖到過年前一週才開始研究，一經老婆提醒才想到過年銀行都沒開，緊急草率算了一下趕快去換的結果就是現金徹底的不夠，差點在香港沒錢吃飯。</p>
-<p>第一步當然就是確定出去玩的日期、酒店和飛機了。很不巧的有同事跟我撞期要去日本，，只好選擇 2/2 ~ 2/5 這四天，週末的假一天都沒有派上用場 :-( 不過這樣也沒啥不好，至少每個點都不用人擠人浪費時間。機加酒最後是選擇了<a href="http://www.kktravel.com.tw">自遊網</a>的金御假日酒店和長榮航空早去晚回（含機場酒店接送及簽證），因為金御假日就在地鐵站出口旁，而且也比喜來登便宜多了。</p>
-<p>規劃行程是最麻煩的了，要參考一堆別人的行程，研究自己想去的點、想吃的店、想逛的商場，還得參考地圖。最後行程的部份大部份是參考<a href="http://www.backpackers.com.tw">背包客</a>網站和 PTT 的 Hong_Kong 板，地圖用 <a href="http://maps.google.com.tw">Google Map</a>，餐廳的位置就靠<a href="http://www.openprice.com">開飯網</a>，還有一堆網站用來查公車、門票、叮叮車、船班等等。用 Google Map 的好處是可以把每個要去的點都先標示出來再排行程可以比較有概念，至於大家都推薦的<a href="http://www.centamap.com">中原地圖</a>感覺頗複雜，所以就沒有用了。最推薦的網站就是<a href="http://hk.myblog.yahoo.com/catjacob2004">Cat Jacob's 香港吃喝玩樂情報站</a>，即使沒有用到他上面提供的行程，但是靠上面的資料就可把很多點之間的交通方式給串出來了。</p>
-
-					<a href="blog/2009/02/08-Hong-Kong-plan.html">...更多</a>
-			</p>
-			<hr/>
-	
-	<hr />
-	
-    <!--
-	<p>Older posts are available in the <a href="/archive.html">archive</a>.</p>
-    -->
-
-		</div>
-		<div id="push"></div>
-    </div>
     
-    <div id="footer">
-      <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1</a></p>
-      </div>
-    </div>
-    
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/prettify.js"></script>
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
 
-    <!-- Add fancyBox -->
-    <script src="js/jquery.fancybox.pack.js?v=2.1.5"></script>
-    <script>
-        $(document).ready(function() {
-            $(".fancybox").fancybox();
-        });
-    </script>
-  </body>
+    <main>
+
+
+
+
+<section id="home">
+        <ul>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2019/02/13-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day11/" title="日本中部北陸 11 日 — 第十一天">日本中部北陸 11 日 — 第十一天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-02-13T00:09:00&#43;08:00">Feb 13, 2019</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>隔了三年才寫有個缺點，那就是都忘了，看著照片想不出那是啥東西，就隨便寫寫吧。</p></p>
+            
+            <a href="/blog/2019/02/13-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day11/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/09/11-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day10/" title="日本中部北陸 11 日 —  第十天">日本中部北陸 11 日 —  第十天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-09-11T02:20:00&#43;08:00">Sep 11, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>今天的行程只有兩個，磁浮鐵道館和買藥妝。前一個是專門找給小孩的，不然十一天下來他們除了坐一堆交通工具很開心外，其他大概都記不得了。後一個嘛，來日本就是要買藥妝啊，不然要幹嘛！</p>
+
+<p>接下來兩天由於現金嚴重不足，也沒有開通海外提款，所以每天早餐只能在便利商店解決，甚至連今天的午餐都要在便利商店先買好，苦命！</p></p>
+            
+            <a href="/blog/2017/09/11-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day10/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/09/05-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day9/" title="日本中部北陸 11 日 —  第九天">日本中部北陸 11 日 —  第九天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-09-05T22:11:00&#43;08:00">Sep 5, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>行程接近尾聲了，今天是最後一天待在高山，把「高山陣屋」和「上三之町古街」逛完就要回到繁華的名古屋囉！</p></p>
+            
+            <a href="/blog/2017/09/05-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day9/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/09/04-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day8/" title="日本中部北陸 11 日 —  第八天">日本中部北陸 11 日 —  第八天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-09-04T01:15:00&#43;08:00">Sep 4, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>今天要去的是到日本中部必玩的「上高地」，又是一個點玩一整天的重頭戲，感覺這次來玩很多必玩景點。</p></p>
+            
+            <a href="/blog/2017/09/04-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day8/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/08/30-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day7/" title="日本中部北陸 11 日 —  第七天">日本中部北陸 11 日 —  第七天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-08-30T00:05:00&#43;08:00">Aug 30, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>今天的行程終於沒有那麼趕了，只有宮川朝市、新穗高纜車和 Gattan Go !! 這三個，算是給前幾天和接下來幾天的累人行程加個緩衝。</p>
+
+<h3 id="宮川朝市">宮川朝市</h3>
+
+<p>宮川朝市是日本的三大朝市之一，似乎是高山市的必逛地點之一，研究過的行程幾乎都有把這裡排進去，加上為了省錢，訂飯店都沒有含早餐，想說可以順便到這裡找早餐吃。沒想到，這個朝市沒賣什麼可以當早餐的！只有簡單不便宜填不飽肚子的飛驒牛肉包、一樣不便宜的飛驒牛串燒、飛驒牛奶，其他的都比較像小吃，剩下的攤販真的都是賣青菜水果和文創商品，店面都是賣紀念品，失策！</p></p>
+            
+            <a href="/blog/2017/08/30-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day7/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/08/26-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day6/" title="日本中部北陸 11 日 —  第六天">日本中部北陸 11 日 —  第六天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-08-26T20:19:00&#43;08:00">Aug 26, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>今天的行程又是重頭戲之一「白川鄉合掌村」，整天差不多就是只有排這個點了，雖然說不是白雪靄靄的冬天，不過夏天綠油油的合掌村也是美得嫑嫑的！</p>
+
+<h3 id="停車">停車</h3>
+
+<p>雖然入口處就有一個相當大的停車場，不過如果要到山上的展望台，除了搭村裡的公車，大部分的人都是選擇走上去再走下來，但是這對前一天才走了整個金澤的一家人來說還是能免就免。</p>
+
+<p>皇天不負苦心人，原來有這種困擾的不是只有我一個啊！在背包客棧的<a href="http://www.backpackers.com.tw/forum/showthread.php?t=1470061">【交通】 白川鄉城山展望台</a>這篇文章就有好心人指出前往展望台的停車位置了，雖然車位不多，不過似乎會直接開車上去的人也不多。</p></p>
+            
+            <a href="/blog/2017/08/26-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day6/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/08/16-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day5/" title="日本中部北陸 11 日 —  第五天">日本中部北陸 11 日 —  第五天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-08-16T14:44:00&#43;08:00">Aug 16, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>這天的行程是金澤市區一日遊，這天大概是這次出遊最操的一天了，從早上走到晚上，行程滿滿！老大還因為走太多路大腿磨到有點紅紅的，誇張！</p>
+
+<h3 id="規劃">規劃</h3>
+
+<h4 id="停車">停車</h4>
+
+<p>由於是金澤市區一日遊，加上又是假日，所以開車並不是選項之一，太辛苦了。也因為前一晚不是住在市區，必須先開車到市區停好車，所以得找一個便宜又方便的停車場。</p>
+
+<p>中間的甘苦就不說了，總之要便宜就是找收費有上限的那種，最後決定的是<a href="http://www.parkingguide-kanazawa.com/category/parking/101073.html?pid=00002005">名鉄協商パーキング 金沢ニシパ</a>，12 小時以內最多 ¥800，這應該是金澤站附近長時間停車最划算的了！</p></p>
+            
+            <a href="/blog/2017/08/16-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day5/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/08/13-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day4/" title="日本中部北陸 11 日 —  第四天">日本中部北陸 11 日 —  第四天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-08-13T02:19:00&#43;08:00">Aug 13, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>這天的行程應該是這次出遊最簡單的一次了，就是出車去黑部峽谷鐵道一日遊，然後到飯店住宿，簡單搞定！</p>
+
+<h3 id="規劃">規劃</h3>
+
+<h4 id="交通工具">交通工具</h4>
+
+<p>行程簡單，規劃不簡單啊！主因就是交通工具。要去玩黑部峽谷鐵道有兩種方法，一種是坐富山地方鐵道，另一種就是租車自駕。</p>
+
+<p>想坐火車的原因很簡單，整天就只有一個點，何必多租車一天結果車都停在停車場呢！而且套票可以坐到「寺田」，只需要加買「寺田」到「宇奈月溫泉」的票就好了。可惜，現實是殘酷的！</p>
+
+<ol>
+<li>如果從富山出發，電車到「宇奈月溫泉」不包含走路就要超過一個半小時，花時間。</li>
+<li>前一晚改住「漁津」可以少花很多交通時間，不過前一天走完黑部立山還要再坐到漁津，累！</li>
+<li>這天玩完還要再坐電車回到富山過夜，準備隔天租車，但是遇到假日富山已經沒有沒地方住了。</li>
+<li>行李拉來拉去很麻煩，不然就是要再寄一次。</li>
+<li>最重要的一點，買了一堆電車票根本沒有省到錢，說不定還比租車一天貴啊！</li>
+</ol>
+
+<p>結論就是，多租一天車的價錢其實沒很貴，還輕鬆不少，也不用趕火車，自駕萬歲！</p></p>
+            
+            <a href="/blog/2017/08/13-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day4/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/08/12-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day3/" title="日本中部北陸 11 日 —  第三天">日本中部北陸 11 日 —  第三天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-08-12T02:42:00&#43;08:00">Aug 12, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>今天的行程就是這次自助旅遊的重頭戲之一：黑部立山橫斷。原本的計畫是在黑部水庫、室堂、彌陀原都走走，不過計劃趕不上變化，室堂行程縮短了，彌陀原直接放棄。</p>
+
+<h3 id="規劃">規劃</h3>
+
+<p>黑部立山這個點的規畫應該是這次行程最複雜的了，首先要搞懂網站上的車次時間表，有些車次只有特定季節或假日才有開，要是錯過了末班車可就得打地鋪了。然後還要計算一下想特別逛的點要停留多久，免得花一堆時間在等車。</p>
+
+<p>如果要一天橫斷，還要走一下一些著名景點，所以要善用一整天的時間。雖然說早點起床是很棒，可是帶小孩不想搞得大家太累，就想說找間離黑部水庫最近的地方過夜，可以睡久一點。可惜，信濃大町和大町溫泉鄉住宿的點似乎都是傳統的日式旅館，要共用大浴池，目前還做不到這麼入境隨俗，所以前一晚只好住到貴鬆鬆的黑部第四皇家酒店。</p></p>
+            
+            <a href="/blog/2017/08/12-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day3/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2017/08/11-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day2/" title="日本中部北陸 11 日 —  第二天">日本中部北陸 11 日 —  第二天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-08-11T01:35:00&#43;08:00">Aug 11, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+                    , 
+                    <a href="/tags/%E6%97%A5%E6%9C%AC/">#日本</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>第二天的主要行程就是松本一日遊，傍晚前信濃大町方向移動，爭取在隔天晚點起床多花點時間在黑部立山。原本想在松本站租腳踏車，但是不確定有沒有兒童椅，所以乾脆用走的了，其實也不遠。</p>
+
+<h3 id="前往松本">前往松本</h3>
+
+<p>第二天一大早就先趕緊到櫃檯把行李寄到後天在富山住宿的飯店，這樣松本、立山黑部這兩天就不用擔心行李寄放的問題了。</p>
+
+<p>再回到名古屋站後，到 10 號月台搭乘 8:00 的特急 3 號前往松本。沒有訂到指定席只好坐自由座，幸好大概是非假日早上的關係，還是有位子坐。早餐就在火車上吃前一晚便利商店買的麵包了，簡單搞定。</p></p>
+            
+            <a href="/blog/2017/08/11-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day2/">Read more&hellip;</a>
+            
+          </li>
+          
+          
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item disabled">
+    <a href="" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/4/">4</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+        </ul>
+      </section>
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
 </html>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Just murmur</title>
+    <link>https://cwweng.github.io/tags/java/</link>
+    <description>Recent content in Java on Just murmur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-TW</language>
+    <lastBuildDate>Mon, 24 Jul 2017 15:30:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://cwweng.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Intellij IDEA 出現 Unindexed remote maven repositories found 的錯誤訊息</title>
+      <link>https://cwweng.github.io/blog/2017/07/24-intellijidea-unindexed-remote-maven-repositories-found/</link>
+      <pubDate>Mon, 24 Jul 2017 15:30:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2017/07/24-intellijidea-unindexed-remote-maven-repositories-found/</guid>
+      <description>&lt;p&gt;最近心血來潮想改用 Intellij IDEA，在匯入 Gradle 專案時出現了如下的錯誤訊息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Unindexed remote maven repositories found. Disable...
+        The following repositories used in your gradle projects were not indexed yet: 
+        http://repo1.maven.org/maven2
+        If you want to use dependency completion for these repositories artifacts,
+        Open Repositories List, select required repositories and press &amp;quot;Update&amp;quot; button (show balloon)
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 下的 Eclipse 4 的 toolbar 變超大</title>
+      <link>https://cwweng.github.io/blog/2016/06/01-eclipse-large-icon-size/</link>
+      <pubDate>Wed, 01 Jun 2016 11:15:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2016/06/01-eclipse-large-icon-size/</guid>
+      <description>&lt;p&gt;因為要開發 Android 程式裝了 Eclipse 4.5，啟動後發現 toolbar 的 icon 浪費很多空間。參考 &lt;a href=&#34;https://github.com/jeeeyul/eclipse-themes/wiki/Linux-Huge-Toolbar-Problem&#34;&gt;Linux Huge Toolbar Problem&lt;/a&gt; 發現是因為 Eclipse 4 預設用 GTK3。但是它提供的 GTK3 解法不能用，因為都找不到 &lt;code&gt;gtk-widgets.css&lt;/code&gt; 這個檔。&lt;/p&gt;
+
+&lt;p&gt;最後是參考 &lt;a href=&#34;https://www.eclipse.org/forums/index.php/t/1071268/&#34;&gt;[solved] Eclipse (Linux) force GTK2&lt;/a&gt;，修改 &lt;code&gt;eclipse.ini&lt;/code&gt;，加上下面兩行後雖然醜了點但變得比較正常了。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;--launcher.GTK_version
+&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Duplicated JSON Properties After Serialize with Jackson</title>
+      <link>https://cwweng.github.io/blog/2015/12/04-duplicated-json-property-with-jackson-english/</link>
+      <pubDate>Fri, 04 Dec 2015 15:36:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2015/12/04-duplicated-json-property-with-jackson-english/</guid>
+      <description>&lt;p&gt;Following problem found in the previous post, certain property got duplicated in the JSON after serialized polymorphic objects with Jackson.&lt;/p&gt;
+
+&lt;p&gt;According to &lt;a href=&#34;http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson&#34;&gt;this article&lt;/a&gt;, Jackson will output &lt;code&gt;action&lt;/code&gt; property based on the value of &lt;code&gt;@JsonSubTypes.Type&lt;/code&gt;, and then serialize the object. Since &lt;code&gt;action&lt;/code&gt; property is used for polymorphic object deserialization and as an actual member of the class, &lt;code&gt;action&lt;/code&gt; get duplicated.&lt;/p&gt;
+
+&lt;p&gt;The solution is simple and can be found in the same artitle. Just change &lt;code&gt;JsonTypeInfo.As.PROPERTY&lt;/code&gt; in &lt;code&gt;@JsonTypeInfo&lt;/code&gt; to &lt;code&gt;JsonTypeInfo.As.EXISTING_PROPERTY&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jackson 序列化後的 JSON 出現重複的屬性</title>
+      <link>https://cwweng.github.io/blog/2015/12/04-duplicated-json-property-with-jackson/</link>
+      <pubDate>Fri, 04 Dec 2015 15:26:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2015/12/04-duplicated-json-property-with-jackson/</guid>
+      <description>&lt;p&gt;接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。&lt;/p&gt;
+
+&lt;p&gt;根據&lt;a href=&#34;http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson&#34;&gt;這篇文章&lt;/a&gt;的說法，Jackson 在續列化時會根據 &lt;code&gt;@JsonSubTypes.Type&lt;/code&gt; 的值先輸出 &lt;code&gt;action&lt;/code&gt; 屬性，接著才把物件內容序列化。碰巧該物件也有一個 &lt;code&gt;action&lt;/code&gt; 屬性，所以被輸出了兩次。會發生這樣的問題是因為 &lt;code&gt;action&lt;/code&gt; 被同時用來判斷物件類別以及其他用途。&lt;/p&gt;
+
+&lt;p&gt;要解決很簡單，同一篇文章就有答案了。把 &lt;code&gt;@JsonTypeInfo&lt;/code&gt; 裡的 &lt;code&gt;JsonTypeInfo.As.PROPERTY&lt;/code&gt; 改成 &lt;code&gt;JsonTypeInfo.As.EXISTING_PROPERTY&lt;/code&gt; 即可。如下&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Deserialize JSON Into Polymorphic Types With Jackson</title>
+      <link>https://cwweng.github.io/blog/2015/12/04-jackson-deserialize-into-polymorphic-types-english/</link>
+      <pubDate>Fri, 04 Dec 2015 14:57:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2015/12/04-jackson-deserialize-into-polymorphic-types-english/</guid>
+      <description>&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;Assume you have two types of JSON documents, and the following actions depend on the value of specific attribute.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;action&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;login&amp;#34;&lt;/span&gt;,
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;userId&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xxx&amp;#34;&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;action&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sendMessage&amp;#34;&lt;/span&gt;,
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;user Message&amp;#34;&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The simplest way is to deserialized them into Map, but that would be very not object-oriented. We need to find a way to automatically deserialize them into right type of objects.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用 Jackson 將 JSON 反序列化成 Polymorphic 物件</title>
+      <link>https://cwweng.github.io/blog/2015/12/04-jackson-deserialize-into-polymorphic-types/</link>
+      <pubDate>Fri, 04 Dec 2015 14:21:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2015/12/04-jackson-deserialize-into-polymorphic-types/</guid>
+      <description>&lt;h3 id=&#34;問題&#34;&gt;問題&lt;/h3&gt;
+
+&lt;p&gt;假設有兩種下列的 JSON 文件，依特定屬性的值決定該文件的作用：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;action&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;login&amp;#34;&lt;/span&gt;,
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;userId&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xxx&amp;#34;&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;{
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;action&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sendMessage&amp;#34;&lt;/span&gt;,
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;user Message&amp;#34;&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;假如兩種 JSON 文件都有可能收到，最簡單的方法就是都轉成 Map，但是這樣就很不物件化，這時候就需要一種方法可以自動判斷並反序列化成對應的物件。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Handshake failed due to invalid Upgrade header: null</title>
+      <link>https://cwweng.github.io/blog/2015/12/03-spring-websocket-handshake-failed/</link>
+      <pubDate>Thu, 03 Dec 2015 15:24:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2015/12/03-spring-websocket-handshake-failed/</guid>
+      <description>&lt;p&gt;昨天用 Chrome 的 &lt;a href=&#34;https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo&#34;&gt;Simple WebSocket Client&lt;/a&gt; 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 &lt;code&gt;org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null&lt;/code&gt; 的錯誤訊息。但是用 Wireshark 抓封包看到送出的 Request 其實是有 &lt;code&gt;Upgrade: websocket&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</title>
+      <link>https://cwweng.github.io/blog/2011/06/28-two-declarations-cause-a-collision-in-the-objectfactory-class/</link>
+      <pubDate>Tue, 28 Jun 2011 11:46:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2011/06/28-two-declarations-cause-a-collision-in-the-objectfactory-class/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Update&lt;/em&gt; : I migrate from tumblr to Github Page, slightly modify and re-post this article.&lt;/p&gt;
+
+&lt;p&gt;This is the English version of my &lt;a href=&#34;http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html&#34;&gt;another post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;problem&#34;&gt;Problem&lt;/h2&gt;
+
+&lt;p&gt;While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : &lt;span style=&#34;color: red&#34;&gt;WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;Turns out it was the following section cause the error&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;s:complexType&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MonitorFilter&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;s:sequence&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;s:element&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;minOccurs=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;maxOccurs=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_sumInstances&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;type=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s:boolean&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- irrelevant --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;s:element&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;minOccurs=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;maxOccurs=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SumInstances&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;type=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s:boolean&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- irrelevant --&amp;gt;&lt;/span&gt;
+ &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/s:sequence&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/s:complexType&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The root cause is that &lt;strong&gt;_sumInstances and SumInstances produce the same property&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</title>
+      <link>https://cwweng.github.io/blog/2011/06/03-two-declarations-cause-a-collision-in-the-objectfactory-class/</link>
+      <pubDate>Fri, 03 Jun 2011 11:15:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2011/06/03-two-declarations-cause-a-collision-in-the-objectfactory-class/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+
+&lt;p&gt;測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題&lt;/p&gt;
+
+&lt;p&gt;直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 &lt;span style=&#34;color: red&#34;&gt;WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl&lt;/span&gt; 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;s:complexType&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MonitorFilter&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;s:sequence&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;s:element&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;minOccurs=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;maxOccurs=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_sumInstances&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;type=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s:boolean&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 省略 --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;s:element&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;minOccurs=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;maxOccurs=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SumInstances&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;type=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s:boolean&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 省略 --&amp;gt;&lt;/span&gt;
+ &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/s:sequence&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/s:complexType&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;因為 &lt;strong&gt;_sumInstances 和 SumInstances 會產生相同的 property&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

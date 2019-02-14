@@ -1,0 +1,196 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Intellij IDEA 出現 Unindexed remote maven repositories found 的錯誤訊息</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-07-24T15:30:00&#43;08:00">Jul 24, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+                    , 
+                    <a href="/tags/intellij/">#intellij</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+    
+
+    <p>最近心血來潮想改用 Intellij IDEA，在匯入 Gradle 專案時出現了如下的錯誤訊息：</p>
+
+<pre><code>Unindexed remote maven repositories found. Disable...
+        The following repositories used in your gradle projects were not indexed yet: 
+        http://repo1.maven.org/maven2
+        If you want to use dependency completion for these repositories artifacts,
+        Open Repositories List, select required repositories and press &quot;Update&quot; button (show balloon)
+</code></pre>
+
+<p>Google 查了一堆解法似乎都不太對，最後從 <a href="https://stackoverflow.com/questions/1784132/intellij-community-cant-use-http-proxy-for-maven/26483623#26483623">Stack Overflow 這篇文章</a>找到正確解法，就是 Maven 的部份要額外加上 proxy 的設定，位置在 <code>File -&gt; Setting -&gt; Build, Execution, Deployment -&gt; Build Tools -&gt; Maven -&gt; Importing</code>，要在 <code>VM options for importer</code> 這個設定加上 <code>-DproxySet=true -DproxyHost=host -DproxyPort=port</code></p>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2017/06/20-kubernetes-pull-images-from-private-docker-registry-servier/"><i class="fa fa-chevron-circle-left"></i> Kubernetes 透過自建的 Docker Registry 取得 Image</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2017/08/10-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-day1/">日本中部北陸 11 日 —  第一天 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments-o"></i> Add/View Comments</button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'cwweng-github';
+            var disqus_button = document.getElementById("show-comments");
+
+            disqus_button.style.display = "";
+            disqus_button.addEventListener("click", disqus, false);
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

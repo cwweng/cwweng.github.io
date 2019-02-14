@@ -1,0 +1,205 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Jackson 序列化後的 JSON 出現重複的屬性</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-12-04T15:26:00&#43;08:00">Dec 4, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+    
+
+    <p>接續之前的文章，發現 Polymorphic 物件序列化後，用來判斷物件類別的屬性被重複輸出了兩次。</p>
+
+<p>根據<a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">這篇文章</a>的說法，Jackson 在續列化時會根據 <code>@JsonSubTypes.Type</code> 的值先輸出 <code>action</code> 屬性，接著才把物件內容序列化。碰巧該物件也有一個 <code>action</code> 屬性，所以被輸出了兩次。會發生這樣的問題是因為 <code>action</code> 被同時用來判斷物件類別以及其他用途。</p>
+
+<p>要解決很簡單，同一篇文章就有答案了。把 <code>@JsonTypeInfo</code> 裡的 <code>JsonTypeInfo.As.PROPERTY</code> 改成 <code>JsonTypeInfo.As.EXISTING_PROPERTY</code> 即可。如下</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@JsonTypeInfo</span><span style="color:#f92672">(</span>use <span style="color:#f92672">=</span> JsonTypeInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">Id</span><span style="color:#f92672">.</span><span style="color:#a6e22e">NAME</span><span style="color:#f92672">,</span> include <span style="color:#f92672">=</span> JsonTypeInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">As</span><span style="color:#f92672">.</span><span style="color:#a6e22e">EXISTING_PROPERTY</span><span style="color:#f92672">,</span> visible <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">,</span> property <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;action&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@JsonSubTypes</span><span style="color:#f92672">({</span>
+    <span style="color:#a6e22e">@Type</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> SendMessageAction<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;sendMessage&#34;</span><span style="color:#f92672">),</span>
+    <span style="color:#a6e22e">@Type</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> LoginAction<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;login&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#f92672">})</span>
+<span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Action</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> String action<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getAction</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> action<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAction</span><span style="color:#f92672">(</span>String action<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">action</span> <span style="color:#f92672">=</span> action<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2015/12/04-jackson-deserialize-into-polymorphic-types-english/"><i class="fa fa-chevron-circle-left"></i> Deserialize JSON Into Polymorphic Types With Jackson</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2015/12/04-duplicated-json-property-with-jackson-english/">Duplicated JSON Properties After Serialize with Jackson <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments-o"></i> Add/View Comments</button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'cwweng-github';
+            var disqus_button = document.getElementById("show-comments");
+
+            disqus_button.style.display = "";
+            disqus_button.addEventListener("click", disqus, false);
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

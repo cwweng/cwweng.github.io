@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on Just murmur</title>
+    <link>https://cwweng.github.io/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on Just murmur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-TW</language>
+    <lastBuildDate>Tue, 20 Jun 2017 16:05:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://cwweng.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kubernetes 透過自建的 Docker Registry 取得 Image</title>
+      <link>https://cwweng.github.io/blog/2017/06/20-kubernetes-pull-images-from-private-docker-registry-servier/</link>
+      <pubDate>Tue, 20 Jun 2017 16:05:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2017/06/20-kubernetes-pull-images-from-private-docker-registry-servier/</guid>
+      <description>&lt;p&gt;因為 image 放到 Docker Hub 太危險也不符公司資安規定，所以在用 Kubernetes 前，最好還是有個自己的 Docker Registry，不然還要自己手動把每個 image 放到每個 node，太麻煩！&lt;/p&gt;
+
+&lt;h3 id=&#34;自建-docker-registry&#34;&gt;自建 Docker Registry&lt;/h3&gt;
+
+&lt;p&gt;網路上資料很多，不過其實也沒有很麻煩，官網的 &lt;a href=&#34;https://docs.docker.com/registry/deploying/&#34;&gt;Deploying a registry server&lt;/a&gt; 最詳細，只是我覺得順序或排版看得不太順。以下是參考其他文章後建置的順序：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在 VirtualBox 的 CentOS 7 VM 上建置 Kubernetes Cluster</title>
+      <link>https://cwweng.github.io/blog/2017/05/24-kubernetes-on-centos-7-guest-in-virtualbox/</link>
+      <pubDate>Wed, 24 May 2017 16:21:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2017/05/24-kubernetes-on-centos-7-guest-in-virtualbox/</guid>
+      <description>&lt;p&gt;搞了兩三天，終於成功了。&lt;/p&gt;
+
+&lt;p&gt;主要是參考 Kubernetes 官方的 &lt;a href=&#34;https://kubernetes.io/docs/getting-started-guides/kubeadm/&#34;&gt;Installing Kubernetes on Linux with kubeadm&lt;/a&gt;，雖然是 Beta，不過應該是未來的趨勢，衝了。不得不說，如果是用 VM 又躲在防火牆後面又雙網卡，那只按照官方文件做真的會搞老半天。&lt;/p&gt;
+
+&lt;h2 id=&#34;環境說明&#34;&gt;環境說明&lt;/h2&gt;
+
+&lt;p&gt;公司很龜毛，有防火牆，所以要連到 internet 抓東西就要透過 proxy。公司也很機車，IP 有管制，沒申請的 IP 連 gateway 都出不去。公司也很省，配的設備不怎麼樣，所以一台 PC 裝多個 VM 互連會哭出來。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

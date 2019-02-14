@@ -1,0 +1,233 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Linux 下的 Eclipse 4 的 toolbar 變超大</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2016-06-01T11:15:00&#43;08:00">Jun 1, 2016</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/linux/">#linux</a>
+                
+                    , 
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+    
+
+    <p>因為要開發 Android 程式裝了 Eclipse 4.5，啟動後發現 toolbar 的 icon 浪費很多空間。參考 <a href="https://github.com/jeeeyul/eclipse-themes/wiki/Linux-Huge-Toolbar-Problem">Linux Huge Toolbar Problem</a> 發現是因為 Eclipse 4 預設用 GTK3。但是它提供的 GTK3 解法不能用，因為都找不到 <code>gtk-widgets.css</code> 這個檔。</p>
+
+<p>最後是參考 <a href="https://www.eclipse.org/forums/index.php/t/1071268/">[solved] Eclipse (Linux) force GTK2</a>，修改 <code>eclipse.ini</code>，加上下面兩行後雖然醜了點但變得比較正常了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">--launcher.GTK_version
+<span style="color:#ae81ff">2</span></code></pre></div>
+<p>如果要再縮可以參考 <a href="http://ubuntuforums.org/showthread.php?t=1465712">Eclipse tab bar bigger on ubuntu</a>，修改或新增 <code>~/.gtkrc-2.0</code> 這個檔，加上</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">style <span style="color:#e6db74">&#34;compact-toolbar&#34;</span>
+<span style="color:#f92672">{</span>
+	GtkToolbar::internal-padding <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+	xthickness <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+	ythickness <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">}</span>
+
+style <span style="color:#e6db74">&#34;compact-button&#34;</span>
+<span style="color:#f92672">{</span>
+	xthickness <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+	ythickness <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#f92672">}</span>
+
+class <span style="color:#e6db74">&#34;GtkToolbar&#34;</span>   				style <span style="color:#e6db74">&#34;compact-toolbar&#34;</span> 
+widget_class <span style="color:#e6db74">&#34;*&lt;GtkToolbar&gt;*&lt;GtkButton&gt;&#34;</span>	style <span style="color:#e6db74">&#34;compact-button&#34;</span></code></pre></div>
+<p>還有另一個建議如下，但是沒測過</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">style <span style="color:#e6db74">&#34;gtkcompact&#34;</span> <span style="color:#f92672">{</span>
+	GtkButton::default_border<span style="color:#f92672">={</span><span style="color:#ae81ff">0</span>,0,0,0<span style="color:#f92672">}</span>
+	GtkButton::default_outside_border<span style="color:#f92672">={</span><span style="color:#ae81ff">0</span>,0,0,0<span style="color:#f92672">}</span>
+	GtkButtonBox::child_min_width<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkButtonBox::child_min_heigth<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkButtonBox::child_internal_pad_x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkButtonBox::child_internal_pad_y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkMenu::vertical-padding<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+	GtkMenuBar::internal_padding<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkMenuItem::horizontal_padding<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+	GtkToolbar::internal-padding<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkToolbar::space-size<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkOptionMenu::indicator_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkOptionMenu::indicator_spacing<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkPaned::handle_size<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+	GtkRange::trough_border<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkRange::stepper_spacing<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkScale::value_spacing<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkScrolledWindow::scrollbar_spacing<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkTreeView::vertical-separator<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkTreeView::horizontal-separator<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+	GtkTreeView::fixed-height-mode<span style="color:#f92672">=</span>TRUE
+	GtkWidget::focus_padding<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+<span style="color:#f92672">}</span>
+class <span style="color:#e6db74">&#34;GtkWidget&#34;</span> style <span style="color:#e6db74">&#34;gtkcompact&#34;</span></code></pre></div>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2016/04/13-blocked-for-more-than-120-seconds/"><i class="fa fa-chevron-circle-left"></i> task XXX blocked for more than 120 seconds</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2017/05/09-%E6%97%A5%E6%9C%AC%E4%B8%AD%E9%83%A8%E5%8C%97%E9%99%B8-%E8%A1%8C%E7%A8%8B%E8%A6%8F%E5%8A%83/">日本中部北陸 11 日 —  行程規劃 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments-o"></i> Add/View Comments</button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'cwweng-github';
+            var disqus_button = document.getElementById("show-comments");
+
+            disqus_button.style.display = "";
+            disqus_button.addEventListener("click", disqus, false);
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

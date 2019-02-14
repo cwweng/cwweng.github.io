@@ -1,0 +1,271 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-06-03T11:15:00&#43;08:00">Jun 3, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+    
+
+    <h2 id="問題">問題</h2>
+
+<p>測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題</p>
+
+<p>直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span> 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;s:complexType</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;MonitorFilter&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;s:sequence&gt;</span>
+    <span style="color:#f92672">&lt;s:element</span> <span style="color:#a6e22e">minOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">maxOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;_sumInstances&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;s:boolean&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#75715e">&lt;!-- 省略 --&gt;</span>
+    <span style="color:#f92672">&lt;s:element</span> <span style="color:#a6e22e">minOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">maxOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;SumInstances&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;s:boolean&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#75715e">&lt;!-- 省略 --&gt;</span>
+ <span style="color:#f92672">&lt;/s:sequence&gt;</span>
+<span style="color:#f92672">&lt;/s:complexType&gt;</span></code></pre></div>
+<p>因為 <strong>_sumInstances 和 SumInstances 會產生相同的 property</strong></p>
+
+<h2 id="解法">解法</h2>
+
+<p>網路上解法有很多個，但幾乎都沒用</p>
+
+<h4 id="第-1-種">第 1 種</h4>
+
+<p>加上 <code>-autoNameResolution</code> 的參數，測試結果是……無效，一樣的錯誤訊息。</p>
+
+<h4 id="第-2-種">第 2 種</h4>
+
+<p>透過 JAXB binding 讓 _ 不要被移掉：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;jaxb:bindings</span>
+  <span style="color:#a6e22e">xmlns:jaxb=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxb&#34;</span>
+  <span style="color:#a6e22e">xmlns:s=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema&#34;</span>
+  <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
+ 
+  <span style="color:#f92672">&lt;jaxb:globalBindings</span> <span style="color:#a6e22e">underscoreBinding=</span><span style="color:#e6db74">&#34;asCharInWord&#34;</span><span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/jaxb:bindings&gt;</span></code></pre></div>
+<p>參數加上 <code>-b binding.xml</code> 錯誤訊息變成了 <span style="color: red">WSDLToJava Error: java.lang.IllegalArgumentException: trying to create the same field twice: sumInstances</span></p>
+
+<h4 id="第-3-種">第 3 種</h4>
+
+<p>用 JAXWS binding 把 _sumInstances 改成 underscoreBinding</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;jaxws:bindings</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span>
+  <span style="color:#a6e22e">xmlns:jaxb=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxb&#34;</span>
+  <span style="color:#a6e22e">xmlns:jaxws=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxws&#34;</span>
+  <span style="color:#a6e22e">xmlns:s=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema&#34;</span>
+  <span style="color:#a6e22e">xmlns:wsdl=</span><span style="color:#e6db74">&#34;http://schemas.xmlsoap.org/wsdl/&#34;</span>
+  <span style="color:#a6e22e">wsdlLocation=</span><span style="color:#e6db74">&#34;PerformanceDataCollectionWS.wsdl&#34;</span>
+  <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxws&#34;</span>
+  <span style="color:#a6e22e">xmlns:tns1=</span><span style="color:#e6db74">&#34;VOLARISWS&#34;</span><span style="color:#f92672">&gt;</span>
+ 
+  <span style="color:#f92672">&lt;jaxws:schemabindings&gt;</span>
+    <span style="color:#f92672">&lt;jaxws:bindings</span> <span style="color:#a6e22e">node=</span><span style="color:#e6db74">&#34;wsdl:definitions&#34;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;jaxws:bindings</span> <span style="color:#a6e22e">node=</span><span style="color:#e6db74">&#34;//s:element[@nam=&#39;_sumInstances&#39;]&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;jaxb:property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;underscoreSumInstances&#34;</span> <span style="color:#f92672">/&gt;</span>
+      <span style="color:#f92672">&lt;/jaxws:bindings&gt;</span>
+    <span style="color:#f92672">&lt;/jaxws:bindings&gt;</span>
+  <span style="color:#f92672">&lt;/jaxws:schemabindings&gt;</span>
+<span style="color:#f92672">&lt;/jaxws:bindings&gt;</span></code></pre></div>
+<p>參數一樣是 -b binding.xml，結果錯誤訊息變成了 <span style="color: red">WSDLToJava Error: Could not find any node with the XPath expression: //wsdl:definitions///s:element[@nam=’_sumInstances’]</span></p>
+
+<p>WTF !!!</p>
+
+<h4 id="第-4-種">第 4 種</h4>
+
+<p>用 JAXB binding 把 _sumInstances 改成 underscoreBinding</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;jaxb:bindings</span>
+  <span style="color:#a6e22e">xmlns:jaxb=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/jaxb&#34;</span>
+  <span style="color:#a6e22e">xmlns:s=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema&#34;</span>
+  <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
+ 
+  <span style="color:#f92672">&lt;jaxb:bindings</span> <span style="color:#a6e22e">schemaLocation=</span><span style="color:#e6db74">&#34;file:PerformanceDataCollectionWS.wsdl&#34;</span> <span style="color:#a6e22e">node=</span><span style="color:#e6db74">&#34;/s:schema&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;jaxb:bindings</span> <span style="color:#a6e22e">node=</span><span style="color:#e6db74">&#34;//s:element[@name=&#39;_sumInstances&#39;]&#34;</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;jaxb:property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;underscoreSumInstances&#34;</span><span style="color:#f92672">&gt;&lt;/jaxb:property&gt;</span>
+    <span style="color:#f92672">&lt;/jaxb:bindings&gt;</span>
+  <span style="color:#f92672">&lt;/jaxb:bindings&gt;</span> 
+<span style="color:#f92672">&lt;/jaxb:bindings&gt;</span></code></pre></div>
+<p>結果錯誤訊息變成了 <span style="color: red">WSDLToJava Error: Thrown by JAXB: “file:/PerformanceDataCollectionWS.wsdl” is not a part of this compilation. Is this a mistake for “file:/PerformanceDataCollectionWS.wsdl#types1”? at line 6 column 91 of schema file:/binding.xml</span>。快瘋了</p>
+
+<h4 id="正確解答">正確解答</h4>
+
+<p><a href="http://mail-archives.apache.org/mod_mbox/cxf-issues/200906.mbox/%3C584927696.1244148907615.JavaMail.jira@brutus%3E">這一篇</a>說 Won’t Fix ! 應該要用 JAXWS 而不是 JAXB (前面用 JAXWS 就吃屎啦)。
+裡面有提到解法就是把 binding.xml 裡的 schemaLocation 檔名結尾加上 #types1 變成 <span style="color: red"> <strong>schemaLocation=”file:PerformanceDataCollectionWS.wsdl#types1”</strong> </span> 就會過了</p>
+
+<p>結果就是要用修改過的第四種方法才會過啦！浪費了我一整個下午！</p>
+
+<h2 id="參考">參考</h2>
+
+<ul>
+<li><a href="http://www.jroller.com/ouertani/entry/wsdl_integration_problem_two_declarations">WSDL integration problem : Two declarations cause a collision</a></li>
+<li><a href="http://stackoverflow.com/questions/2163719/tell-jaxb-to-not-remove-underscores">tell jaxb to not remove underscores</a></li>
+</ul>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2009/11/07-hong-kong-day2/"><i class="fa fa-chevron-circle-left"></i> 香港四天三夜自由行 ─ 第二天</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2011/06/14-hong-kong-day3/">香港四天三夜自由行 ─ 第三天 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments-o"></i> Add/View Comments</button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'cwweng-github';
+            var disqus_button = document.getElementById("show-comments");
+
+            disqus_button.style.display = "";
+            disqus_button.addEventListener("click", disqus, false);
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

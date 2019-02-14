@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Just murmur</title>
+    <link>https://cwweng.github.io/tags/blog/</link>
+    <description>Recent content in Blog on Just murmur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-TW</language>
+    <lastBuildDate>Mon, 07 Dec 2015 02:33:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://cwweng.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>修正 fancyBox 點擊圖片後會跳到網頁最上方的問題</title>
+      <link>https://cwweng.github.io/blog/2015/12/07-fancybox-cause-page-to-jump-to-top/</link>
+      <pubDate>Mon, 07 Dec 2015 02:33:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2015/12/07-fancybox-cause-page-to-jump-to-top/</guid>
+      <description>&lt;p&gt;處理好 fancyBox 和 Google Photos 的問題後，又跑出了另一個問題：點了圖以後會直接跳到文章的最開頭！一樣也是 Google 後找到&lt;a href=&#34;http://stackoverflow.com/questions/13547007/fancybox2-fancybox-causes-page-to-to-jump-to-the-top&#34;&gt;解法&lt;/a&gt;，參考其中一個修改 css 的方法就搞定了！&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;jquery.fancybox.css&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;fancybox-lock&lt;/span&gt; {
+    &lt;span style=&#34;color:#75715e&#34;&gt;/* overflow: hidden !important; */&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;/* comment out this one */&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;width&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt;;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>fancyBox 和 Google Photos 不太合作 (fancyBox doesn&#39;t work with Google Photos)</title>
+      <link>https://cwweng.github.io/blog/2015/12/07-fancybox-with-google-photos/</link>
+      <pubDate>Mon, 07 Dec 2015 01:21:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2015/12/07-fancybox-with-google-photos/</guid>
+      <description>&lt;p&gt;為新 Blog 放上了 &lt;a href=&#34;http://fancyapps.com/fancybox/&#34;&gt;fancyBox&lt;/a&gt; 後發現不支援 Google Photos 圖檔的網址，&lt;a href=&#34;https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51&#34;&gt;查了一下&lt;/a&gt;發現原來 fancyBox 會去判斷副檔名，剛好 Google Photos 提供的網址都沒有副檔名。根據該文章的說明，把 Google Photos 提供的網址最後加上 &lt;strong&gt;#.jpg&lt;/strong&gt; 讓它看起來有副檔名就行了。&lt;/p&gt;
+
+&lt;p&gt;After adding support for &lt;a href=&#34;http://fancyapps.com/fancybox/&#34;&gt;fancyBox&lt;/a&gt;, I found that it doesn&amp;rsquo;t work with Google Photos. According to &lt;a href=&#34;https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme/issues/51&#34;&gt;this article&lt;/a&gt;, fancyBox requires extension at the end of the URL, and URL provided by Google Photos has none. Just Adding &lt;strong&gt;#.jpg&lt;/strong&gt; at the end of the URL as the article suggested and everything works !&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>重新出發</title>
+      <link>https://cwweng.github.io/blog/2015/11/30-new-start/</link>
+      <pubDate>Mon, 30 Nov 2015 16:32:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2015/11/30-new-start/</guid>
+      <description>公司把 Tumblr 擋掉了，反正那邊也太久沒用了，上次用發覺很慢，就乾脆換個地方重新出發吧。
+這次改用 JBake 加上 Github Page，所有東西都可以版本控制，就玩玩看吧。</description>
+    </item>
+    
+  </channel>
+</rss>

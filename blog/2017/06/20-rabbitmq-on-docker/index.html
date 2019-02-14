@@ -1,0 +1,245 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>建立預先設定好 Exchange/Queue/User 的 RabbitMQ Docker Image</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-06-20T09:30:00&#43;08:00">Jun 20, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/docker/">#docker</a>
+                
+                    , 
+                    <a href="/tags/rabbitmq/">#rabbitmq</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+    
+
+    <p>如果都已經用 Docker 了，結果 image 給別人以後還要按手冊建立 queue 和 exchange，這樣可能有點掉漆，幸好網路上資料很多。</p>
+
+<p>首先，必須先進去 RabbitMQ Management 的網頁，把原本的設定匯出，然後再更名為<code>definitions.json</code>。</p>
+
+<p><code>Dockerfile</code> 只要把 rabbitmq.config 和 definitions.json 加進去就行啦！</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> rabbitmq:3-management</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span><span style="color:#e6db74"> rabbitmq.config /etc/rabbitmq/</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span><span style="color:#e6db74"> definitions.json /etc/rabbitmq/</span></code></pre></div>
+<p><code>rabbitmq.config</code> 應該不太需要說，<code>definitions.json</code> 才是用來預先建立 queue/exchange/user 的。另外，這邊當初卡了好久，原因是匯出的 <code>definitions.json</code> 匯入後都會說帳號密碼錯誤，後來發現在 RabbitMQ 3.6 以後，密碼預設適用 SHA-256，而在之前是 MD5，所以在舊版匯出的密碼 hash 以 SHA-256 的方式匯入就會出問題了。解決的方法就是告訴 RabbitMQ 說密碼是用 MD5，可參考下面 <code>definitions.json</code> 的 <code>&quot;hashing_algorithm&quot;:&quot;rabbit_password_hashing_md5&quot;</code>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;rabbit_version&#34;</span>:<span style="color:#e6db74">&#34;3.5.6&#34;</span>,
+    <span style="color:#f92672">&#34;users&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;guest&#34;</span>,
+            <span style="color:#f92672">&#34;password_hash&#34;</span>:<span style="color:#e6db74">&#34;mkob/5khgoVguaOUJD0ZnakCOVY=&#34;</span>,
+            <span style="color:#f92672">&#34;hashing_algorithm&#34;</span>:<span style="color:#e6db74">&#34;rabbit_password_hashing_md5&#34;</span>,
+            <span style="color:#f92672">&#34;tags&#34;</span>:<span style="color:#e6db74">&#34;administrator&#34;</span>
+        }],
+    <span style="color:#f92672">&#34;vhosts&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;/&#34;</span>
+        }],
+    <span style="color:#f92672">&#34;permissions&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;user&#34;</span>:<span style="color:#e6db74">&#34;guest&#34;</span>,
+            <span style="color:#f92672">&#34;vhost&#34;</span>:<span style="color:#e6db74">&#34;/&#34;</span>,
+            <span style="color:#f92672">&#34;configure&#34;</span>:<span style="color:#e6db74">&#34;.*&#34;</span>,
+            <span style="color:#f92672">&#34;write&#34;</span>:<span style="color:#e6db74">&#34;.*&#34;</span>,
+            <span style="color:#f92672">&#34;read&#34;</span>:<span style="color:#e6db74">&#34;.*&#34;</span>
+        }],
+    <span style="color:#f92672">&#34;queues&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;QU:Blah&#34;</span>,
+            <span style="color:#f92672">&#34;vhost&#34;</span>:<span style="color:#e6db74">&#34;/&#34;</span>,
+            <span style="color:#f92672">&#34;durable&#34;</span>:<span style="color:#66d9ef">true</span>,
+            <span style="color:#f92672">&#34;auto_delete&#34;</span>:<span style="color:#66d9ef">false</span>,
+            <span style="color:#f92672">&#34;arguments&#34;</span>:{}
+        }],
+    <span style="color:#f92672">&#34;exchanges&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;EX:Blah&#34;</span>,
+            <span style="color:#f92672">&#34;vhost&#34;</span>:<span style="color:#e6db74">&#34;/&#34;</span>,
+            <span style="color:#f92672">&#34;type&#34;</span>:<span style="color:#e6db74">&#34;direct&#34;</span>,
+            <span style="color:#f92672">&#34;durable&#34;</span>:<span style="color:#66d9ef">true</span>,
+            <span style="color:#f92672">&#34;auto_delete&#34;</span>:<span style="color:#66d9ef">false</span>,
+            <span style="color:#f92672">&#34;internal&#34;</span>:<span style="color:#66d9ef">false</span>,
+            <span style="color:#f92672">&#34;arguments&#34;</span>:{}
+        }],
+    <span style="color:#f92672">&#34;bindings&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;source&#34;</span>:<span style="color:#e6db74">&#34;EX:Blah&#34;</span>,
+            <span style="color:#f92672">&#34;vhost&#34;</span>:<span style="color:#e6db74">&#34;/&#34;</span>,
+            <span style="color:#f92672">&#34;destination&#34;</span>:<span style="color:#e6db74">&#34;QU:Blah&#34;</span>,
+            <span style="color:#f92672">&#34;destination_type&#34;</span>:<span style="color:#e6db74">&#34;queue&#34;</span>,
+            <span style="color:#f92672">&#34;routing_key&#34;</span>:<span style="color:#e6db74">&#34;&#34;</span>,
+            <span style="color:#f92672">&#34;arguments&#34;</span>:{}
+        }]
+}</code></pre></div>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2017/05/24-kubernetes-on-centos-7-guest-in-virtualbox/"><i class="fa fa-chevron-circle-left"></i> 在 VirtualBox 的 CentOS 7 VM 上建置 Kubernetes Cluster</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2017/06/20-kubernetes-pull-images-from-private-docker-registry-servier/">Kubernetes 透過自建的 Docker Registry 取得 Image <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments-o"></i> Add/View Comments</button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'cwweng-github';
+            var disqus_button = document.getElementById("show-comments");
+
+            disqus_button.style.display = "";
+            disqus_button.addEventListener("click", disqus, false);
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

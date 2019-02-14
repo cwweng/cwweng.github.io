@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Just murmur</title>
+    <link>https://cwweng.github.io/tags/linux/</link>
+    <description>Recent content in Linux on Just murmur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-TW</language>
+    <lastBuildDate>Wed, 24 May 2017 16:21:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://cwweng.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在 VirtualBox 的 CentOS 7 VM 上建置 Kubernetes Cluster</title>
+      <link>https://cwweng.github.io/blog/2017/05/24-kubernetes-on-centos-7-guest-in-virtualbox/</link>
+      <pubDate>Wed, 24 May 2017 16:21:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2017/05/24-kubernetes-on-centos-7-guest-in-virtualbox/</guid>
+      <description>&lt;p&gt;搞了兩三天，終於成功了。&lt;/p&gt;
+
+&lt;p&gt;主要是參考 Kubernetes 官方的 &lt;a href=&#34;https://kubernetes.io/docs/getting-started-guides/kubeadm/&#34;&gt;Installing Kubernetes on Linux with kubeadm&lt;/a&gt;，雖然是 Beta，不過應該是未來的趨勢，衝了。不得不說，如果是用 VM 又躲在防火牆後面又雙網卡，那只按照官方文件做真的會搞老半天。&lt;/p&gt;
+
+&lt;h2 id=&#34;環境說明&#34;&gt;環境說明&lt;/h2&gt;
+
+&lt;p&gt;公司很龜毛，有防火牆，所以要連到 internet 抓東西就要透過 proxy。公司也很機車，IP 有管制，沒申請的 IP 連 gateway 都出不去。公司也很省，配的設備不怎麼樣，所以一台 PC 裝多個 VM 互連會哭出來。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 下的 Eclipse 4 的 toolbar 變超大</title>
+      <link>https://cwweng.github.io/blog/2016/06/01-eclipse-large-icon-size/</link>
+      <pubDate>Wed, 01 Jun 2016 11:15:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2016/06/01-eclipse-large-icon-size/</guid>
+      <description>&lt;p&gt;因為要開發 Android 程式裝了 Eclipse 4.5，啟動後發現 toolbar 的 icon 浪費很多空間。參考 &lt;a href=&#34;https://github.com/jeeeyul/eclipse-themes/wiki/Linux-Huge-Toolbar-Problem&#34;&gt;Linux Huge Toolbar Problem&lt;/a&gt; 發現是因為 Eclipse 4 預設用 GTK3。但是它提供的 GTK3 解法不能用，因為都找不到 &lt;code&gt;gtk-widgets.css&lt;/code&gt; 這個檔。&lt;/p&gt;
+
+&lt;p&gt;最後是參考 &lt;a href=&#34;https://www.eclipse.org/forums/index.php/t/1071268/&#34;&gt;[solved] Eclipse (Linux) force GTK2&lt;/a&gt;，修改 &lt;code&gt;eclipse.ini&lt;/code&gt;，加上下面兩行後雖然醜了點但變得比較正常了。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;--launcher.GTK_version
+&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>task XXX blocked for more than 120 seconds</title>
+      <link>https://cwweng.github.io/blog/2016/04/13-blocked-for-more-than-120-seconds/</link>
+      <pubDate>Wed, 13 Apr 2016 15:58:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2016/04/13-blocked-for-more-than-120-seconds/</guid>
+      <description>&lt;p&gt;公司 VM 的 IO 很慢，最近出現 &lt;code&gt;task XXX blocked for more than 120 seconds&lt;/code&gt;，然後就 Kernel Panic 整個不動了。&lt;/p&gt;
+
+&lt;p&gt;參考&lt;a href=&#34;http://www.blackmoreops.com/2014/09/22/linux-kernel-panic-issue-fix-hung_task_timeout_secs-blocked-120-seconds-problem/&#34;&gt;網路上的文章&lt;/a&gt;，原因是 Linux 要把 file system cache 的資料寫回硬碟時如果 IO 太慢沒辦法在 120 秒內寫完，後續的資料又一直進來，就卡住了。&lt;/p&gt;
+
+&lt;p&gt;解決辦法就是降低 cache 的大小，增加寫入的頻率。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;vm.dirty_background_ratio = 2&lt;/code&gt; 降低 cache，當超過這個百分比時就開始背景寫回硬碟。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vm.dirty_ratio = 5&lt;/code&gt; 當超過這個百分比時就強制寫回硬碟。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 掛載 Windows 網芳</title>
+      <link>https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share/</link>
+      <pubDate>Sat, 14 Sep 2013 14:41:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2013/09/14-linux-mount-windows-share/</guid>
+      <description>&lt;h4 id=&#34;安裝&#34;&gt;安裝&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;apt-get install smbclient
+apt-get install cifs-utils&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;瀏覽&#34;&gt;瀏覽&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;smbclient -L //IP/Share -U domain/username -D subdirectory&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;掛載&#34;&gt;掛載&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mount -t cifs -o user&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&amp;lt;username&amp;gt;,domain&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&amp;lt;domain&amp;gt;,password&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&amp;lt;password&amp;gt; //IP/Share/subdirectory /mount_point&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

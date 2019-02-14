@@ -1,0 +1,435 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<section id="home">
+        <ul>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2011/06/28-two-declarations-cause-a-collision-in-the-objectfactory-class/" title="WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-06-28T11:46:00&#43;08:00">Jun 28, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p><em>Update</em> : I migrate from tumblr to Github Page, slightly modify and re-post this article.</p>
+
+<p>This is the English version of my <a href="http://cwweng.github.io/blog/2011/06/03-Two-declarations-cause-a-collision-in-the-ObjectFactory-class.html">another post</a>.</p>
+
+<h2 id="problem">Problem</h2>
+
+<p>While I was testing PlateSpin Recon Web Service API with Apach CXF, the WSDL2Java gave me the following exception : <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span>.</p>
+
+<p>Turns out it was the following section cause the error</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;s:complexType</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;MonitorFilter&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;s:sequence&gt;</span>
+    <span style="color:#f92672">&lt;s:element</span> <span style="color:#a6e22e">minOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">maxOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;_sumInstances&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;s:boolean&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#75715e">&lt;!-- irrelevant --&gt;</span>
+    <span style="color:#f92672">&lt;s:element</span> <span style="color:#a6e22e">minOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">maxOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;SumInstances&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;s:boolean&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#75715e">&lt;!-- irrelevant --&gt;</span>
+ <span style="color:#f92672">&lt;/s:sequence&gt;</span>
+<span style="color:#f92672">&lt;/s:complexType&gt;</span></code></pre></div>
+<p>The root cause is that <strong>_sumInstances and SumInstances produce the same property</strong></p></p>
+            
+            <a href="/blog/2011/06/28-two-declarations-cause-a-collision-in-the-objectfactory-class/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2011/06/24-kindle-3/" title="Amazon Kindle 3 入手">Amazon Kindle 3 入手</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-06-24T13:14:00&#43;08:00">Jun 24, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%96%8B%E5%8D%B7%E6%9C%89%E7%9B%8A/">#開卷有益</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>抓了很多電子書，但是用電腦看的缺點就是眼睛會越看越乾，久了就累了想睡覺。另外就是開會或是出差閒閒沒事時沒辦法看，要用手機看電子書不如拿來玩遊戲。所以買一台電子書閱讀器就是最好的選擇啦！雖然原因那麼多，但最主要的是最近發獎金有一筆小錢啦！</p>
+
+<p>iPad 紅歸紅，一樣有看久會累的問題，而且買了 iPad 應該大部份時間都不會是看電子書吧，而且&hellip;它很貴。總之，買了台 Kindle 3 Wifi-only，正值台幣值錢，加上稅金運費也只要台幣 4800 就搞定了。</p></p>
+            
+            <a href="/blog/2011/06/24-kindle-3/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2011/06/17-hong-kong-day4/" title="香港四天三夜自由行 ─ 第四天">香港四天三夜自由行 ─ 第四天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-06-17T17:04:00&#43;08:00">Jun 17, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>第四天了，拖了兩年多終於要寫完啦！</p>
+
+<p>這天一大早就辦退房了，但是退房後可以寄放行李，這樣就能輕輕鬆鬆出去玩了，有這種服務真棒！</p>
+
+<p>早餐原本好像是要吃「澳洲牛奶公司」，不過變成了「美心快餐」，也是很好吃，尤其是蘿蔔糕，讚！</p>
+
+<p><img src="https://lh3.googleusercontent.com/z-3k512Gbegn85UcP9UFSShVWwyyG-eqCu97iNEwJW45KgvH8x6k7NkvdrVOLIR2UJhoKgd1u_slvFm3VA=w640" alt="美心快餐" /></p></p>
+            
+            <a href="/blog/2011/06/17-hong-kong-day4/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2011/06/14-hong-kong-day3/" title="香港四天三夜自由行 ─ 第三天">香港四天三夜自由行 ─ 第三天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-06-14T15:58:00&#43;08:00">Jun 14, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>隔兩年了，要動<strike>筆</strike>手真難</p>
+
+<p>今天計畫很簡單，可是不太輕鬆，加上前一晚太累，所以一大早就拖延了。早餐吃的是「潮樓」，照慣例有著香港不怎麼樣的服務態度，但又很美味的食物，真的是又愛又恨啊！</p></p>
+            
+            <a href="/blog/2011/06/14-hong-kong-day3/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2011/06/03-two-declarations-cause-a-collision-in-the-objectfactory-class/" title="WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤">WSDL2Java 出現 Two declarations cause a collision in the ObjectFactory class 的錯誤</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2011-06-03T11:15:00&#43;08:00">Jun 3, 2011</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><h2 id="問題">問題</h2>
+
+<p>測試 PlateSpin Recon Web Service API，要用 Apache CXF 內的 WSDLToJava 時出現的問題</p>
+
+<p>直接執行 WSDLToJava PerformanceDataCollectionWS.wsdl 出現 <span style="color: red">WSDLToJava Error: Thrown by JAXB: Two declarations cause a collision in the ObjectFactory class. at line 263 column 90 of schema file:/home/cwweng/workspace/recon/PerformanceDataCollectionWS.wsdl</span> 的錯誤。結果是因為 PerformanceDataCollectionWS.wsdl 下面的這一段出問題</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;s:complexType</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;MonitorFilter&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;s:sequence&gt;</span>
+    <span style="color:#f92672">&lt;s:element</span> <span style="color:#a6e22e">minOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">maxOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;_sumInstances&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;s:boolean&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#75715e">&lt;!-- 省略 --&gt;</span>
+    <span style="color:#f92672">&lt;s:element</span> <span style="color:#a6e22e">minOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">maxOccurs=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;SumInstances&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;s:boolean&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#75715e">&lt;!-- 省略 --&gt;</span>
+ <span style="color:#f92672">&lt;/s:sequence&gt;</span>
+<span style="color:#f92672">&lt;/s:complexType&gt;</span></code></pre></div>
+<p>因為 <strong>_sumInstances 和 SumInstances 會產生相同的 property</strong></p></p>
+            
+            <a href="/blog/2011/06/03-two-declarations-cause-a-collision-in-the-objectfactory-class/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2009/11/07-hong-kong-day2/" title="香港四天三夜自由行 ─ 第二天">香港四天三夜自由行 ─ 第二天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2009-11-07T22:15:00&#43;08:00">Nov 7, 2009</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>這次更扯啦！距離前一篇已經超過五個月囉！寫遊記實在不是我的強項。</p>
+
+<p>第二天大概八點起床吧，雖然說是自由行，不過如果睡太晚就虧大囉。今天的行程主要是去海洋公園、太平山夜景、還有蘭桂芳，不過重點還是香港美食啦！</p></p>
+            
+            <a href="/blog/2009/11/07-hong-kong-day2/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2009/05/28-hong-kong-day1/" title="香港四天三夜自由行 ─ 第一天">香港四天三夜自由行 ─ 第一天</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2009-05-28T15:00:00&#43;08:00">May 28, 2009</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>距離前一篇已經過了三個月了，人懶起來真的是很恐佈的！</p>
+
+<p>行程的開頭當然是去機場啦，幸好刷國泰的卡可以免費停外圍的五福停車場，不然交通真的是很麻煩的一件事，雖然如此，路癡我還是迷了路幸好沒有延誤。登機的地方是第二航廈，不過就算是第二航廈還是很不怎麼樣，輸國外很多啊！</p>
+
+<p>行程的第一站就誤點了，因為飛機重新降落，果然計劃趕不上變化啊！一出關就很明顯就看到中旅社的櫃台了，把「單程纜車+凌霄閣」套票和海洋公園的票買好，再買八達通，港幣去掉快大半了。接著就去 Hotel Link 登記等著上巴士然後就到了要睡四天的金御假日了。東西放一放就往第一站「半島酒店下午茶」出發啦！</p></p>
+            
+            <a href="/blog/2009/05/28-hong-kong-day1/">Read more&hellip;</a>
+            
+          </li>
+          
+          <li>
+            <h1><a href="https://cwweng.github.io/blog/2009/02/08-hong-kong-plan/" title="香港四天三夜自由行 ─ 行前規劃">香港四天三夜自由行 ─ 行前規劃</a></h1> 
+            <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2009-02-08T20:08:00&#43;08:00">Feb 8, 2009</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/%E9%81%8A%E5%B1%B1%E7%8E%A9%E6%B0%B4/">#遊山玩水</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+            <p><p>因為老婆放寒假，本來是想趁過年去紐西蘭玩的，查了一下以後發現&hellip;&hellip;貴死人，加上現在經濟不景氣我們還是低調點的好，所以就變成香港啦。其實我是個懶人，想到要自己規劃行程又更懶了，所以拖到過年前一週才開始研究，一經老婆提醒才想到過年銀行都沒開，緊急草率算了一下趕快去換的結果就是現金徹底的不夠，差點在香港沒錢吃飯。</p>
+
+<p>第一步當然就是確定出去玩的日期、酒店和飛機了。很不巧的有同事跟我撞期要去日本，，只好選擇 <sup>2</sup>&frasl;<sub>2</sub> ~ <sup>2</sup>&frasl;<sub>5</sub> 這四天，週末的假一天都沒有派上用場 :-( 不過這樣也沒啥不好，至少每個點都不用人擠人浪費時間。機加酒最後是選擇了<a href="http://www.kktravel.com.tw">自遊網</a>的金御假日酒店和長榮航空早去晚回（含機場酒店接送及簽證），因為金御假日就在地鐵站出口旁，而且也比喜來登便宜多了。</p>
+
+<p>規劃行程是最麻煩的了，要參考一堆別人的行程，研究自己想去的點、想吃的店、想逛的商場，還得參考地圖。最後行程的部份大部份是參考<a href="http://www.backpackers.com.tw">背包客</a>網站和 PTT 的 Hong_Kong 板，地圖用 <a href="http://maps.google.com.tw">Google Map</a>，餐廳的位置就靠<a href="http://www.openprice.com">開飯網</a>，還有一堆網站用來查公車、門票、叮叮車、船班等等。用 Google Map 的好處是可以把每個要去的點都先標示出來再排行程可以比較有概念，至於大家都推薦的<a href="http://www.centamap.com">中原地圖</a>感覺頗複雜，所以就沒有用了。最推薦的網站就是<a href="http://hk.myblog.yahoo.com/catjacob2004">Cat Jacob&rsquo;s 香港吃喝玩樂情報站</a>，即使沒有用到他上面提供的行程，但是靠上面的資料就可把很多點之間的交通方式給串出來了。</p></p>
+            
+            <a href="/blog/2009/02/08-hong-kong-plan/">Read more&hellip;</a>
+            
+          </li>
+          
+          
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+    <a href="/page/3/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/page/4/">4</a></li>
+    
+    
+    <li class="page-item disabled">
+    <a href="" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+        </ul>
+      </section>
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Kubernetes 透過自建的 Docker Registry 取得 Image</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2017-06-20T16:05:00&#43;08:00">Jun 20, 2017</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/docker/">#docker</a>
+                
+                    , 
+                    <a href="/tags/kubernetes/">#kubernetes</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+    
+
+    <p>因為 image 放到 Docker Hub 太危險也不符公司資安規定，所以在用 Kubernetes 前，最好還是有個自己的 Docker Registry，不然還要自己手動把每個 image 放到每個 node，太麻煩！</p>
+
+<h3 id="自建-docker-registry">自建 Docker Registry</h3>
+
+<p>網路上資料很多，不過其實也沒有很麻煩，官網的 <a href="https://docs.docker.com/registry/deploying/">Deploying a registry server</a> 最詳細，只是我覺得順序或排版看得不太順。以下是參考其他文章後建置的順序：</p>
+
+<h4 id="建立自簽憑證">建立自簽憑證</h4>
+
+<p>因為是在 VM 上測試，所以暫時用自簽憑證解決，有憑證才能遠端存取。這裡的步驟主要是參考<a href="http://mycodetub.logdown.com/posts/798060-build-your-own-docker-registry">這篇文章</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir -p /opt/registry/certs
+$ cd /opt/registry/certs
+$ openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days <span style="color:#ae81ff">365</span> -out domain.crt</code></pre></div>
+<p>產生憑證過程的資料可以隨便填，不過 Common Name 這個要填 Domain Name，在這邊測試時是填 master.kubernetes</p>
+
+<h4 id="複製憑證">複製憑證</h4>
+
+<p>如果是自簽憑證，那這個步驟在每個會用到 Docker 服務的機器都要做，這樣才能正確登入 Docker Registry。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir /etc/docker/certs.d/master.kubernetes:5000/
+$ cp domain.crt /etc/docker/certs.d/master.kubernetes:5000/ca.crt</code></pre></div>
+<h4 id="建立帳號密碼">建立帳號密碼</h4>
+
+<p>這個步驟是建立遠端存取時的帳號密碼，這邊是用 htpasswd 建立帳號是 admin，密碼是 123456 的使用者</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir /opt/registry/auth
+$ cd /opt/registry/auth
+$ docker run --entrypoint htpasswd registry:2 -Bbn admin <span style="color:#ae81ff">123456</span> &gt;&gt; htpasswd</code></pre></div>
+<h4 id="啟動-docker-registry">啟動 Docker Registry</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir /opt/registry/data
+$ docker run -d -p <span style="color:#ae81ff">5000</span>:5000 --restart<span style="color:#f92672">=</span>always --name registry -v /opt/registry/data:/var/lib/registry -v /opt/registry/certs:/certs -v /opt/registry/auth:/auth -e REGISTRY_HTTP_TLS_CERTIFICATE<span style="color:#f92672">=</span>/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY<span style="color:#f92672">=</span>/certs/domain.key -e REGISTRY_AUTH<span style="color:#f92672">=</span>htpasswd -e <span style="color:#e6db74">&#34;REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm&#34;</span> -e REGISTRY_AUTH_HTPASSWD_PATH<span style="color:#f92672">=</span>/auth/htpasswd registry:2</code></pre></div>
+<h4 id="測試">測試</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ docker login master.kubernetes:5000</code></pre></div>
+<h3 id="kubernetes-從自建的-docker-registry-取得-image">Kubernetes 從自建的 Docker Registry 取得 Image</h3>
+
+<p>建好 Docker Registry 後，理論上參考 Kubernetes 的 <a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/">Pull an Image from a Private Registry</a> 應該就行了，可是照著做沒有成功。最後是參考 <a href="https://blog.cloudhelix.io/using-a-private-docker-registry-with-kubernetes-f8d5f6b8f646">Using a private Docker Registry with Kubernetes</a> 這篇。</p>
+
+<p>####建立 Secret
+首先執行 <code>docker login</code> 後，會產生 <code>~/.docker/config.json</code> ,這個檔，裡面存的是登入相關的資料。接著執行下列指令取得其 base64 編碼的值：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat ~/.docker/config.json | base64 | tr -d <span style="color:#ae81ff">\\</span>n</code></pre></div>
+<p>接下來是產生 YAML 檔案，內容如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+kind: Secret
+metadata:
+    name: regsecret
+    data:
+        .dockerconfigjson: &lt;前一步驟 base64 編碼後的值<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    type: kubernetes.io/dockerconfigjson</span></code></pre></div>
+<p>然後產生 Secret</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f my-secret.yaml</code></pre></div>
+<p>####測試
+建立一個從 Docker Registry 取出 Image 的 Deployment 來測試，YAML 檔如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: test-deployment
+spec:
+    template:
+        metadata:
+			name: test-deployment
+        spec:
+            containers:
+            - image: master.kubernetes:<span style="color:#ae81ff">5000</span>/test-image:<span style="color:#ae81ff">1</span>
+              name: test-container
+            imagePullSecrets:
+            - name: regsecret</code></pre></div>
+<p>建立 Deployment</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create -f my-deployment.yaml</code></pre></div>
+<p>如果有跑起來就算成功啦！</p>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2017/06/20-rabbitmq-on-docker/"><i class="fa fa-chevron-circle-left"></i> 建立預先設定好 Exchange/Queue/User 的 RabbitMQ Docker Image</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2017/07/24-intellijidea-unindexed-remote-maven-repositories-found/">Intellij IDEA 出現 Unindexed remote maven repositories found 的錯誤訊息 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments-o"></i> Add/View Comments</button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'cwweng-github';
+            var disqus_button = document.getElementById("show-comments");
+
+            disqus_button.style.display = "";
+            disqus_button.addEventListener("click", disqus, false);
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

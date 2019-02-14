@@ -1,0 +1,196 @@
+<!doctype html>
+
+<html lang="zh-TW">
+
+<head>
+  <title>Just murmur</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Isaac Weng" />
+  <meta name="generator" content="Hugo 0.53" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-175902-4', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="/">Just murmur</a>
+            </h1>
+
+      <ul id="social-media">
+             
+      </ul>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="/blog/">
+                <i class="fa-li fa  fa-lg"></i><span>Posts</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="/tags/">
+                <i class="fa-li fa  fa-lg"></i><span>Tags</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Handshake failed due to invalid Upgrade header: null</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2015-12-03T15:24:00&#43;08:00">Dec 3, 2015</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="/tags/java/">#java</a>
+                
+            </em>
+        </li>
+        
+    </ul>
+</aside>
+
+    
+
+    <p>昨天用 Chrome 的 <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a> 測試用 Spring Framework 開發的 WebSocket 程式時，發現一直吐出 <code>org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null</code> 的錯誤訊息。但是用 Wireshark 抓封包看到送出的 Request 其實是有 <code>Upgrade: websocket</code>。</p>
+
+<p>用 Google 大神找不到有用的解法，原始的 log 也看不出什麼有用的資訊。打開 Spring 的 debug log 後看到了個似乎相關的訊息：<code>OriginHandshakeInterceptor - Handshake request rejected, Origin header value chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo not allowed</code>。查了<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">文件</a>發現原來 Spring 預設只允許相同來源的 Request，但是 Simple WebSocket Client 送出的是 <code>Origin: chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo</code>，所以就被擋掉了。為了測試只好設 <code>allowed-origins=&quot;*&quot;</code>，設好後重啟就可以用了。</p>
+
+<p>詳細的設定可以參考 Spring 官方文件的 <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">Configuring allowed origins</a></p>
+
+<h4 id="english-version">English Version</h4>
+
+<p>While testing my Spring-based WebSocket application using <a href="https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo">Simple WebSocket Client</a>, server log keeps saying <code>org.springframework.web.socket.server.support.DefaultHandshakeHandler.handleInvalidUpgradeHeader Handshake failed due to invalid Upgrade header: null</code>. However, packets captured by Wireshark indeed contains <code>Upgrade: websocket</code>.</p>
+
+<p>No luck with Google, and the log show nothing useful. Forced to turn on Spring debug log, something suspicious appears: <code>OriginHandshakeInterceptor - Handshake request rejected, Origin header value chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo not allowed</code>. According to the <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">reference</a>, it turns out that Spring by default allows only same origin requests. That&rsquo;s why the request is denied since Simple WebSocket Client sends out <code>Origin: chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo</code>. After setting <code>allowed-origins=&quot;*&quot;</code>, everything works!</p>
+
+<p>Detail setting can be found in <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#websocket-server-allowed-origins">Configuring allowed origins</a>.</p>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2015/11/30-new-start/"><i class="fa fa-chevron-circle-left"></i> 重新出發</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://cwweng.github.io/blog/2015/12/04-jackson-deserialize-into-polymorphic-types/">用 Jackson 將 JSON 反序列化成 Polymorphic 物件 <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments-o"></i> Add/View Comments</button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'cwweng-github';
+            var disqus_button = document.getElementById("show-comments");
+
+            disqus_button.style.display = "";
+            disqus_button.addEventListener("click", disqus, false);
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> | 
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://cwweng.github.io/index.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+
+</html>

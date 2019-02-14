@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on Just murmur</title>
+    <link>https://cwweng.github.io/tags/docker/</link>
+    <description>Recent content in Docker on Just murmur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-TW</language>
+    <lastBuildDate>Tue, 20 Jun 2017 16:05:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://cwweng.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kubernetes 透過自建的 Docker Registry 取得 Image</title>
+      <link>https://cwweng.github.io/blog/2017/06/20-kubernetes-pull-images-from-private-docker-registry-servier/</link>
+      <pubDate>Tue, 20 Jun 2017 16:05:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2017/06/20-kubernetes-pull-images-from-private-docker-registry-servier/</guid>
+      <description>&lt;p&gt;因為 image 放到 Docker Hub 太危險也不符公司資安規定，所以在用 Kubernetes 前，最好還是有個自己的 Docker Registry，不然還要自己手動把每個 image 放到每個 node，太麻煩！&lt;/p&gt;
+
+&lt;h3 id=&#34;自建-docker-registry&#34;&gt;自建 Docker Registry&lt;/h3&gt;
+
+&lt;p&gt;網路上資料很多，不過其實也沒有很麻煩，官網的 &lt;a href=&#34;https://docs.docker.com/registry/deploying/&#34;&gt;Deploying a registry server&lt;/a&gt; 最詳細，只是我覺得順序或排版看得不太順。以下是參考其他文章後建置的順序：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>建立預先設定好 Exchange/Queue/User 的 RabbitMQ Docker Image</title>
+      <link>https://cwweng.github.io/blog/2017/06/20-rabbitmq-on-docker/</link>
+      <pubDate>Tue, 20 Jun 2017 09:30:00 +0800</pubDate>
+      
+      <guid>https://cwweng.github.io/blog/2017/06/20-rabbitmq-on-docker/</guid>
+      <description>&lt;p&gt;如果都已經用 Docker 了，結果 image 給別人以後還要按手冊建立 queue 和 exchange，這樣可能有點掉漆，幸好網路上資料很多。&lt;/p&gt;
+
+&lt;p&gt;首先，必須先進去 RabbitMQ Management 的網頁，把原本的設定匯出，然後再更名為&lt;code&gt;definitions.json&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Dockerfile&lt;/code&gt; 只要把 rabbitmq.config 和 definitions.json 加進去就行啦！&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-docker&#34; data-lang=&#34;docker&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; rabbitmq:3-management&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ADD&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; rabbitmq.config /etc/rabbitmq/&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ADD&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; definitions.json /etc/rabbitmq/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
